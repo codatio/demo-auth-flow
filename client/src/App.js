@@ -1,4 +1,5 @@
 import React from 'react'
+import Login from './pages/Login';
 
 function App() {
   const [data, setData] = React.useState(null);
@@ -11,9 +12,7 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <p>{!data ? "Loading..." : data}</p>
-      </header>
+      <Login />
     </div>
   );
 }
