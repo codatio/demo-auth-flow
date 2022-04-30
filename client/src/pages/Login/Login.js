@@ -5,11 +5,29 @@ import {
   Typography
 } from "@mui/material";
 import './login.css'
+import { useState } from "react";
 
 const Login = () => {
-  const submitForm = () => {
-    console.log('Form submitted')
+  const [userName, setUserName] = useState('')
+  
+  const handleLogin = () => {
+    fetch("/login", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username: userName }),
+    })
+    .then((res) => res.json())
+    .then(data => console.log(data))
   }
+
+  const handleUserName = (event) => {
+    const input = event.target.value;
+    setUserName(input)
+  }
+
   return (
     <div className="login-wrapper">
       <Card variant="outlined">
@@ -31,6 +49,7 @@ const Login = () => {
             id="username-input"
             label="Username"
             variant="outlined"
+            onChange={handleUserName}
           />
           <TextField
             id="password-input"
@@ -41,9 +60,10 @@ const Login = () => {
           />
           <Button
             className="submit-button"
-            onClick={submitForm}
+            onClick={handleLogin}
             variant="contained"
             size="large"
+            disabled={userName === ''}
           >
             Submit
           </Button>
