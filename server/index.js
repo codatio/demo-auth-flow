@@ -10,10 +10,6 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get("/api", (req, res) => {
-  res.json({ message: "Hello from server!" });
-});
-
 const userIdMap = new LocalStorage("./bin/users");
 
 app.post('/login', (req, res) => {
@@ -21,7 +17,7 @@ app.post('/login', (req, res) => {
   const userName = req.body.username
 
   userIdMap.setItem(userName, userId)
-  res.json({ userId })
+  res.json({ userName, userId })
 });
 
 app.listen(PORT, () => {

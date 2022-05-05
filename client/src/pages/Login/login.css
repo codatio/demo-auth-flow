@@ -1,0 +1,23 @@
+.login-wrapper {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-card {
+  box-shadow: 0 0.7rem 1rem -.7rem #000000;
+}
+
+.login-content {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  justify-content: center;
+  padding: 4rem;
+}
+
+.submit-button {
+  max-width: 8rem;
+  align-self: center;
+}
