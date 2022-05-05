@@ -5,13 +5,16 @@
   justify-content: center;
 }
 
+.login-card {
+  box-shadow: 0 0.7rem 1rem -.7rem #000000;
+}
+
 .login-content {
   display: flex;
   flex-direction: column;
   row-gap: 1rem;
   justify-content: center;
   padding: 4rem;
-  box-shadow: 0 0.7rem 1rem -0.5rem #000000, 0.3rem 0.3rem 1rem 0.3rem rgb(0 0 0 / 0%);
 }
 
 .submit-button {

@@ -23,14 +23,16 @@ const Login = () => {
     .then(data => console.log(data))
   }
 
-  const handleUserName = (event) => {
+  const handleUserNameChange = (event) => {
     const input = event.target.value;
     setUserName(input)
   }
 
+  const disabled = userName === ''
+
   return (
     <div className="login-wrapper">
-      <Card variant="outlined">
+      <Card variant="outlined" className="login-card">
         <div className="login-content">
           <Typography
             variant="h3"
@@ -48,8 +50,9 @@ const Login = () => {
           <TextField
             id="username-input"
             label="Username"
+            value={userName}
             variant="outlined"
-            onChange={handleUserName}
+            onChange={handleUserNameChange}
           />
           <TextField
             id="password-input"
@@ -63,7 +66,7 @@ const Login = () => {
             onClick={handleLogin}
             variant="contained"
             size="large"
-            disabled={userName === ''}
+            disabled={disabled}
           >
             Submit
           </Button>
