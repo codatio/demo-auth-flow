@@ -1,11 +1,19 @@
 import React from 'react'
 import Login from './pages/Login/Login';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <Login />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/login' element={<Login />}/>
+        <Route 
+          path="*"
+          //When we create a dashboard, we can redirect to it instead of the login page
+          element={<Navigate replace to="/login" />}
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
