@@ -6,3 +6,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+:root {
+  --primary: #5D9E8F;
+  --secondary: #edf2ff;
+}

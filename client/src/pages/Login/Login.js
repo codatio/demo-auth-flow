@@ -5,10 +5,13 @@ import {
   Typography
 } from "@mui/material";
 import './login.css'
-import { useState } from "react";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [userName, setUserName] = useState('')
+
+  const navigate = useNavigate();
   
   const handleLogin = () => {
     fetch("/login", {
@@ -20,7 +23,10 @@ const Login = () => {
       body: JSON.stringify({ username: userName }),
     })
     .then((res) => res.json())
-    .then(data => console.log(data))
+    .then(data => {
+      const { userId } = data;
+      navigate(`/${userId}/dashboard`)
+    })
   }
 
   const handleUserNameChange = (event) => {
