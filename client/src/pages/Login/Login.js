@@ -7,6 +7,7 @@ import {
 import './login.css'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { routes } from "../../routes";
 
 const Login = () => {
   const [userName, setUserName] = useState('')
@@ -25,7 +26,7 @@ const Login = () => {
     .then((res) => res.json())
     .then(data => {
       const { userId } = data;
-      navigate(`/${userId}/dashboard`)
+      navigate(routes.dashboard(userId))
     })
   }
 
