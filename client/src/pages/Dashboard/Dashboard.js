@@ -5,7 +5,7 @@ const Dashboard = () => {
     <>
       <Header/>
       <h1>
-        Hi ugly!
+        Hello, user!
       </h1>
     </>
   )
