@@ -12,7 +12,6 @@ const App = () => {
         <Route path={routes.dashboard(':userId')} element={<Dashboard />} />
         <Route 
           path="*"
-          //When we create a dashboard, we can redirect to it instead of the login page
           element={<Navigate replace to={routes.login} />}
         /> 
       </Routes>
