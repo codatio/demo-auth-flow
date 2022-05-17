@@ -6,3 +6,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+:root {
+  /*Colors*/
+  --primary: #5D9E8F;
+  --secondary: #edf2ff;
+  
+  /*Layout*/
+  --main-wrapper: 1028px;
+}

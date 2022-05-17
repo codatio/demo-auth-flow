@@ -5,22 +5,23 @@ import {
   Typography
 } from "@mui/material";
 import './login.css'
-import { useState } from "react";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { routes } from '../../routes'
+import { linkService } from "../../link-service";
 
 const Login = () => {
   const [userName, setUserName] = useState('')
-  
+
+  const navigate = useNavigate();
+
   const handleLogin = () => {
-    fetch("/login", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username: userName }),
-    })
-    .then((res) => res.json())
-    .then(data => console.log(data))
+    linkService
+      .login(userName)
+      .then(data => {
+        const { userId } = data;
+        navigate(routes.dashboard(userId))
+      })
   }
 
   const handleUserNameChange = (event) => {

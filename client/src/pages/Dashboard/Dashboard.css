@@ -1,0 +1,18 @@
+.dashboard-content-wrapper {
+  max-width: var(--main-wrapper);
+  margin: 0 auto;
+}
+
+.user-data-wrapper {
+  padding: 1.5rem;
+}
+
+.list-container {
+  display: flex;
+  gap: 2rem;
+}
+
+.key-column, .value-column {
+  list-style-type: none;
+  padding-left: 0;
+}
