@@ -12,7 +12,7 @@ const Dashboard = () => {
     <>
       <Header/>
       <div className="dashboard-content-wrapper">
-        <div className="user-data-wrapper">
+        <div>
           <Typography variant='h3' gutterBottom>
             Your account
           </Typography>

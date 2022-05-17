@@ -1,10 +1,7 @@
 .dashboard-content-wrapper {
   max-width: var(--main-wrapper);
   margin: 0 auto;
-}
-
-.user-data-wrapper {
-  padding: 1.5rem;
+  padding-top: 1.5rem;
 }
 
 .list-container {

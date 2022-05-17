@@ -1,0 +1,26 @@
+.loan-form-content-wrapper {
+  max-width: var(--main-wrapper);
+  margin: 0 auto;
+  padding-top: 1.5rem;
+}
+
+.contact-information-form {
+  display: flex;
+}
+
+.key-column, .value-column {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.key-column li, .value-column li {
+  min-height: 55px;
+  display: flex;
+  align-items: center;
+  padding-right: 2rem;
+}
+
+.loan-slider {
+  min-width: 30rem;
+  max-width: 30rem;
+}
