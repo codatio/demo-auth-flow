@@ -42,7 +42,7 @@ app.post('/login', async (req, res) => {
   const userStorage = getUserStorage(userId);
   if(!userStorage.getItem("codat-company-id")) {
     // Codat company has not been created
-    // So we will create it by posting to the API
+    // So we will create it by posting to the Codat API
     const postResult = await fetch(
       `${codatBaseUrl}/companies`,
       {
