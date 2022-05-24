@@ -1,5 +1,5 @@
 const uuid = require("uuid");
-const { createCompany } = require("../clients/codat");
+const { createCompany, getConnections } = require("../clients/codat");
 const { userIdMap, getUserStorage } = require("../storage/user");
 
 const userLogin = async (req, res) => {
@@ -27,6 +27,33 @@ const userLogin = async (req, res) => {
   }
 
   res.json({ userName, userId });
+};
+
+const getUserConnections = async(req, res) => {
+  const userId = req.params.userId;
+  
+  if (!userId) {
+    res.status(400).send({error: "userId is a required field"});
+  }
+  
+  const userStorage = getUserStorage(userId);
+  
+  if (!userStorage) {
+    res.status(400).send({error: "Unknown user id"});
+  }
+
+  const codatCompanyId = userStorage.getItem("codat-company-id");
+  
+  if (!codatCompanyId) {
+    res.status(400).send({error: "User ID has not been set up with codat"});
+  }
+
+  console.log("Getting connections for user", userId, "codat company ID", codatCompanyId);
+  
+  const results = await getConnections(codatCompanyId);
+
+  res.json(results);
 }
 
 exports.userLogin = userLogin;
+exports.getUserConnections = getUserConnections;
