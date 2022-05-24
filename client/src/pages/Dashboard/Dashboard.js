@@ -12,15 +12,15 @@ const Dashboard = () => {
   const listItems = [
     {
       key: "Name:",
-      value: "User name"
+      value: <Typography variant="body1">User name</Typography>,
     },
     {
       key: "User e-mail:",
-      value: "email@company.com"
+      value: <Typography variant="body1">email@company.com</Typography>
     },
     {
       key: "User ID:",
-      value: userId
+      value: <Typography variant="body1">{userId}</Typography>
     }
   ]
 

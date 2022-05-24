@@ -18,9 +18,7 @@ const FlexColumns = (props) => (
     <ul className="value-column">
       {props.listItems.map((listItem) => (
         <li>
-          <Typography variant="body1">
-            {listItem.value}
-          </Typography>
+          {listItem.value}
         </li>
       ))}
     </ul>

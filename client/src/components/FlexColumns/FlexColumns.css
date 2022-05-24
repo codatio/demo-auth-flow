@@ -7,3 +7,7 @@
   list-style-type: none;
   padding-left: 0;
 }
+
+.key-column li p {
+  font-weight: bold;
+}
