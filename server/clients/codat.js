@@ -1,7 +1,8 @@
 const fetch = require("node-fetch");
+const { config } = require("../config");
 
-const apiKey = process.env.CODAT_API_KEY;
-const codatBaseUrl = process.env.API_BASE_URL;
+const apiKey = config.apiKey;
+const codatBaseUrl = config.codatBaseUrl;
 
 if (!apiKey) {
   throw new Error("You must have your Codat api key set as the environment variable CODAT_API_KEY");

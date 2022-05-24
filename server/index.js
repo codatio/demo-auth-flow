@@ -3,8 +3,8 @@ const bodyParser = require("body-parser");
 const uuid = require("uuid");
 const { LocalStorage } = require("node-localstorage");
 const { createCompany } = require("./clients/codat");
+const { config } = require("./config");
 
-const PORT = process.env.PORT || 3001;
 const app = express();
 
 app.use(bodyParser.json());
@@ -44,6 +44,6 @@ app.post('/login', async (req, res) => {
   res.json({ userName, userId });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server listening on ${PORT}`);
+app.listen(config.port, () => {
+  console.log(`Server listening on ${config.port}`);
 });
