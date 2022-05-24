@@ -6,21 +6,22 @@ import FlexColumns from '../../components/FlexColumns/FlexColumns';
 
 const LoanForm = () => {
   const [empStatus, setEmpStatus] = React.useState('');
-  const [loanSum, setLoanSum] = React.useState(10);
+  const [sliderValue, setSliderValue] = React.useState(10);
+  const [loanSum, setLoanSum] = React.useState(10000);
 
   const handleEmpSelection = (event) => {
     setEmpStatus(event.target.value);
   };
 
+  const handleSliderValueChange = (event, newValue) => {
+    setSliderValue(newValue);
+    setLoanSum(newValue * 1000)
+  };
+
   const handleLoanSumChange = (event) => {
-    setLoanSum(event.target.value === '' ? '' : Number(event.target.value));
+    setLoanSum(event.target.value);
+    setSliderValue(event.target.value / 1000)
   };
-
-  const handleLoanSumSlider = (event, newValue) => {
-    setLoanSum(newValue);
-  };
-
-  const scaleLoanValue = (loanValue) => loanValue * 1000;
 
   const marks = [
     {
@@ -82,30 +83,35 @@ const LoanForm = () => {
           <Typography variant="h4" gutterBottom>
             Loan details
           </Typography>
-          <div className="loan-amount-slider">
-            <Typography className="loan-slider-label" variant="body1" gutterBottom>
-              Loan amount
+          <div className="loan-amount-input">
+            <Typography variant="body1" gutterBottom className="loan-amount-label">
+              Loan amount:
             </Typography>
+            <Typography variant="body1" gutterBottom>£</Typography>
+            <Input
+              className="loan-sum-input"
+              value={loanSum}
+              variant="filled"
+              size="small"
+              onChange={handleLoanSumChange}
+              inputProps={{
+                step: 1000,
+                min: 10000,
+                max: 100000,
+                type: 'number',
+              }}
+            />
+          </div>
+          <div className="loan-amount-slider">
             <div className="loan-slider">
               <Slider
                 aria-label="Loan amount"
                 defaultValue={0}
-                step={10}
+                step={1}
+                min={10}
                 marks={marks}
-                value={typeof loanSum === 'number' ? loanSum : 0}
-                onChange={handleLoanSumSlider}
-                scale={scaleLoanValue}
-              />
-              <Input
-                value={loanSum}
-                size="small"
-                onChange={handleLoanSumChange}
-                inputProps={{
-                  step: 10,
-                  min: 10,
-                  max: 100,
-                  type: 'number',
-                }}
+                value={typeof sliderValue === 'number' ? sliderValue : 0}
+                onChange={handleSliderValueChange}
               />
             </div>
           </div>
