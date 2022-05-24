@@ -1,0 +1,9 @@
+.list-container {
+  display: flex;
+  gap: 2rem;
+}
+
+.key-column, .value-column {
+  list-style-type: none;
+  padding-left: 0;
+}

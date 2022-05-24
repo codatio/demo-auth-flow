@@ -3,13 +3,3 @@
   margin: 0 auto;
   padding-top: 1.5rem;
 }
-
-.list-container {
-  display: flex;
-  gap: 2rem;
-}
-
-.key-column, .value-column {
-  list-style-type: none;
-  padding-left: 0;
-}

@@ -1,7 +1,7 @@
 const routes = {
   dashboard: (userId) => `/${userId}/dashboard`,
   login: '/login',
-  loanForm: '/loan-form'
+  loanForm: (userId) => `/${userId}/loan-form`
 }
 
 export { routes }

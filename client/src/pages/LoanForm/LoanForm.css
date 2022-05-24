@@ -8,11 +8,6 @@
   display: flex;
 }
 
-.key-column, .value-column {
-  list-style-type: none;
-  padding-left: 0;
-}
-
 .key-column li, .value-column li {
   min-height: 55px;
   display: flex;

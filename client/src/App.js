@@ -11,7 +11,7 @@ const App = () => {
       <Routes>
         <Route path={routes.login} element={<Login />}/>
         <Route path={routes.dashboard(':userId')} element={<Dashboard />} />
-        <Route path={routes.loanForm} element={<LoanForm />}/>
+        <Route path={routes.loanForm(':userId')} element={<LoanForm />}/>
         <Route 
           path="*"
           element={<Navigate replace to={routes.login} />}

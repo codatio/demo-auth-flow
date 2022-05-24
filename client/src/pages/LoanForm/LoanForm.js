@@ -1,26 +1,38 @@
 import { Typography, TextField, Slider } from "@mui/material"
 import Header from "../../components/Header/Header"
 import "./LoanForm.css"
+import FlexColumns from '../../components/FlexColumns/FlexColumns';
 
 const LoanForm = () => {
   const marks = [
     {
       value: 0,
-      label: '0£',
+      label: '£0',
     },
     {
       value: 10,
-      label: '10000£',
+      label: '£10000',
     },
     {
       value: 50,
-      label: '50000£',
+      label: '£50000',
     },
     {
       value: 100,
-      label: '100000£',
+      label: '£100000',
     }
   ];
+
+  const listItems = [
+    {
+      key: "Name:",
+      value: <TextField label="Name" variant="filled" />
+    },
+    {
+      key: "Employment status:",
+      value: <TextField label="Employment" variant="filled" />
+    }
+  ]
 
   return (
     <>
@@ -38,28 +50,7 @@ const LoanForm = () => {
           <Typography variant="h4">
             Contact information
           </Typography>
-          <div className="contact-information-form">
-            <ul className="key-column">
-              <li>
-                <Typography variant="body1">
-                  Name
-                </Typography>
-              </li>
-              <li>
-                <Typography variant="body1">
-                  Employment status
-                </Typography>
-              </li>
-            </ul>
-            <ul className="value-column">
-              <li>
-                <TextField label="Name" variant="filled" />
-              </li>
-              <li>
-                <TextField label="Employment" variant="filled" />
-              </li>
-            </ul>
-          </div>
+          <FlexColumns listItems={listItems}/>
         </div>
         <div className="loan-amount-wrapper">
           <Typography variant="h4" gutterBottom>
