@@ -2,19 +2,9 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const uuid = require("uuid");
 const { LocalStorage } = require("node-localstorage");
-const fetch = require("node-fetch");
+const { createCompany } = require("./clients/codat");
 
 const PORT = process.env.PORT || 3001;
-const apiKey = process.env.CODAT_API_KEY;
-const codatBaseUrl = "https://api.codat.io";
-
-const apiKeyBase64Encoded = Buffer.from(apiKey).toString("base64");
-const authorisationHeader = "Basic " + apiKeyBase64Encoded;
-
-if (!apiKey) {
-  throw new Error("You must have your Codat api key set as the environment variable CODAT_API_KEY");
-}
-
 const app = express();
 
 app.use(bodyParser.json());
@@ -43,21 +33,7 @@ app.post('/login', async (req, res) => {
   if(!userStorage.getItem("codat-company-id")) {
     // Codat company has not been created
     // So we will create it by posting to the Codat API
-    const postResult = await fetch(
-      `${codatBaseUrl}/companies`,
-      {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: authorisationHeader
-        },
-        body: JSON.stringify({
-          name: userName
-        })
-      }
-    );
-    const resultBody = await postResult.json();
+    const resultBody = await createCompany(userName);
     const codatCompanyId = resultBody.id;
     if (codatCompanyId) {
       console.log("Setting codat company ID as", codatCompanyId, "for user", userId);
