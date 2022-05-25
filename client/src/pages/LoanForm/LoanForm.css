@@ -8,7 +8,9 @@
   display: flex;
 }
 
-.key-column li, .value-column li {
+/* 'Encapsulate' styles for this page */
+.loan-form-content-wrapper .key-column li,
+.loan-form-content-wrapper .value-column li {
   min-height: 55px;
   display: flex;
   align-items: center;
