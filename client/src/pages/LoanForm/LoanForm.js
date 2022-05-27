@@ -6,21 +6,19 @@ import FlexColumns from '../../components/FlexColumns/FlexColumns';
 
 const LoanForm = () => {
   const [empStatus, setEmpStatus] = React.useState('');
-  const [sliderValue, setSliderValue] = React.useState(10);
   const [loanSum, setLoanSum] = React.useState(10000);
+  const sliderValue = loanSum / 1000;
 
   const handleEmpSelection = (event) => {
     setEmpStatus(event.target.value);
   };
 
   const handleSliderValueChange = (event, newValue) => {
-    setSliderValue(newValue);
     setLoanSum(newValue * 1000)
   };
 
   const handleLoanSumChange = (event) => {
     setLoanSum(event.target.value);
-    setSliderValue(event.target.value / 1000)
   };
 
   const marks = [
@@ -41,7 +39,7 @@ const LoanForm = () => {
   const listItems = [
     {
       key: "Name:",
-      value: <TextField label="Name" variant="filled" />
+      value: <TextField className="name-field" label="Name" variant="filled" />
     },
     {
       key: "Employment status:",
@@ -110,7 +108,7 @@ const LoanForm = () => {
                 step={1}
                 min={10}
                 marks={marks}
-                value={typeof sliderValue === 'number' ? sliderValue : 0}
+                value={sliderValue}
                 onChange={handleSliderValueChange}
               />
             </div>
