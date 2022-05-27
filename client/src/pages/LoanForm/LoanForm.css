@@ -1,0 +1,39 @@
+.loan-form-content-wrapper {
+  max-width: var(--main-wrapper);
+  margin: 0 auto;
+  padding-top: 1.5rem;
+}
+
+.contact-information-form {
+  display: flex;
+}
+
+/* 'Encapsulate' styles for this page */
+.loan-form-content-wrapper .key-column li,
+.loan-form-content-wrapper .value-column li {
+  min-height: 55px;
+  display: flex;
+  align-items: center;
+  padding-right: 2rem;
+}
+
+.loan-amount-input {
+  display: flex;
+}
+
+.loan-slider {
+  min-width: 30rem;
+  max-width: 30rem;
+}
+
+.employment-status-field {
+  width: 100%;
+}
+
+.loan-sum-input {
+  bottom: .1rem;
+}
+
+.loan-amount-label {
+  padding-right: 1rem;
+}
