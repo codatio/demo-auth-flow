@@ -43,7 +43,6 @@ const getUserConnections = async(req, res) => {
   }
 
   const codatCompanyId = userStorage.getItem("codat-company-id");
-  // const codatCompanyId = 'a3493abc-7768-4847-a72a-8eb0326a5fa5';
   
   if (!codatCompanyId) {
     res.status(400).send({error: "User ID has not been set up with codat"});

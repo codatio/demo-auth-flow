@@ -9,11 +9,11 @@ const ConnectionDisplay = (props) => {
   const listItems = [
     {
       key: 'Status',
-      value: props.connectionObject.status,
+      value: <Typography variant="body1">{props.connectionObject.status}</Typography>,
     },
     {
       key: 'Source type',
-      value: props.connectionObject.sourceType,
+      value: <Typography variant="body1">{props.connectionObject.sourceType}</Typography>,
     },
   ];
 
