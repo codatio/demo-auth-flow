@@ -1,10 +1,12 @@
-import Header from '../../components/Header/Header';
 import { Typography } from '@mui/material';
 import './Dashboard.css';
-import FlexColumns from '../../components/FlexColumns/FlexColumns';
 import { useParams } from 'react-router-dom';
 import { Fragment, useEffect, useState } from 'react';
 import { linkService } from '../../link-service';
+// Components
+import Header from '../../components/Header/Header';
+import FlexColumns from '../../components/FlexColumns/FlexColumns';
+import ConnectionDisplay from '../../components/ConnectionDisplay/ConnectionDisplay';
 
 const Dashboard = () => {
   const { userId } = useParams();
@@ -27,11 +29,14 @@ const Dashboard = () => {
   ];
 
   useEffect(() => {
-    linkService.connections(userId)
+    linkService
+      .connections(userId)
       .then((data) => {
         setCompanyConnections(data);
       })
-      .catch(() => {setErrorMessage('Something went wrong.')})
+      .catch(() => {
+        setErrorMessage('Something went wrong.');
+      });
   }, []);
 
   const formattedCompanyConnections = companyConnections.map(
@@ -66,15 +71,13 @@ const Dashboard = () => {
             Your connections
           </Typography>
           {errorMessage && <Typography>{errorMessage}</Typography>}
-          {formattedCompanyConnections.length > 0 ? (
-            formattedCompanyConnections.map((item) => {
-              return (
-                <Fragment key={item.id}>
-                  <Typography>{item.title}</Typography>
-                  <FlexColumns listItems={item.listItems} />
-                </Fragment>
-              );
-            })
+          {companyConnections.length > 0 ? (
+            companyConnections.map((companyConnection) => (
+              <ConnectionDisplay
+                key={companyConnection.id}
+                connectionObject={companyConnection}
+              />
+            ))
           ) : (
             <Typography>Connections not found!</Typography>
           )}
