@@ -7,11 +7,12 @@ import { linkService } from '../../link-service';
 import Header from '../../components/Header/Header';
 import FlexColumns from '../../components/FlexColumns/FlexColumns';
 import ConnectionDisplay from '../../components/ConnectionDisplay/ConnectionDisplay';
+import ConnectionsSummary from '../../components/ConnectionsSummary/ConnectionsSummary';
 
 const Dashboard = () => {
   const { userId } = useParams();
   const [companyConnections, setCompanyConnections] = useState([]);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const listItems = [
     {
@@ -70,17 +71,15 @@ const Dashboard = () => {
           <Typography variant="h3" gutterBottom>
             Your connections
           </Typography>
-          {errorMessage && <Typography>{errorMessage}</Typography>}
-          {companyConnections.length > 0 ? (
-            companyConnections.map((companyConnection) => (
+          <ConnectionsSummary error={errorMessage} companyConnections={companyConnections}/>
+          <div className="connection-display-wrapper">
+            {companyConnections.map((companyConnection) => (
               <ConnectionDisplay
                 key={companyConnection.id}
                 connectionObject={companyConnection}
               />
-            ))
-          ) : (
-            <Typography>Connections not found!</Typography>
-          )}
+            ))}
+          </div>
         </div>
       </div>
     </>

@@ -1,20 +1,47 @@
-import React from 'react'
-import { Typography, TextField, Slider, FormControl, Select, InputLabel, MenuItem, Input } from "@mui/material"
-import Header from "../../components/Header/Header"
-import "./LoanForm.css"
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import {
+  Typography,
+  TextField,
+  Slider,
+  FormControl,
+  Select,
+  InputLabel,
+  MenuItem,
+  Input,
+} from '@mui/material';
+import Header from '../../components/Header/Header';
+import './LoanForm.css';
+import { linkService } from '../../link-service';
+//Components
 import FlexColumns from '../../components/FlexColumns/FlexColumns';
+import ConnectionsSummary from '../../components/ConnectionsSummary/ConnectionsSummary';
 
 const LoanForm = () => {
-  const [empStatus, setEmpStatus] = React.useState('');
-  const [loanSum, setLoanSum] = React.useState(10000);
+  const { userId } = useParams();
+  const [empStatus, setEmpStatus] = useState('');
+  const [companyConnections, setCompanyConnections] = useState([]);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [loanSum, setLoanSum] = useState(10000);
   const sliderValue = loanSum / 1000;
+
+  useEffect(() => {
+    linkService
+      .connections(userId)
+      .then((data) => {
+        setCompanyConnections(data);
+      })
+      .catch(() => {
+        setErrorMessage('Something went wrong.');
+      });
+  }, []);
 
   const handleEmpSelection = (event) => {
     setEmpStatus(event.target.value);
   };
 
   const handleSliderValueChange = (event, newValue) => {
-    setLoanSum(newValue * 1000)
+    setLoanSum(newValue * 1000);
   };
 
   const handleLoanSumChange = (event) => {
@@ -33,19 +60,21 @@ const LoanForm = () => {
     {
       value: 100,
       label: '£100000',
-    }
+    },
   ];
 
   const listItems = [
     {
-      key: "Name:",
-      value: <TextField className="name-field" label="Name" variant="filled" />
+      key: 'Name:',
+      value: <TextField className="name-field" label="Name" variant="filled" />,
     },
     {
-      key: "Employment status:",
+      key: 'Employment status:',
       value: (
         <FormControl className="employment-status-field" variant="filled">
-          <InputLabel id="employment-status-label">Employment status</InputLabel>
+          <InputLabel id="employment-status-label">
+            Employment status
+          </InputLabel>
           <Select
             labelId="employment-status-label"
             value={empStatus}
@@ -55,9 +84,9 @@ const LoanForm = () => {
             <MenuItem value={'unemployed'}>Unemployed</MenuItem>
           </Select>
         </FormControl>
-      )
-    }
-  ]
+      ),
+    },
+  ];
 
   return (
     <>
@@ -68,24 +97,34 @@ const LoanForm = () => {
             Your loan application
           </Typography>
           <Typography variant="body1" gutterBottom>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
           </Typography>
         </div>
         <div className="contact-information-wrapper">
-          <Typography variant="h4">
-            Contact information
-          </Typography>
-          <FlexColumns listItems={listItems}/>
+          <Typography variant="h4">Contact information</Typography>
+          <FlexColumns listItems={listItems} />
         </div>
         <div className="loan-amount-wrapper">
           <Typography variant="h4" gutterBottom>
             Loan details
           </Typography>
           <div className="loan-amount-input">
-            <Typography variant="body1" gutterBottom className="loan-amount-label">
+            <Typography
+              variant="body1"
+              gutterBottom
+              className="loan-amount-label"
+            >
               Loan amount:
             </Typography>
-            <Typography variant="body1" gutterBottom>£</Typography>
+            <Typography variant="body1" gutterBottom>
+              £
+            </Typography>
             <Input
               className="loan-sum-input"
               value={loanSum}
@@ -113,10 +152,11 @@ const LoanForm = () => {
               />
             </div>
           </div>
+          <ConnectionsSummary error={errorMessage} companyConnections={companyConnections}/>
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
 export default LoanForm;
