@@ -1,42 +1,71 @@
-import Header from '../../components/Header/Header';
-import {
-  Typography
-} from "@mui/material";
-import "./Dashboard.css";
-import FlexColumns from '../../components/FlexColumns/FlexColumns';
+import { Typography } from '@mui/material';
+import './Dashboard.css';
 import { useParams } from 'react-router-dom';
+import { Fragment, useEffect, useState } from 'react';
+import { linkService } from '../../link-service';
+// Components
+import Header from '../../components/Header/Header';
+import FlexColumns from '../../components/FlexColumns/FlexColumns';
+import ConnectionDisplay from '../../components/ConnectionDisplay/ConnectionDisplay';
 
 const Dashboard = () => {
   const { userId } = useParams();
+  const [companyConnections, setCompanyConnections] = useState([]);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const listItems = [
     {
-      key: "Name:",
+      key: 'Name:',
       value: <Typography variant="body1">User name</Typography>,
     },
     {
-      key: "User e-mail:",
-      value: <Typography variant="body1">email@company.com</Typography>
+      key: 'User e-mail:',
+      value: <Typography variant="body1">email@company.com</Typography>,
     },
     {
-      key: "User ID:",
-      value: <Typography variant="body1">{userId}</Typography>
-    }
-  ]
+      key: 'User ID:',
+      value: <Typography variant="body1">{userId}</Typography>,
+    },
+  ];
+
+  useEffect(() => {
+    linkService
+      .connections(userId)
+      .then((data) => {
+        setCompanyConnections(data);
+      })
+      .catch(() => {
+        setErrorMessage('Something went wrong.');
+      });
+  }, []);
 
   return (
     <>
-      <Header/>
+      <Header />
       <div className="dashboard-content-wrapper">
         <div>
-          <Typography variant='h3' gutterBottom>
+          <Typography variant="h3" gutterBottom>
             Your account
           </Typography>
-          <FlexColumns listItems={listItems}/>
+          <FlexColumns listItems={listItems} />
+          <Typography variant="h3" gutterBottom>
+            Your connections
+          </Typography>
+          {errorMessage && <Typography>{errorMessage}</Typography>}
+          {companyConnections.length > 0 ? (
+            companyConnections.map((companyConnection) => (
+              <ConnectionDisplay
+                key={companyConnection.id}
+                connectionObject={companyConnection}
+              />
+            ))
+          ) : (
+            <Typography>Connections not found!</Typography>
+          )}
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
 export default Dashboard;
