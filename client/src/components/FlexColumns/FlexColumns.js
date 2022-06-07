@@ -8,7 +8,7 @@ const FlexColumns = (props) => (
   <div className="list-container">
     <ul className="key-column">
       {props.listItems.map((listItem, index) => (
-        <li key={`key-${index}`}>
+        <li key={index}>
           <Typography variant="body1">
             {listItem.key}
           </Typography>
@@ -17,7 +17,7 @@ const FlexColumns = (props) => (
     </ul>
     <ul className="value-column">
       {props.listItems.map((listItem, index) => (
-        <li key={`value-${index}`}>
+        <li key={index}>
           {listItem.value}
         </li>
       ))}

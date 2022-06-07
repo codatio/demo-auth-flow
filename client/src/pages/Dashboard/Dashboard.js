@@ -39,25 +39,6 @@ const Dashboard = () => {
       });
   }, []);
 
-  const formattedCompanyConnections = companyConnections.map(
-    (connectionObject) => {
-      return {
-        title: connectionObject.platformName,
-        id: connectionObject.id,
-        listItems: [
-          {
-            key: 'Status',
-            value: connectionObject.status,
-          },
-          {
-            key: 'Source type',
-            value: connectionObject.sourceType,
-          },
-        ],
-      };
-    }
-  );
-
   return (
     <>
       <Header />

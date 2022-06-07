@@ -1,6 +1,5 @@
 import { Typography } from '@mui/material';
 import { Fragment } from 'react';
-import './ConnectionDisplay.css';
 
 import FlexColumns from '../FlexColumns/FlexColumns';
 
