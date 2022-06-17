@@ -63,5 +63,23 @@ const getConnections = async (codatCompanyId) => {
   return resultBody.results;
 }
 
+const getIntegrations = async () => {
+  const getResult = await fetch(
+    `${codatBaseUrl}/integrations?page=1&pageSize=100`,
+    {
+      method: "GET",
+      headers
+    }
+  );
+
+  if (!getResult.ok) {
+    throw new Error("Could not get integrations");
+  }
+
+  const resultBody = await getResult.json();
+  return resultBody.results;
+}
+
 exports.createCompany = createCompany;
 exports.getConnections = getConnections;
+exports.getIntegrations = getIntegrations;
