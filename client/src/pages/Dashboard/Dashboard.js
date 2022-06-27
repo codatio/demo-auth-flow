@@ -1,8 +1,10 @@
-import { Typography } from '@mui/material';
+import { Typography, Button } from '@mui/material';
 import './Dashboard.css';
 import { useParams } from 'react-router-dom';
-import { Fragment, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { linkService } from '../../link-service';
+import { useNavigate } from 'react-router-dom';
+import { routes } from '../../routes';
 // Components
 import Header from '../../components/Header/Header';
 import FlexColumns from '../../components/FlexColumns/FlexColumns';
@@ -39,18 +41,22 @@ const Dashboard = () => {
       });
   }, []);
 
+  const navigate = useNavigate();
+
+  const handleApplication = () => {
+    navigate(routes.loanForm(userId));
+  };
+
   return (
     <>
       <Header />
       <div className="dashboard-content-wrapper">
         <div>
-          <Typography variant="h3" gutterBottom>
-            Your account
-          </Typography>
+          <Typography variant="h4">Account information</Typography>
           <FlexColumns listItems={listItems} />
-          <Typography variant="h3" gutterBottom>
-            Your connections
-          </Typography>
+        </div>
+        <div>
+          <Typography variant="h4">Company connections</Typography>
           {errorMessage && <Typography>{errorMessage}</Typography>}
           {companyConnections.length > 0 ? (
             companyConnections.map((companyConnection) => (
@@ -60,8 +66,24 @@ const Dashboard = () => {
               />
             ))
           ) : (
-            <Typography>Connections not found!</Typography>
+            <div className="connections-error-box">
+              <Typography>Connections not found!</Typography>
+            </div>
           )}
+        </div>
+        <div>
+          <Typography variant="h4">Your loans</Typography>
+          <Typography>
+            To apply for a loan, you will be required to fill out a loan form.
+          </Typography>
+          <Button
+            variant="contained"
+            onClick={handleApplication}
+            sx={{ mt: 3 }}
+            size="large"
+          >
+            Apply
+          </Button>
         </div>
       </div>
     </>

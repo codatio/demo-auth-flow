@@ -11,7 +11,8 @@ body {
   /*Colors*/
   --primary: #5D9E8F;
   --secondary: #edf2ff;
-  --inactive: #adafb4;
+  --inactive: #c2c3c5;
+  --accent: #DE562C;
   
   /*Layout*/
   --main-wrapper: 1028px;
