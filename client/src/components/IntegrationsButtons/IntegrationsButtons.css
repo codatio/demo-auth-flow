@@ -1,0 +1,22 @@
+.integrations-buttons {
+  display: flex;
+  gap: 2rem;
+}
+
+.integration-button {
+  border-radius: .3rem !important;
+  border: .2rem solid !important;
+  max-height: 5rem;
+}
+
+.integration-button img {
+  height: 100%;
+}
+
+.integration-button--active {
+  border-color: var(--primary) !important;
+}
+
+.integration-button--inactive {
+  border-color: var(--inactive) !important;
+}
