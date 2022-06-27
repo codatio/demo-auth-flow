@@ -65,7 +65,7 @@ const getConnections = async (codatCompanyId) => {
 
 const getIntegrations = async () => {
   const getResult = await fetch(
-    `${codatBaseUrl}/integrations?page=1&pageSize=100`,
+    `${codatBaseUrl}/integrations?page=1&pageSize=100&query=enabled%3Dtrue%26%26sourceType%3Daccounting`,
     {
       method: "GET",
       headers
