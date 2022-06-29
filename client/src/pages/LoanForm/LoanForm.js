@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import {
   Typography,
   TextField,
@@ -16,6 +17,7 @@ import FlexColumns from '../../components/FlexColumns/FlexColumns';
 import IntegrationsModal from '../../components/IntegrationsModal/IntegrationsModal';
 
 const LoanForm = () => {
+  const { userId } = useParams();
   const [empStatus, setEmpStatus] = useState('');
   const [loanSum, setLoanSum] = useState(10000);
   const sliderValue = loanSum / 1000;
@@ -141,12 +143,17 @@ const LoanForm = () => {
               />
             </div>
           </div>
+          <Typography variant="body1" sx={{ mt: 2, mb: 3 }}>
+            If you connect your accounting platform, we would be able to approve
+            your loan faster.
+          </Typography>
           <Button variant="contained" size="large" onClick={handleModalToggle}>
-            Submit
+            Add integration
           </Button>
           <IntegrationsModal
             isModalOpen={isModalOpen}
             handleModalToggle={handleModalToggle}
+            userId={userId}
           />
         </div>
       </div>
