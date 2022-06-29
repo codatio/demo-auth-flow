@@ -3,15 +3,14 @@ import React, { useState } from 'react';
 import './IntegrationsButtons.css';
 
 const IntegrationsButtons = (props) => {
-  const [selectedIntegration, setSelectedIntegration] = useState('');
   const handleIntegrationSelection = (event, newSelectedIntegration) => {
-    setSelectedIntegration(newSelectedIntegration);
+    props.setSelectedIntegration(newSelectedIntegration);
   };
 
   return (
     <ToggleButtonGroup
       className="integrations-buttons"
-      value={selectedIntegration}
+      value={props.selectedIntegration}
       onChange={handleIntegrationSelection}
       exclusive
     >
@@ -19,7 +18,7 @@ const IntegrationsButtons = (props) => {
         return (
           <ToggleButton
             className={`integration-button ${
-              integration.key === selectedIntegration
+              integration.key === props.selectedIntegration
                 ? 'integration-button--active'
                 : 'integration-button--inactive'
             }`}

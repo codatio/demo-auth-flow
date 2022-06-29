@@ -1,7 +1,7 @@
 const headers = {
   Accept: 'application/json',
-  'Content-Type': 'application/json'
-}
+  'Content-Type': 'application/json',
+};
 
 const linkService = {
   login: (userName) =>
@@ -20,6 +20,12 @@ const linkService = {
   integrations: () =>
     fetch('/integrations', {
       method: 'GET',
+      headers,
+    }).then((res) => res.json()),
+  //Create a connection to an integration
+  postConnection: (userId, integrationKey) =>
+    fetch(`/user/${userId}/connections/${integrationKey}`, {
+      method: 'POST',
       headers,
     }).then((res) => res.json()),
 };
