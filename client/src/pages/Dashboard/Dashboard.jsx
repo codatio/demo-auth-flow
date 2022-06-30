@@ -65,8 +65,8 @@ const Dashboard = () => {
               />
             ))
           ) : (
-            <div className="connections-error-box">
-              <Typography>Connections not found!</Typography>
+            <div>
+              <Typography>❌Connections not found!</Typography>
             </div>
           )}
         </SectionWrapper>
