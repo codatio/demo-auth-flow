@@ -106,11 +106,9 @@ const LoanForm = () => {
               gutterBottom
               className="loan-amount-label"
             >
-              <span className='bold-text'>Loan amount:</span>
+              <span className="bold-text">Loan amount:</span>
             </Typography>
-            <Typography variant="body1">
-              £
-            </Typography>
+            <Typography variant="body1">£</Typography>
             <Input
               className="loan-sum-input"
               value={loanSum}
@@ -139,8 +137,8 @@ const LoanForm = () => {
             </div>
           </div>
         </SectionWrapper>
-        
-        <div className='connection-prompt-wrapper'>
+
+        <div className="connection-prompt-wrapper">
           <Typography variant="body1">
             If you connect your accounting platform, we will be able to approve
             your loan faster.
@@ -149,8 +147,8 @@ const LoanForm = () => {
             Connect
           </Button>
         </div>
-        <Button variant="contained" size="large" color="primary" sx={{mb:3}}>
-            Submit application
+        <Button variant="contained" size="large" color="primary" sx={{ mb: 3 }}>
+          Submit application
         </Button>
       </div>
       <IntegrationsModal

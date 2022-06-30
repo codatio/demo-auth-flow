@@ -1,8 +1,8 @@
 import { Typography } from '@mui/material';
 
 const RedirectHandler = () => {
-  window.close()
-  
+  window.close();
+
   return <Typography>Please close this tab.</Typography>;
 };
 
