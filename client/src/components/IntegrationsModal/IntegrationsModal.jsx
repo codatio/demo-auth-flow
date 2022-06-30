@@ -31,6 +31,8 @@ const IntegrationsModal = (props) => {
           window.open(data.linkUrl, '_blank');
         })
         .catch(() => setErrorMessage('Could not add a connection.'));
+    } else if (connectionState === connectionSuccess) {
+      props.handleModalToggle()
     }
   };
 
