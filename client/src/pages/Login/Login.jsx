@@ -29,7 +29,7 @@ const Login = () => {
       <Card variant="outlined" className="login-card">
         <div className="login-content">
           <Typography variant="h3" component="h3" align="center">
-            Welcome to GenBus
+            Welcome to <span className="accent-text">GenBus</span>
           </Typography>
           <Typography align="left" gutterBottom>
             Sign in using your username and password

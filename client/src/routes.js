@@ -2,7 +2,7 @@ const routes = {
   dashboard: (userId) => `/${userId}/dashboard`,
   login: '/login',
   loanForm: (userId) => `/${userId}/loan-form`,
-  redirect: '/redirect'
-}
+  redirect: '/redirect',
+};
 
-export { routes }
+export { routes };

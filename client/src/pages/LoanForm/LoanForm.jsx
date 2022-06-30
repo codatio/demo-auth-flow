@@ -11,10 +11,12 @@ import {
   Input,
   Button,
 } from '@mui/material';
-import Header from '../../components/Header/Header';
 import './LoanForm.css';
+//Components
+import Header from '../../components/Header/Header';
 import FlexColumns from '../../components/FlexColumns/FlexColumns';
 import IntegrationsModal from '../../components/IntegrationsModal/IntegrationsModal';
+import SectionWrapper from '../../components/SectionWrapper/SectionWrapper';
 
 const LoanForm = () => {
   const { userId } = useParams();
@@ -83,11 +85,8 @@ const LoanForm = () => {
     <>
       <Header />
       <div className="loan-form-content-wrapper">
-        <div>
-          <Typography variant="h3" gutterBottom>
-            Your loan application
-          </Typography>
-          <Typography variant="body1" gutterBottom>
+        <SectionWrapper title="Your loan application">
+          <Typography variant="body1">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -96,26 +95,20 @@ const LoanForm = () => {
             pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
             culpa qui officia deserunt mollit anim id est laborum.
           </Typography>
-        </div>
-        <div className="contact-information-wrapper">
-          <Typography variant="h4">Contact information</Typography>
+        </SectionWrapper>
+        <SectionWrapper title="Contact information">
           <FlexColumns listItems={listItems} />
-        </div>
-        <div className="loan-amount-wrapper">
-          <Typography variant="h4" gutterBottom>
-            Loan details
-          </Typography>
+        </SectionWrapper>
+        <SectionWrapper title="Loan details">
           <div className="loan-amount-input">
             <Typography
               variant="body1"
               gutterBottom
               className="loan-amount-label"
             >
-              Loan amount:
+              <span className="bold-text">Loan amount:</span>
             </Typography>
-            <Typography variant="body1" gutterBottom>
-              £
-            </Typography>
+            <Typography variant="body1">£</Typography>
             <Input
               className="loan-sum-input"
               value={loanSum}
@@ -143,20 +136,26 @@ const LoanForm = () => {
               />
             </div>
           </div>
-          <Typography variant="body1" sx={{ mt: 2, mb: 3 }}>
-            If you connect your accounting platform, we would be able to approve
+        </SectionWrapper>
+
+        <div className="connection-prompt-wrapper">
+          <Typography variant="body1">
+            If you connect your accounting platform, we will be able to approve
             your loan faster.
           </Typography>
-          <Button variant="contained" size="large" onClick={handleModalToggle}>
-            Add integration
+          <Button variant="outlined" color="accent" onClick={handleModalToggle}>
+            Connect
           </Button>
-          <IntegrationsModal
-            isModalOpen={isModalOpen}
-            handleModalToggle={handleModalToggle}
-            userId={userId}
-          />
         </div>
+        <Button variant="contained" size="large" color="primary" sx={{ mb: 3 }}>
+          Submit application
+        </Button>
       </div>
+      <IntegrationsModal
+        isModalOpen={isModalOpen}
+        handleModalToggle={handleModalToggle}
+        userId={userId}
+      />
     </>
   );
 };

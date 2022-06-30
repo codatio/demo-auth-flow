@@ -37,19 +37,24 @@ const IntegrationsModal = (props) => {
         >
           Select your integration
         </Typography>
-        {errorMessage && <Typography>{errorMessage}</Typography>}
-        <IntegrationsButtons
-          enabledIntegrations={enabledIntegrations}
-          setSelectedIntegration={setSelectedIntegration}
-          selectedIntegration={selectedIntegration}
-        />
-        <Button variant="contained" size="large" onClick={onPlatformSubmit}>
-          Confirm
-        </Button>
-        <Typography variant="body2">
-          By clicking this button, you will be redirected to your accounting
-          platform to authorize the connection.
-        </Typography>
+        {errorMessage ? (
+          <Typography>🙁{errorMessage}</Typography>
+        ) : (
+          <>
+            <IntegrationsButtons
+              enabledIntegrations={enabledIntegrations}
+              setSelectedIntegration={setSelectedIntegration}
+              selectedIntegration={selectedIntegration}
+            />
+            <Button variant="contained" size="large" onClick={onPlatformSubmit}>
+              Confirm
+            </Button>
+            <Typography variant="body2">
+              By clicking this button, you will be redirected to your accounting
+              platform to authorize the connection.
+            </Typography>
+          </>
+        )}
       </Box>
     </Modal>
   );

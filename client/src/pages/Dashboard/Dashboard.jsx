@@ -1,12 +1,15 @@
-import { Typography } from '@mui/material';
+import { Typography, Button } from '@mui/material';
 import './Dashboard.css';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { linkService } from '../../link-service';
+import { useNavigate } from 'react-router-dom';
+import { routes } from '../../routes';
 // Components
 import Header from '../../components/Header/Header';
 import FlexColumns from '../../components/FlexColumns/FlexColumns';
 import ConnectionDisplay from '../../components/ConnectionDisplay/ConnectionDisplay';
+import SectionWrapper from '../../components/SectionWrapper/SectionWrapper';
 
 const Dashboard = () => {
   const { userId } = useParams();
@@ -39,30 +42,44 @@ const Dashboard = () => {
       });
   }, []);
 
+  const navigate = useNavigate();
+
+  const handleApplication = () => {
+    navigate(routes.loanForm(userId));
+  };
+
   return (
     <>
       <Header />
       <div className="dashboard-content-wrapper">
-        <div>
-          <Typography variant="h3" gutterBottom>
-            Your account
-          </Typography>
-          <FlexColumns listItems={listItems} />
-          <Typography variant="h3" gutterBottom>
-            Your connections
-          </Typography>
-          {errorMessage && <Typography>{errorMessage}</Typography>}
-          {companyConnections.length > 0 ? (
+        <SectionWrapper title="Account information">
+          <FlexColumns backgroundActive listItems={listItems} />
+        </SectionWrapper>
+        <SectionWrapper title="Company connections">
+          {errorMessage ? (
+            <Typography>🙁{errorMessage}</Typography>
+          ) : companyConnections.length > 0 ? (
             companyConnections.map((companyConnection) => (
               <ConnectionDisplay
+                backgroundActive
                 key={companyConnection.id}
                 connectionObject={companyConnection}
               />
             ))
           ) : (
-            <Typography>Connections not found!</Typography>
+            <div>
+              <Typography>❌Connections not found!</Typography>
+            </div>
           )}
-        </div>
+        </SectionWrapper>
+        <SectionWrapper title="Your loans">
+          <Typography>
+            To apply for a loan, you will be required to fill out a loan form.
+          </Typography>
+          <Button variant="contained" onClick={handleApplication} size="large">
+            Apply
+          </Button>
+        </SectionWrapper>
       </div>
     </>
   );

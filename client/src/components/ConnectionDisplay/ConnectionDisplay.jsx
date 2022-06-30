@@ -8,18 +8,27 @@ const ConnectionDisplay = (props) => {
   const listItems = [
     {
       key: 'Status',
-      value: <Typography variant="body1">{props.connectionObject.status}</Typography>,
+      value: (
+        <Typography variant="body1">{props.connectionObject.status}</Typography>
+      ),
     },
     {
       key: 'Source type',
-      value: <Typography variant="body1">{props.connectionObject.sourceType}</Typography>,
+      value: (
+        <Typography variant="body1">
+          {props.connectionObject.sourceType}
+        </Typography>
+      ),
     },
   ];
 
   return (
     <Fragment>
       <Typography variant="h5">{title}</Typography>
-      <FlexColumns listItems={listItems} />
+      <FlexColumns
+        listItems={listItems}
+        backgroundActive={props.backgroundActive}
+      />
     </Fragment>
   );
 };
