@@ -18,11 +18,11 @@ const IntegrationsButtons = (props) => {
         return (
           <ToggleButton
             className={`integration-button ${
-              integration.key === props.selectedIntegration
+              integration.key === props.selectedIntegration?.key
                 ? 'integration-button--active'
                 : 'integration-button--inactive'
             }`}
-            value={integration.key}
+            value={{key: integration.key, sourceId: integration.sourceId}}
             key={integration.key}
           >
             <img src={integration.logoUrl} />

@@ -10,7 +10,9 @@ const linkService = {
       headers,
       body: JSON.stringify({ username: userName }),
     }).then((res) => res.json()),
-  // Get all company connections
+  /** 
+   * Get all company connections
+   */
   connections: (userId) =>
     fetch(`/user/${userId}/connections`, {
       method: 'GET',
