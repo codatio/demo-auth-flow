@@ -21,9 +21,3 @@
   max-width: 8rem;
   align-self: center;
 }
-
-.accent-text {
-  color: var(--accent);
-  font-weight: bold;
-  font-family: 'Philosopher', sans-serif;
-}

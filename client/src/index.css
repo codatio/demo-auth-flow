@@ -18,3 +18,9 @@ body {
   /*Layout*/
   --main-wrapper: 1028px;
 }
+
+.accent-text {
+  color: var(--accent);
+  font-weight: bold;
+  font-family: 'Philosopher', sans-serif;
+}
