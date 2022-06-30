@@ -25,7 +25,7 @@ const ConnectionDisplay = (props) => {
   return (
     <Fragment>
       <Typography variant="h5">{title}</Typography>
-      <FlexColumns listItems={listItems} />
+      <FlexColumns listItems={listItems} backgroundActive={props.backgroundActive} />
     </Fragment>
   );
 };

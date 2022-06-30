@@ -3,6 +3,13 @@
   gap: 2rem;
 }
 
+.list-container--background {
+  background-color: var(--backdrop);
+  min-width: 30rem;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
 .key-column, .value-column {
   list-style-type: none;
   padding-left: 0;

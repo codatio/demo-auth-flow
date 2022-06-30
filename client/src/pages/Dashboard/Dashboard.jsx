@@ -9,6 +9,7 @@ import { routes } from '../../routes';
 import Header from '../../components/Header/Header';
 import FlexColumns from '../../components/FlexColumns/FlexColumns';
 import ConnectionDisplay from '../../components/ConnectionDisplay/ConnectionDisplay';
+import SectionWrapper from '../../components/SectionWrapper/SectionWrapper';
 
 const Dashboard = () => {
   const { userId } = useParams();
@@ -51,16 +52,14 @@ const Dashboard = () => {
     <>
       <Header />
       <div className="dashboard-content-wrapper">
-        <div>
-          <Typography variant="h4">Account information</Typography>
-          <FlexColumns listItems={listItems} />
-        </div>
-        <div>
-          <Typography variant="h4">Company connections</Typography>
+        <SectionWrapper title="Account information">
+          <FlexColumns backgroundActive listItems={listItems} />
+        </SectionWrapper>
+        <SectionWrapper title="Company connections">
           {errorMessage && <Typography>{errorMessage}</Typography>}
           {companyConnections.length > 0 ? (
             companyConnections.map((companyConnection) => (
-              <ConnectionDisplay
+              <ConnectionDisplay backgroundActive
                 key={companyConnection.id}
                 connectionObject={companyConnection}
               />
@@ -70,21 +69,19 @@ const Dashboard = () => {
               <Typography>Connections not found!</Typography>
             </div>
           )}
-        </div>
-        <div>
-          <Typography variant="h4">Your loans</Typography>
+        </SectionWrapper>
+        <SectionWrapper title="Your loans">
           <Typography>
             To apply for a loan, you will be required to fill out a loan form.
           </Typography>
           <Button
             variant="contained"
             onClick={handleApplication}
-            sx={{ mt: 3 }}
             size="large"
           >
             Apply
           </Button>
-        </div>
+        </SectionWrapper>
       </div>
     </>
   );
