@@ -8,9 +8,8 @@
   display: flex;
 }
 
-/* 'Encapsulate' styles for this page */
-.loan-form-content-wrapper .key-column li,
-.loan-form-content-wrapper .value-column li {
+.contact-info-columns .key-column li,
+.contact-info-columns .value-column li {
   min-height: 55px;
   display: flex;
   align-items: center;
