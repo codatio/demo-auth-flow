@@ -17,6 +17,12 @@
   padding-right: 2rem;
 }
 
+.loan-amount-slider {
+  background-color: var(--backdrop);
+  padding: 1rem 3rem;
+  border-radius: 1rem;
+}
+
 .loan-amount-input {
   display: flex;
 }
@@ -36,4 +42,16 @@
 
 .loan-amount-label {
   padding-right: 1rem;
+}
+
+.bold-text {
+  font-weight: bold;
+}
+
+.connection-prompt-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: center;
+  margin-bottom: 2rem;
 }

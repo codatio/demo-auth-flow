@@ -8,5 +8,8 @@ export const linkTheme = createTheme({
     secondary: {
       main: '#edf2ff',
     },
+    accent: {
+      main: '#DE562C',
+    },
   },
 });

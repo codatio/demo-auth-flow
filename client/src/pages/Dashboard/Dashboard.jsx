@@ -56,10 +56,12 @@ const Dashboard = () => {
           <FlexColumns backgroundActive listItems={listItems} />
         </SectionWrapper>
         <SectionWrapper title="Company connections">
-          {errorMessage && <Typography>{errorMessage}</Typography>}
-          {companyConnections.length > 0 ? (
+          {errorMessage ? (
+            <Typography>🙁{errorMessage}</Typography>
+          ) : companyConnections.length > 0 ? (
             companyConnections.map((companyConnection) => (
-              <ConnectionDisplay backgroundActive
+              <ConnectionDisplay
+                backgroundActive
                 key={companyConnection.id}
                 connectionObject={companyConnection}
               />
@@ -74,11 +76,7 @@ const Dashboard = () => {
           <Typography>
             To apply for a loan, you will be required to fill out a loan form.
           </Typography>
-          <Button
-            variant="contained"
-            onClick={handleApplication}
-            size="large"
-          >
+          <Button variant="contained" onClick={handleApplication} size="large">
             Apply
           </Button>
         </SectionWrapper>

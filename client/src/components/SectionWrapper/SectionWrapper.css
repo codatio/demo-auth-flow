@@ -2,6 +2,6 @@
   margin-bottom: 2rem;
   display: flex;
   flex-direction: column;
-  gap: .5rem;
+  gap: 1rem;
   align-items: flex-start;
 }
