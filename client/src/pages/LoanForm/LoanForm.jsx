@@ -149,9 +149,9 @@ const LoanForm = () => {
             Connect
           </Button>
         </div>
-      <Button className="apply-button" variant="contained" size="large" color="primary">
-          Submit application
-      </Button>
+        <Button variant="contained" size="large" color="primary" sx={{mb:3}}>
+            Submit application
+        </Button>
       </div>
       <IntegrationsModal
         isModalOpen={isModalOpen}
