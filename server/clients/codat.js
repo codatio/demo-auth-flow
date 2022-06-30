@@ -80,6 +80,25 @@ const getIntegrations = async () => {
   return resultBody.results;
 }
 
+const createDataConnection = async (codatCompanyId, integrationKey) => {
+  const postResult = await fetch(
+    `${codatBaseUrl}/companies/${codatCompanyId}/connections`,
+    {
+      method: "POST",
+      headers,
+      body: JSON.stringify(integrationKey)
+    }
+  );
+
+  if (!postResult.ok) {
+    throw new Error("Could not create connection");
+  }
+
+  const resultBody = await postResult.json();
+  return resultBody;
+}
+
 exports.createCompany = createCompany;
 exports.getConnections = getConnections;
 exports.getIntegrations = getIntegrations;
+exports.createDataConnection = createDataConnection;
