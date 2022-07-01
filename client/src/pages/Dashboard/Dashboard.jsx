@@ -1,20 +1,16 @@
 import { Typography, Button } from '@mui/material';
 import './Dashboard.css';
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { linkService } from '../../link-service';
 import { useNavigate } from 'react-router-dom';
 import { routes } from '../../routes';
 // Components
 import Header from '../../components/Header/Header';
 import FlexColumns from '../../components/FlexColumns/FlexColumns';
-import ConnectionDisplay from '../../components/ConnectionDisplay/ConnectionDisplay';
 import SectionWrapper from '../../components/SectionWrapper/SectionWrapper';
+import CompanyConnections from '../../components/CompanyConnections/CompanyConnections';
 
 const Dashboard = () => {
   const { userId } = useParams();
-  const [companyConnections, setCompanyConnections] = useState([]);
-  const [errorMessage, setErrorMessage] = useState('');
 
   const listItems = [
     {
@@ -31,17 +27,6 @@ const Dashboard = () => {
     },
   ];
 
-  useEffect(() => {
-    linkService
-      .connections(userId)
-      .then((data) => {
-        setCompanyConnections(data);
-      })
-      .catch(() => {
-        setErrorMessage('Something went wrong.');
-      });
-  }, []);
-
   const navigate = useNavigate();
 
   const handleApplication = () => {
@@ -55,23 +40,7 @@ const Dashboard = () => {
         <SectionWrapper title="Account information">
           <FlexColumns backgroundActive listItems={listItems} />
         </SectionWrapper>
-        <SectionWrapper title="Company connections">
-          {errorMessage ? (
-            <Typography>🙁{errorMessage}</Typography>
-          ) : companyConnections.length > 0 ? (
-            companyConnections.map((companyConnection) => (
-              <ConnectionDisplay
-                backgroundActive
-                key={companyConnection.id}
-                connectionObject={companyConnection}
-              />
-            ))
-          ) : (
-            <div>
-              <Typography>❌Connections not found!</Typography>
-            </div>
-          )}
-        </SectionWrapper>
+        <CompanyConnections />
         <SectionWrapper title="Your loans">
           <Typography>
             To apply for a loan, you will be required to fill out a loan form.

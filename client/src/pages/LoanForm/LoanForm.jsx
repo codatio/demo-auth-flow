@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import {
   Typography,
@@ -12,18 +12,30 @@ import {
   Button,
 } from '@mui/material';
 import './LoanForm.css';
+import { linkService } from '../../link-service';
 //Components
 import Header from '../../components/Header/Header';
 import FlexColumns from '../../components/FlexColumns/FlexColumns';
 import IntegrationsModal from '../../components/IntegrationsModal/IntegrationsModal';
 import SectionWrapper from '../../components/SectionWrapper/SectionWrapper';
+import CompanyConnections from '../../components/CompanyConnections/CompanyConnections';
 
 const LoanForm = () => {
   const { userId } = useParams();
+  const [activeConnectionsAvailable, setActiveConnectionsAvailable] =
+    useState(false);
   const [empStatus, setEmpStatus] = useState('');
+  const [connectionState, setConnectionState] = useState('');
   const [loanSum, setLoanSum] = useState(10000);
   const sliderValue = loanSum / 1000;
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    linkService.connections(userId).then((data) => {
+      const activeConnectionsValue = data.some((c) => c.status === 'Linked');
+      setActiveConnectionsAvailable(activeConnectionsValue);
+    });
+  }, [connectionState]);
 
   const handleModalToggle = () => {
     setIsModalOpen(!isModalOpen);
@@ -97,7 +109,9 @@ const LoanForm = () => {
           </Typography>
         </SectionWrapper>
         <SectionWrapper title="Contact information">
-          <FlexColumns listItems={listItems} />
+          <div className="contact-info-columns">
+            <FlexColumns listItems={listItems} />
+          </div>
         </SectionWrapper>
         <SectionWrapper title="Loan details">
           <div className="loan-amount-input">
@@ -138,15 +152,24 @@ const LoanForm = () => {
           </div>
         </SectionWrapper>
 
-        <div className="connection-prompt-wrapper">
-          <Typography variant="body1">
-            If you connect your accounting platform, we will be able to approve
-            your loan faster.
-          </Typography>
-          <Button variant="outlined" color="accent" onClick={handleModalToggle}>
-            Connect
-          </Button>
-        </div>
+        {activeConnectionsAvailable ? (
+          <CompanyConnections />
+        ) : (
+          <div className="connection-prompt-wrapper">
+            <Typography variant="body1">
+              If you connect your accounting platform, we will be able to
+              approve your loan faster.
+            </Typography>
+            <Button
+              variant="outlined"
+              color="accent"
+              onClick={handleModalToggle}
+            >
+              Connect
+            </Button>
+          </div>
+        )}
+
         <Button variant="contained" size="large" color="primary" sx={{ mb: 3 }}>
           Submit application
         </Button>
@@ -155,6 +178,8 @@ const LoanForm = () => {
         isModalOpen={isModalOpen}
         handleModalToggle={handleModalToggle}
         userId={userId}
+        connectionState={connectionState}
+        setConnectionState={setConnectionState}
       />
     </>
   );
