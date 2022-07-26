@@ -11,6 +11,7 @@ const IntegrationsModal = (props) => {
   const [enabledIntegrations, setEnabledIntegrations] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
   const [selectedIntegration, setSelectedIntegration] = useState(null);
+  const [connectionState, setConnectionState] = useState('');
 
   useEffect(() => {
     linkService
@@ -22,21 +23,19 @@ const IntegrationsModal = (props) => {
   }, []);
 
   const onPlatformSubmit = () => {
-    if (selectedIntegration && !props.connectionState) {
-      props.setConnectionState(waitingForComplete);
+    if (selectedIntegration && !connectionState) {
+      setConnectionState(waitingForComplete);
       linkService
         .postConnection(props.userId, selectedIntegration.key)
         .then((data) => {
           window.open(data.linkUrl, '_blank');
         })
         .catch(() => setErrorMessage('Could not add a connection.'));
-    } else if (props.connectionState === connectionSuccess) {
-      props.handleModalToggle()
     }
   };
 
   useEffect(() => {
-    if (props.connectionState === waitingForComplete) {
+    if (connectionState === waitingForComplete) {
       const interval = setInterval(() => {
         // Call the getDataConnections endpoint
         linkService.connections(props.userId).then((connections) => {
@@ -46,19 +45,22 @@ const IntegrationsModal = (props) => {
 
           // Check if the selectedIntegration has changed to Linked
           if (matchingConnection?.status === 'Linked') {
-            // If it has, set props.connectionState to connectionSuccess
-            props.setConnectionState(connectionSuccess);
+            // If it has, set connectionState to connectionSuccess
+            setConnectionState(connectionSuccess);
             clearInterval(interval);
           }
         });
       // If it has not complete, try again in 5 seconds
       }, 5000);
 
+    } else if (connectionState === connectionSuccess) {
+      props.onConnectionLinked();
     }
-  }, [props.connectionState]);
+
+  }, [connectionState]);
 
   const onIntegrationSelect = (integration) => {
-    if (!props.connectionState) {
+    if (!connectionState) {
       setSelectedIntegration(integration);
     }
   };
@@ -83,17 +85,17 @@ const IntegrationsModal = (props) => {
               selectedIntegration={selectedIntegration}
             />
             <Button variant="contained" size="large" onClick={onPlatformSubmit}>
-              {props.connectionState === waitingForComplete
+              {connectionState === waitingForComplete
                 ? 'Waiting...'
-                : props.connectionState === connectionSuccess
+                : connectionState === connectionSuccess
                 ? 'Success!'
                 : 'Confirm'}
             </Button>
             <Typography variant="body2">
               {
-                props.connectionState === waitingForComplete
+                connectionState === waitingForComplete
                 ? 'A new window will open. Please follow the instructions to link your accounting package.'
-                : props.connectionState === connectionSuccess
+                : connectionState === connectionSuccess
                 ? 'Great job! Thanks for your accounting data 😎'
                 : 'By clicking this button, you will be redirected to your accounting platform to authorize the connection.'
               }

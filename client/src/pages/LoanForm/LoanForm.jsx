@@ -25,17 +25,9 @@ const LoanForm = () => {
   const [activeConnectionsAvailable, setActiveConnectionsAvailable] =
     useState(false);
   const [empStatus, setEmpStatus] = useState('');
-  const [connectionState, setConnectionState] = useState('');
   const [loanSum, setLoanSum] = useState(10000);
   const sliderValue = loanSum / 1000;
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  useEffect(() => {
-    linkService.connections(userId).then((data) => {
-      const activeConnectionsValue = data.some((c) => c.status === 'Linked');
-      setActiveConnectionsAvailable(activeConnectionsValue);
-    });
-  }, [connectionState]);
 
   const handleModalToggle = () => {
     setIsModalOpen(!isModalOpen);
@@ -52,6 +44,21 @@ const LoanForm = () => {
   const handleLoanSumChange = (event) => {
     setLoanSum(event.target.value);
   };
+
+  const refreshActiveConnections = () => {
+    linkService.connections(userId).then((data) => {
+      const activeConnectionsValue = data.some((c) => c.status === 'Linked');
+      setActiveConnectionsAvailable(activeConnectionsValue);
+    });
+  };
+
+  useEffect(() => {
+    refreshActiveConnections();
+  },  [])
+
+  const onConnectionLinked = () => {
+    refreshActiveConnections();
+  }
 
   const marks = [
     {
@@ -178,8 +185,7 @@ const LoanForm = () => {
         isModalOpen={isModalOpen}
         handleModalToggle={handleModalToggle}
         userId={userId}
-        connectionState={connectionState}
-        setConnectionState={setConnectionState}
+        onConnectionLinked={onConnectionLinked}
       />
     </>
   );
