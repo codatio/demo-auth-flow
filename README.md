@@ -31,7 +31,7 @@ Server:
 * [Concurrently](https://www.npmjs.com/package/concurrently)
 
   >`Concurrently` is to run the client and server code concurrently in a local environment.
-* [Node.js](https://nodejs.org/en/)
+* [Node.js](https://nodejs.org/en/), long-term support (LTS) version
 * [nodemon](https://www.npmjs.com/package/nodemon)
 * [node-localstorage](https://www.npmjs.com/package/node-localstorage)
   >`node-localstorage` is used to mock out a proper data store system. Login merchant data is stored locally. If deployed to a cloud environment, this will be wiped with each new release.
@@ -40,8 +40,8 @@ Server:
 
 ## Prerequisites
 * Set up a Codat account if you don't have one already. See [Codat's documentation](https://docs.codat.io/docs/your-first-call-to-the-api-using-api-explorer#find-your-api-key) for how to sign up for a free trial.
-* Make sure you have a recent version of `Node.js` installed.
-* After the linking process is complete, the user should be redirected back to the app that embeds Link. Set up the redirect URL to `https://localhost:3000/redirect` To set up the redirect URL, follow the instructions in [Codat's documentation on Redirect URLs](https://docs.codat.io/docs/redirect-urls).
+* Make sure you have a recent LTS version of `Node.js` installed.
+* After the linking process is complete, the user should be redirected back to the Link demo app. Set up the redirect URL to `https://localhost:3000/redirect` To set up the redirect URL, follow the instructions in [Codat's documentation on Redirect URLs](https://docs.codat.io/docs/redirect-urls).
 
 ## Installation
 1. Get your Codat client API key. See [here](https://docs.codat.io/docs/your-first-call-to-the-api-using-api-explorer#find-your-api-key) for how to get your API key.
