@@ -1,13 +1,16 @@
 const codatClient = require("../clients/codat");
 const { getUserStorage } = require("../storage/user");
 
-const getEnabledIntegrations = async (req, res) => {
-  const results = await codatClient.getIntegrations();
-
-  res.json(results);
+const getEnabledIntegrations = async (req, res, next) => {
+  try {
+    const results = await codatClient.getIntegrations();
+    res.json(results);
+  } catch (e) {
+    next(e);
+  }
 };
 
-const createDataConnection = async (req, res) => {
+const createDataConnection = async (req, res, next) => {
   const userId = req.params.userId;
   const integrationKey = req.params.integrationKey;
   
@@ -33,9 +36,13 @@ const createDataConnection = async (req, res) => {
 
   console.log("Creating data connection for user", userId, "codat company ID", codatCompanyId, "integration key", integrationKey);
 
-  const results = await codatClient.createDataConnection(codatCompanyId, integrationKey);
+  try {
+    const results = await codatClient.createDataConnection(codatCompanyId, integrationKey, next);
+    res.json(results);
+  } catch (e) {
+    next(e);
+  }
 
-  res.json(results);
 };
 
 exports.getEnabledIntegrations = getEnabledIntegrations;
