@@ -1,8 +1,9 @@
-import { Modal, Box, Typography, Button } from '@mui/material';
+import { Modal, Box, Typography, Button, IconButton } from '@mui/material';
 import IntegrationsButtons from '../IntegrationsButtons/IntegrationsButtons';
 import { linkService } from '../../link-service';
 import { useState, useEffect } from 'react';
 import './IntegrationsModal.css';
+import CloseIcon from '@mui/icons-material/Close';
 
 const waitingForComplete = 'waitingForComplete';
 const connectionSuccess = 'connectionSuccess';
@@ -68,6 +69,11 @@ const IntegrationsModal = (props) => {
   return (
     <Modal open={props.isModalOpen} onClose={props.handleModalToggle}>
       <Box className="integrations-modal-wrapper">
+        <div className="close-icon">
+          <IconButton>
+            <CloseIcon/> 
+          </IconButton>
+        </div>
         <Typography
           className="integrations-modal-title"
           variant="h6"
