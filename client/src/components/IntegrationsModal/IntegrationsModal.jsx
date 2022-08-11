@@ -70,7 +70,9 @@ const IntegrationsModal = (props) => {
     <Modal open={props.isModalOpen} onClose={props.handleModalToggle}>
       <Box className="integrations-modal-wrapper">
         <div className="close-icon">
-          <IconButton>
+          <IconButton
+            onClick={props.handleModalToggle}
+          >
             <CloseIcon/> 
           </IconButton>
         </div>
