@@ -54,11 +54,11 @@ const LoanForm = () => {
 
   useEffect(() => {
     refreshActiveConnections();
-  },  [])
+  }, []);
 
   const onConnectionLinked = () => {
     refreshActiveConnections();
-  }
+  };
 
   const marks = [
     {
@@ -98,6 +98,30 @@ const LoanForm = () => {
         </FormControl>
       ),
     },
+    {
+      key: 'Which sector(s) do you operate in?',
+      value: <TextField label="Select sector(s)" variant="filled" />,
+    },
+    {
+      key: 'What was your turnover in the last financial year?',
+      value: <TextField label="" variant="filled" />,
+    },
+    {
+      key: 'What was your monthly recurring revenue?',
+      value: <TextField label="" variant="filled" />,
+    },
+    {
+      key: 'Did your business make a profit in the last financial year?',
+      value: <TextField label="" variant="filled" />,
+    },
+    {
+      key: 'Are you a homeowner?',
+      value: <TextField label="" variant="filled" />,
+    },
+    {
+      key: 'Which is your main bank?',
+      value: <TextField label="" variant="filled" />,
+    },
   ];
 
   return (
@@ -115,7 +139,7 @@ const LoanForm = () => {
             culpa qui officia deserunt mollit anim id est laborum.
           </Typography>
         </SectionWrapper>
-        <SectionWrapper title="Contact information">
+        <SectionWrapper title="Funding requirements">
           <div className="contact-info-columns">
             <FlexColumns listItems={listItems} />
           </div>
