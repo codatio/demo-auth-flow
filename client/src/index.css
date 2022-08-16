@@ -16,7 +16,7 @@ body {
   --backdrop: #5d9e8f18;
   
   /*Layout*/
-  --main-wrapper: 1028px;
+  --main-wrapper: 900px;
 }
 
 .accent-text {
