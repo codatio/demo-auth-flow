@@ -10,6 +10,7 @@ import {
   MenuItem,
   Input,
   Button,
+  Autocomplete,
 } from '@mui/material';
 import './LoanForm.css';
 import { linkService } from '../../link-service';
@@ -75,10 +76,14 @@ const LoanForm = () => {
     },
   ];
 
+  const sectorOptions = ['Finance', 'Health'];
+
   const listItems = [
     {
       key: 'Name:',
-      value: <TextField className="name-field" label="Name" variant="outlined" />,
+      value: (
+        <TextField className="name-field" label="Name" variant="outlined" />
+      ),
     },
     {
       key: 'Employment status:',
@@ -91,6 +96,7 @@ const LoanForm = () => {
             labelId="employment-status-label"
             value={empStatus}
             onChange={handleEmpSelection}
+            label="Employment status"
           >
             <MenuItem value={'employed'}>Employed</MenuItem>
             <MenuItem value={'unemployed'}>Unemployed</MenuItem>
@@ -100,7 +106,22 @@ const LoanForm = () => {
     },
     {
       key: 'Which sector(s) do you operate in?',
-      value: <TextField label="Select sector(s)" variant="outlined" />,
+      value: (
+        <Autocomplete
+          className='form-value-dropdown'
+          multiple
+          options={sectorOptions}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              variant="outlined"
+              label="Select sector"
+              placeholder="Sector(s)"
+            />
+          )}
+          label="Select sector(s)"
+        />
+      ),
     },
     {
       key: 'What was your turnover in the last financial year?',
