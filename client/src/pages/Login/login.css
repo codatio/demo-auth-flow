@@ -17,6 +17,15 @@
   padding: 4rem;
 }
 
+.login-title {
+  display: inline-flex;
+  align-content: center;
+}
+
+.login-title .company-logo {
+  margin-left: 1rem;
+}
+
 .submit-button {
   max-width: 8rem;
   align-self: center;
