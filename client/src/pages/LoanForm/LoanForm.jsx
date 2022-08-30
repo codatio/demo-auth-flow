@@ -15,7 +15,7 @@ import './LoanForm.css';
 import { linkService } from '../../link-service';
 //Components
 import Header from '../../components/Header/Header';
-import FlexColumns from '../../components/FlexColumns/FlexColumns';
+import FormColumns from '../../components/FormColumns/FormColumns';
 import IntegrationsModal from '../../components/IntegrationsModal/IntegrationsModal';
 import SectionWrapper from '../../components/SectionWrapper/SectionWrapper';
 import CompanyConnections from '../../components/CompanyConnections/CompanyConnections';
@@ -78,12 +78,12 @@ const LoanForm = () => {
   const listItems = [
     {
       key: 'Name:',
-      value: <TextField className="name-field" label="Name" variant="filled" />,
+      value: <TextField className="name-field" label="Name" variant="outlined" />,
     },
     {
       key: 'Employment status:',
       value: (
-        <FormControl className="employment-status-field" variant="filled">
+        <FormControl className="employment-status-field" variant="outlined">
           <InputLabel id="employment-status-label">
             Employment status
           </InputLabel>
@@ -100,27 +100,27 @@ const LoanForm = () => {
     },
     {
       key: 'Which sector(s) do you operate in?',
-      value: <TextField label="Select sector(s)" variant="filled" />,
+      value: <TextField label="Select sector(s)" variant="outlined" />,
     },
     {
       key: 'What was your turnover in the last financial year?',
-      value: <TextField label="" variant="filled" />,
+      value: <TextField label="" variant="outlined" />,
     },
     {
       key: 'What was your monthly recurring revenue?',
-      value: <TextField label="" variant="filled" />,
+      value: <TextField label="" variant="outlined" />,
     },
     {
       key: 'Did your business make a profit in the last financial year?',
-      value: <TextField label="" variant="filled" />,
+      value: <TextField label="" variant="outlined" />,
     },
     {
       key: 'Are you a homeowner?',
-      value: <TextField label="" variant="filled" />,
+      value: <TextField label="" variant="outlined" />,
     },
     {
       key: 'Which is your main bank?',
-      value: <TextField label="" variant="filled" />,
+      value: <TextField label="" variant="outlined" />,
     },
   ];
 
@@ -140,9 +140,7 @@ const LoanForm = () => {
           </Typography>
         </SectionWrapper>
         <SectionWrapper title="Funding requirements">
-          <div className="contact-info-columns">
-            <FlexColumns listItems={listItems} />
-          </div>
+          <FormColumns listItems={listItems} />
         </SectionWrapper>
         <SectionWrapper title="Loan details">
           <div className="loan-amount-input">
