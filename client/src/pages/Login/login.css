@@ -19,7 +19,12 @@
 
 .login-title {
   display: inline-flex;
-  align-content: center;
+  align-items: center;
+}
+
+.login-title img {
+  position: relative;
+  top: 3px;
 }
 
 .login-title .company-logo {
