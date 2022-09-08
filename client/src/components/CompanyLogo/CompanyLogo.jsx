@@ -3,7 +3,7 @@ import './CompanyLogo.css'
 
 const CompanyLogo = () => {
   return (
-    <img className="company-logo" src={CompanyLogoImage}/>
+    <img className="company-logo" alt="copay-company-logo" src={CompanyLogoImage}/>
   )
 }
 
