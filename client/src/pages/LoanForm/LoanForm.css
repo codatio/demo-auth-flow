@@ -8,14 +8,6 @@
   display: flex;
 }
 
-.contact-info-columns .key-column li,
-.contact-info-columns .value-column li {
-  min-height: 55px;
-  display: flex;
-  align-items: center;
-  padding-right: 2rem;
-}
-
 .loan-amount-slider {
   background-color: var(--backdrop);
   padding: 1rem 3rem;

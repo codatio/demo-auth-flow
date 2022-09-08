@@ -1,9 +1,10 @@
 import { Button, TextField, Card, Typography } from '@mui/material';
-import './login.css';
+import './Login.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { routes } from '../../routes';
 import { linkService } from '../../link-service';
+import CompanyLogo from '../../components/CompanyLogo/CompanyLogo';
 
 const Login = () => {
   const [userName, setUserName] = useState('');
@@ -28,8 +29,8 @@ const Login = () => {
     <div className="login-wrapper">
       <Card variant="outlined" className="login-card">
         <div className="login-content">
-          <Typography variant="h3" component="h3" align="center">
-            Welcome to <span className="accent-text">GenBus</span>
+          <Typography className="login-title" variant="h3" component="h3" align="center">
+            Welcome to<CompanyLogo />
           </Typography>
           <Typography align="left" gutterBottom>
             Sign in using your username and password

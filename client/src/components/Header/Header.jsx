@@ -1,7 +1,8 @@
 import './Header.css';
-import { Typography, Button } from '@mui/material';
+import { Button } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { routes } from '../../routes';
+import CompanyLogo from '../CompanyLogo/CompanyLogo'
 
 const Header = () => {
   const navigate = useNavigate();
@@ -13,9 +14,7 @@ const Header = () => {
 
   return (
     <header className="main-header">
-      <Typography variant="h3" className="main-header-text">
-        GenBus Ltd.
-      </Typography>
+      <CompanyLogo/>
       <Button onClick={goToProfile}>My profile</Button>
     </header>
   );

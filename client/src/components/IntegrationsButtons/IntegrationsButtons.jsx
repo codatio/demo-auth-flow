@@ -25,7 +25,7 @@ const IntegrationsButtons = (props) => {
             value={{key: integration.key, sourceId: integration.sourceId}}
             key={integration.key}
           >
-            <img src={integration.logoUrl} />
+            <img alt={integration.name} src={integration.logoUrl} />
           </ToggleButton>
         );
       })}

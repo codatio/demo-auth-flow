@@ -13,10 +13,10 @@ body {
   --secondary: #edf2ff;
   --inactive: #c2c3c5;
   --accent: #DE562C;
-  --backdrop: #5d9e8f18;
+  --backdrop: #F4F3F6;
   
   /*Layout*/
-  --main-wrapper: 1028px;
+  --main-wrapper: 900px;
 }
 
 .accent-text {

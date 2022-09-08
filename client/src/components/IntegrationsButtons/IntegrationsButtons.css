@@ -1,12 +1,15 @@
 .integrations-buttons {
   display: flex;
   gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .integration-button {
-  border-radius: .3rem !important;
-  border: .2rem solid !important;
+  border-radius: 0.3rem !important;
+  border: 0.2rem solid !important;
   max-height: 5rem;
+  max-width: 10rem;
 }
 
 .integration-button img {

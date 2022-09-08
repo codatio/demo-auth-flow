@@ -10,12 +10,13 @@ import {
   MenuItem,
   Input,
   Button,
+  Autocomplete,
 } from '@mui/material';
 import './LoanForm.css';
 import { linkService } from '../../link-service';
 //Components
 import Header from '../../components/Header/Header';
-import FlexColumns from '../../components/FlexColumns/FlexColumns';
+import FormColumns from '../../components/FormColumns/FormColumns';
 import IntegrationsModal from '../../components/IntegrationsModal/IntegrationsModal';
 import SectionWrapper from '../../components/SectionWrapper/SectionWrapper';
 import CompanyConnections from '../../components/CompanyConnections/CompanyConnections';
@@ -54,11 +55,11 @@ const LoanForm = () => {
 
   useEffect(() => {
     refreshActiveConnections();
-  },  [])
+  }, []);
 
   const onConnectionLinked = () => {
     refreshActiveConnections();
-  }
+  };
 
   const marks = [
     {
@@ -75,15 +76,19 @@ const LoanForm = () => {
     },
   ];
 
+  const sectorOptions = ['Finance', 'Health'];
+
   const listItems = [
     {
       key: 'Name:',
-      value: <TextField className="name-field" label="Name" variant="filled" />,
+      value: (
+        <TextField className="name-field" label="Name" variant="outlined" />
+      ),
     },
     {
       key: 'Employment status:',
       value: (
-        <FormControl className="employment-status-field" variant="filled">
+        <FormControl className="employment-status-field" variant="outlined">
           <InputLabel id="employment-status-label">
             Employment status
           </InputLabel>
@@ -91,12 +96,52 @@ const LoanForm = () => {
             labelId="employment-status-label"
             value={empStatus}
             onChange={handleEmpSelection}
+            label="Employment status"
           >
             <MenuItem value={'employed'}>Employed</MenuItem>
             <MenuItem value={'unemployed'}>Unemployed</MenuItem>
           </Select>
         </FormControl>
       ),
+    },
+    {
+      key: 'Which sector(s) do you operate in?',
+      value: (
+        <Autocomplete
+          className='form-value-dropdown'
+          multiple
+          options={sectorOptions}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              variant="outlined"
+              label="Select sector"
+              placeholder="Sector(s)"
+            />
+          )}
+          label="Select sector(s)"
+        />
+      ),
+    },
+    {
+      key: 'What was your turnover in the last financial year?',
+      value: <TextField label="" variant="outlined" />,
+    },
+    {
+      key: 'What was your monthly recurring revenue?',
+      value: <TextField label="" variant="outlined" />,
+    },
+    {
+      key: 'Did your business make a profit in the last financial year?',
+      value: <TextField label="" variant="outlined" />,
+    },
+    {
+      key: 'Are you a homeowner?',
+      value: <TextField label="" variant="outlined" />,
+    },
+    {
+      key: 'Which is your main bank?',
+      value: <TextField label="" variant="outlined" />,
     },
   ];
 
@@ -115,10 +160,8 @@ const LoanForm = () => {
             culpa qui officia deserunt mollit anim id est laborum.
           </Typography>
         </SectionWrapper>
-        <SectionWrapper title="Contact information">
-          <div className="contact-info-columns">
-            <FlexColumns listItems={listItems} />
-          </div>
+        <SectionWrapper title="Funding requirements">
+          <FormColumns listItems={listItems} />
         </SectionWrapper>
         <SectionWrapper title="Loan details">
           <div className="loan-amount-input">
