@@ -50,6 +50,10 @@ const IntegrationsModal = (props) => {
             setConnectionState(connectionSuccess);
             clearInterval(interval);
           }
+          // Check if the selectedIntegration has a data connection error
+          // If so, set the connection state to connectionError
+          // Get the error message from the data connection error
+          // And display to user, change button text to 'Error'
         });
       // If it has not complete, try again in 5 seconds
       }, 5000);
