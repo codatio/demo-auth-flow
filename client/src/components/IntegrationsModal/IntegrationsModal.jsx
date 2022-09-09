@@ -14,6 +14,7 @@ const IntegrationsModal = (props) => {
   const [errorMessage, setErrorMessage] = useState(null);
   const [selectedIntegration, setSelectedIntegration] = useState(null);
   const [connectionState, setConnectionState] = useState('');
+  const [ignoreErrorBefore, setIgnoreErrorBefore] = useState(new Date());
 
   useEffect(() => {
     linkService
@@ -56,11 +57,15 @@ const IntegrationsModal = (props) => {
           // Get the error message from the data connection error
           // And display to user, change button text to 'Error'
           if (matchingConnection?.dataConnectionErrors?.length > 0) {
-            setErrorMessage(
-              matchingConnection.dataConnectionErrors[0].statusText
-            );
-            setConnectionState(connectionFailure);
-            clearInterval(interval);
+            const errorTimestamp = new Date(matchingConnection.dataConnectionErrors[0].erroredOnUtc);
+
+            if (errorTimestamp > ignoreErrorBefore) {
+              setErrorMessage(
+                matchingConnection.dataConnectionErrors[0].statusText
+              );
+              setConnectionState(connectionFailure);
+              clearInterval(interval);
+            }
           }
         });
         // If it has not complete, try again in 5 seconds
@@ -75,6 +80,13 @@ const IntegrationsModal = (props) => {
       setSelectedIntegration(integration);
     }
   };
+
+  const onTryAgainClick = () => {
+    setErrorMessage(null);
+    setSelectedIntegration(null);
+    setIgnoreErrorBefore(new Date());
+    setConnectionState('');
+  }
 
   return (
     <Modal open={props.isModalOpen} onClose={props.handleModalToggle}>
@@ -92,7 +104,10 @@ const IntegrationsModal = (props) => {
           Select your integration
         </Typography>
         {errorMessage ? (
+          <>
           <Typography>🙁{errorMessage}</Typography>
+          <Button variant="contained" size="large" onClick={onTryAgainClick}>Try again</Button>
+          </>
         ) : (
           <>
             <IntegrationsButtons
