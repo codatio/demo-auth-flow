@@ -7,6 +7,7 @@ import CloseIcon from '@mui/icons-material/Close';
 
 const waitingForComplete = 'waitingForComplete';
 const connectionSuccess = 'connectionSuccess';
+const connectionFailure = 'connectionFailure';
 
 const IntegrationsModal = (props) => {
   const [enabledIntegrations, setEnabledIntegrations] = useState([]);
@@ -50,14 +51,21 @@ const IntegrationsModal = (props) => {
             setConnectionState(connectionSuccess);
             clearInterval(interval);
           }
+          // Check if the selectedIntegration has a data connection error
+          // If so, set the connection state to connectionError
+          // Get the error message from the data connection error
+          // And display to user, change button text to 'Error'
+          if (matchingConnection?.dataConnectionErrors?.length > 0) {
+            setErrorMessage(matchingConnection.dataConnectionErrors[0].statusText);
+            setConnectionState(connectionFailure);
+            clearInterval(interval);
+          }
         });
-      // If it has not complete, try again in 5 seconds
+        // If it has not complete, try again in 5 seconds
       }, 5000);
-
     } else if (connectionState === connectionSuccess) {
       props.onConnectionLinked();
     }
-
   }, [connectionState]);
 
   const onIntegrationSelect = (integration) => {
@@ -70,10 +78,8 @@ const IntegrationsModal = (props) => {
     <Modal open={props.isModalOpen} onClose={props.handleModalToggle}>
       <Box className="integrations-modal-wrapper">
         <div className="close-icon">
-          <IconButton
-            onClick={props.handleModalToggle}
-          >
-            <CloseIcon/> 
+          <IconButton onClick={props.handleModalToggle}>
+            <CloseIcon />
           </IconButton>
         </div>
         <Typography
@@ -97,17 +103,18 @@ const IntegrationsModal = (props) => {
                 ? 'Waiting...'
                 : connectionState === connectionSuccess
                 ? 'Success!'
+                : connectionState === connectionFailure
+                ? 'Error'
                 : 'Confirm'}
             </Button>
             <Typography variant="body2">
-              {
-                connectionState === waitingForComplete
+              {connectionState === waitingForComplete
                 ? 'A new window will open. Please follow the instructions to link your accounting package.'
                 : connectionState === connectionSuccess
                 ? 'Great job! Thanks for your accounting data 😎'
-                : 'By clicking this button, you will be redirected to your accounting platform to authorize the connection.'
-              }
-              
+                : connectionState === connectionFailure
+                ? ''
+                : 'By clicking this button, you will be redirected to your accounting platform to authorize the connection.'}
             </Typography>
           </>
         )}
