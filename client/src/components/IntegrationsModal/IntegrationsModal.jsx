@@ -56,7 +56,9 @@ const IntegrationsModal = (props) => {
           // Get the error message from the data connection error
           // And display to user, change button text to 'Error'
           if (matchingConnection?.dataConnectionErrors?.length > 0) {
-            setErrorMessage(matchingConnection.dataConnectionErrors[0].statusText);
+            setErrorMessage(
+              matchingConnection.dataConnectionErrors[0].statusText
+            );
             setConnectionState(connectionFailure);
             clearInterval(interval);
           }
