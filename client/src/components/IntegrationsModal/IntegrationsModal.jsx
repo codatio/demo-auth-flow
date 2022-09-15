@@ -7,12 +7,14 @@ import CloseIcon from '@mui/icons-material/Close';
 
 const waitingForComplete = 'waitingForComplete';
 const connectionSuccess = 'connectionSuccess';
+const connectionFailure = 'connectionFailure';
 
 const IntegrationsModal = (props) => {
   const [enabledIntegrations, setEnabledIntegrations] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
   const [selectedIntegration, setSelectedIntegration] = useState(null);
   const [connectionState, setConnectionState] = useState('');
+  const [ignoreErrorBefore, setIgnoreErrorBefore] = useState(new Date());
 
   useEffect(() => {
     linkService
@@ -50,14 +52,26 @@ const IntegrationsModal = (props) => {
             setConnectionState(connectionSuccess);
             clearInterval(interval);
           }
-        });
-      // If it has not complete, try again in 5 seconds
-      }, 5000);
+          // Check if the selectedIntegration has a data connection error
+          //   If so, set the connection state to connectionError
+          //   Get the error message from the data connection error
+          //   And display to user, change button text to 'Error'
+          const firstError = matchingConnection?.dataConnectionErrors?.[0]
+          if (firstError) {
+            const errorTimestamp = new Date(firstError.erroredOnUtc);
 
+            if (errorTimestamp > ignoreErrorBefore) {
+              setErrorMessage(firstError.statusText);
+              setConnectionState(connectionFailure);
+              clearInterval(interval);
+            }
+          }
+        });
+        // If it has not completed, try again in 5 seconds
+      }, 5000);
     } else if (connectionState === connectionSuccess) {
       props.onConnectionLinked();
     }
-
   }, [connectionState]);
 
   const onIntegrationSelect = (integration) => {
@@ -66,14 +80,19 @@ const IntegrationsModal = (props) => {
     }
   };
 
+  const onTryAgainClick = () => {
+    setErrorMessage(null);
+    setSelectedIntegration(null);
+    setIgnoreErrorBefore(new Date());
+    setConnectionState('');
+  }
+
   return (
     <Modal open={props.isModalOpen} onClose={props.handleModalToggle}>
       <Box className="integrations-modal-wrapper">
         <div className="close-icon">
-          <IconButton
-            onClick={props.handleModalToggle}
-          >
-            <CloseIcon/> 
+          <IconButton onClick={props.handleModalToggle}>
+            <CloseIcon />
           </IconButton>
         </div>
         <Typography
@@ -84,7 +103,10 @@ const IntegrationsModal = (props) => {
           Select your integration
         </Typography>
         {errorMessage ? (
+          <>
           <Typography>🙁{errorMessage}</Typography>
+          <Button variant="contained" size="large" onClick={onTryAgainClick}>Try again</Button>
+          </>
         ) : (
           <>
             <IntegrationsButtons
@@ -97,17 +119,18 @@ const IntegrationsModal = (props) => {
                 ? 'Waiting...'
                 : connectionState === connectionSuccess
                 ? 'Success!'
+                : connectionState === connectionFailure
+                ? 'Error'
                 : 'Confirm'}
             </Button>
             <Typography variant="body2">
-              {
-                connectionState === waitingForComplete
+              {connectionState === waitingForComplete
                 ? 'A new window will open. Please follow the instructions to link your accounting package.'
                 : connectionState === connectionSuccess
                 ? 'Great job! Thanks for your accounting data 😎'
-                : 'By clicking this button, you will be redirected to your accounting platform to authorize the connection.'
-              }
-              
+                : connectionState === connectionFailure
+                ? ''
+                : 'By clicking this button, you will be redirected to your accounting platform to authorize the connection.'}
             </Typography>
           </>
         )}
