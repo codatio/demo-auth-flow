@@ -1,11 +1,8 @@
-const { LocalStorage } = require("node-localstorage");
+import { LocalStorage } from "node-localstorage";
 
 // username -> user ID map
-const userIdMap = new LocalStorage("./bin/users");
+export const userIdMap = new LocalStorage("./bin/users");
 
-const getUserStorage = (userId) => {
+export const getUserStorage = (userId) => {
   return new LocalStorage(`./bin/${userId}`);
 };
-
-exports.userIdMap = userIdMap;
-exports.getUserStorage = getUserStorage;

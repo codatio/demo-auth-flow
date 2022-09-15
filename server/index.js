@@ -1,8 +1,8 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const { config } = require("./config");
-const { userLogin, getUserConnections } = require("./controllers/user");
-const { getEnabledIntegrations, createDataConnection } = require("./controllers/integrations");
+import express from "express";
+import bodyParser from "body-parser";
+import { config } from "./config.js";
+import { userLogin, getUserConnections } from "./controllers/user.js";
+import { getEnabledIntegrations, createDataConnection } from "./controllers/integrations.js";
 
 const app = express();
 
@@ -17,3 +17,4 @@ app.post('/user/:userId/connections/:integrationKey', createDataConnection);
 app.listen(config.port, () => {
   console.log(`Server listening on ${config.port}`);
 });
+ 

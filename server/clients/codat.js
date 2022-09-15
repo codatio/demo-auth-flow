@@ -1,5 +1,5 @@
-const fetch = require("node-fetch");
-const { config } = require("../config");
+import fetch from "node-fetch";
+import { config } from "../config.js";
 
 const apiKey = config.apiKey;
 const codatBaseUrl = config.codatBaseUrl;
@@ -21,7 +21,7 @@ const headers = {
 };
 
 
-const createCompany = async (name) => {
+export const createCompany = async (name) => {
   const postResult = await fetch(
     `${codatBaseUrl}/companies`,
     {
@@ -42,7 +42,7 @@ const createCompany = async (name) => {
   return resultBody;
 };
 
-const getConnections = async (codatCompanyId) => {
+export const getConnections = async (codatCompanyId) => {
   // We are ignoring paging for this endpoint as we expect only
   //   a small number of connections per company.
 
@@ -63,7 +63,7 @@ const getConnections = async (codatCompanyId) => {
   return resultBody.results;
 }
 
-const getIntegrations = async () => {
+export const getIntegrations = async () => {
   const getResult = await fetch(
     `${codatBaseUrl}/integrations?page=1&pageSize=100&query=enabled%3Dtrue%26%26sourceType%3Daccounting`,
     {
@@ -80,7 +80,7 @@ const getIntegrations = async () => {
   return resultBody.results;
 }
 
-const createDataConnection = async (codatCompanyId, integrationKey) => {
+export const createDataConnection = async (codatCompanyId, integrationKey) => {
   const postResult = await fetch(
     `${codatBaseUrl}/companies/${codatCompanyId}/connections`,
     {
@@ -97,8 +97,3 @@ const createDataConnection = async (codatCompanyId, integrationKey) => {
   const resultBody = await postResult.json();
   return resultBody;
 }
-
-exports.createCompany = createCompany;
-exports.getConnections = getConnections;
-exports.getIntegrations = getIntegrations;
-exports.createDataConnection = createDataConnection;

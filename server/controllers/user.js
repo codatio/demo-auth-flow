@@ -1,8 +1,8 @@
-const uuid = require("uuid");
-const { createCompany, getConnections } = require("../clients/codat");
-const { userIdMap, getUserStorage } = require("../storage/user");
+import { v4 } from "uuid";
+import * as CodatClient from "../clients/codat.js";
+import { userIdMap, getUserStorage } from "../storage/user.js";
 
-const userLogin = async (req, res) => {
+export const userLogin = async (req, res) => {
   const userName = req.body.username;
   
   if (!userName) {
@@ -10,7 +10,7 @@ const userLogin = async (req, res) => {
   }
 
   // Try to get user ID for an existing user
-  const userId = userIdMap.getItem(userName) ?? uuid.v4();
+  const userId = userIdMap.getItem(userName) ?? v4();
   // Set the userIdMap value
   userIdMap.setItem(userName, userId);
 
@@ -18,7 +18,7 @@ const userLogin = async (req, res) => {
   if(!userStorage.getItem("codat-company-id")) {
     // Codat company has not been created
     // So we will create it by posting to the Codat API
-    const resultBody = await createCompany(userName);
+    const resultBody = await CodatClient.createCompany(userName);
     const codatCompanyId = resultBody.id;
     if (codatCompanyId) {
       console.log("Setting codat company ID as", codatCompanyId, "for user", userId);
@@ -29,7 +29,7 @@ const userLogin = async (req, res) => {
   res.json({ userName, userId });
 };
 
-const getUserConnections = async(req, res) => {
+export const getUserConnections = async(req, res) => {
   const userId = req.params.userId;
   
   if (!userId) {
@@ -50,10 +50,7 @@ const getUserConnections = async(req, res) => {
 
   console.log("Getting connections for user", userId, "codat company ID", codatCompanyId);
   
-  const results = await getConnections(codatCompanyId);
+  const results = await CodatClient.getConnections(codatCompanyId);
 
   res.json(results);
 }
-
-exports.userLogin = userLogin;
-exports.getUserConnections = getUserConnections;
