@@ -53,22 +53,21 @@ const IntegrationsModal = (props) => {
             clearInterval(interval);
           }
           // Check if the selectedIntegration has a data connection error
-          // If so, set the connection state to connectionError
-          // Get the error message from the data connection error
-          // And display to user, change button text to 'Error'
-          if (matchingConnection?.dataConnectionErrors?.length > 0) {
-            const errorTimestamp = new Date(matchingConnection.dataConnectionErrors[0].erroredOnUtc);
+          //   If so, set the connection state to connectionError
+          //   Get the error message from the data connection error
+          //   And display to user, change button text to 'Error'
+          const firstError = matchingConnection?.dataConnectionErrors?.[0]
+          if (firstError) {
+            const errorTimestamp = new Date(firstError.erroredOnUtc);
 
             if (errorTimestamp > ignoreErrorBefore) {
-              setErrorMessage(
-                matchingConnection.dataConnectionErrors[0].statusText
-              );
+              setErrorMessage(firstError.statusText);
               setConnectionState(connectionFailure);
               clearInterval(interval);
             }
           }
         });
-        // If it has not complete, try again in 5 seconds
+        // If it has not completed, try again in 5 seconds
       }, 5000);
     } else if (connectionState === connectionSuccess) {
       props.onConnectionLinked();
