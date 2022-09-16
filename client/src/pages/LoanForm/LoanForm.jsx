@@ -212,7 +212,7 @@ const LoanForm = () => {
             </Typography>
             <Button
               variant="outlined"
-              color="accent"
+              color="primary"
               onClick={handleModalToggle}
             >
               Connect
