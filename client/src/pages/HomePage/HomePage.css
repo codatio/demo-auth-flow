@@ -5,7 +5,7 @@
 
 .home-page-wrapper {
   max-width: var(--landing-page-wrapper);
-  margin: 5rem auto 0;
+  margin: 8rem auto 0;
   padding: 2rem 2rem;
   display: grid;
   grid-template-columns: 2fr 1.5fr;
@@ -42,46 +42,50 @@
   z-index: 1;
 }
 
+.home-page-card-image:hover {
+  animation: grow 2s ease-out 1;
+}
+
 .home-page-vectors-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: -7rem;
+  transform: translateY(-7rem);
 }
 
 .home-page-vectors-wrapper img {
   position: absolute;
-  animation: spin-counterclockwise 100s linear infinite;
+  animation: spin-counterclockwise 200s linear infinite;
+  opacity: .6;
+  transition-duration: .1s;
 }
 
 .home-page-vectors-wrapper img:nth-child(2n) {
-  animation: spin-clockwise 120s linear infinite;
+  animation: spin-clockwise 220s linear infinite;
 }
 
 .home-page-vectors-wrapper img:nth-child(3n) {
-  animation: spin-counterclockwise 80s linear infinite;
-  opacity: 0.7;
+  animation: spin-counterclockwise 180s linear infinite;
 }
 
 .home-page-vectors-wrapper img:nth-child(4n) {
-  animation: spin-clockwise 140s linear infinite;
+  animation: spin-clockwise 240s linear infinite;
 }
 
 .home-page-vectors-wrapper img:nth-child(5n) {
-  animation: spin-counterclockwise 60s linear infinite;
-  opacity: 0.5;
+  animation: spin-counterclockwise 140s linear infinite;
 }
 
 .home-page-vectors-wrapper img:nth-child(6n) {
-  animation: spin-clockwise 160s linear infinite;
+  animation: spin-clockwise 260s linear infinite;
 }
 
 .home-page-vectors-wrapper img:nth-child(7n) {
-  animation: spin-counterclockwise 20s linear infinite;
+  animation: spin-counterclockwise 120s linear infinite;
 }
 
 .home-page-vectors-wrapper img:nth-child(8n) {
-  animation: spin-clockwise 180s linear infinite;
+  animation: spin-clockwise 280s linear infinite;
 }
 
 @keyframes spin-clockwise {
@@ -93,5 +97,17 @@
 @keyframes spin-counterclockwise {
   100% {
     transform: rotate(-360deg);
+  }
+}
+
+@keyframes grow {
+  0% {
+    scale: 1;
+  }
+  50% {
+    scale: 1.02;
+  }
+  100% {
+    scale: 1;
   }
 }
