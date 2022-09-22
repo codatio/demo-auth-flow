@@ -38,14 +38,16 @@ const HomePage = () => {
             <List>
               {sellingPoints.map((sellingPoint) => {
                 return (
-                  <ListItem>
+                  <ListItem
+                    key={sellingPoint}
+                  >
                     <ListItemIcon>
                       <img src={ListIcon} alt="Checkmark list icon." />
                     </ListItemIcon>
                     <ListItemText
                       className="home-page-selling-point"
                       primary={sellingPoint}
-                    ></ListItemText>
+                    />
                   </ListItem>
                 );
               })}
@@ -59,11 +61,11 @@ const HomePage = () => {
               <img
                 className="home-page-card-image"
                 src={Card}
-                alt="An image showing a credit card."
+                alt=""
               />
               <div className="home-page-vectors-wrapper">
-                {vectors.map((vector) => (
-                  <img src={vector} alt="Decorative vector." />
+                {vectors.map((vector, index) => (
+                  <img key={index} src={vector} alt="" />
                 ))}
               </div>
             </div>
