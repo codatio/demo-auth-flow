@@ -18,7 +18,7 @@ const App = () => {
         <Route path={routes.redirect} element={<RedirectHandler />}/>
         <Route 
           path="*"
-          element={<Navigate replace to={routes.login} />}
+          element={<Navigate replace to={routes.home} />}
         /> 
       </Routes>
     </BrowserRouter>
