@@ -4,11 +4,10 @@ const headers = {
 };
 
 const linkService = {
-  login: (userName) =>
-    fetch('/login', {
+  apply: () =>
+    fetch('/apply', {
       method: 'POST',
       headers,
-      body: JSON.stringify({ username: userName }),
     }).then((res) => res.json()),
   /** 
    * Get all company connections

@@ -8,13 +8,25 @@ import {
   Button,
 } from '@mui/material';
 import './HomePage.css';
+import { useNavigate } from 'react-router-dom';
+import { linkService } from '../../link-service';
+import { routes } from '../../routes';
 
 //Assets
 import ListIcon from '../../assets/images/icons/bullet-point.svg';
 import Card from '../../assets/images/card.svg';
-import vectors from './vectors'
+import vectors from './vectors';
 
 const HomePage = () => {
+  const navigate = useNavigate();
+
+  const handleApply = () => {
+    linkService.apply().then((data) => {
+      const { userId } = data;
+      navigate(routes.loanForm(userId));
+    });
+  };
+
   const sellingPoints = [
     'Revenue-based loan',
     'Free to apply and it doesn’t affect your credit score',
@@ -32,15 +44,14 @@ const HomePage = () => {
               Apply for a loan within minutes
             </Typography>
             <Typography className="home-page-description">
-              Find the loan for you from £10,000 to £100,000. Connect your accounting software to check your eligibility fast.
+              Find the loan for you from £10,000 to £100,000. Connect your
+              accounting software to check your eligibility fast.
             </Typography>
 
             <List>
               {sellingPoints.map((sellingPoint) => {
                 return (
-                  <ListItem
-                    key={sellingPoint}
-                  >
+                  <ListItem key={sellingPoint}>
                     <ListItemIcon>
                       <img src={ListIcon} alt="Checkmark list icon." />
                     </ListItemIcon>
@@ -52,17 +63,13 @@ const HomePage = () => {
                 );
               })}
             </List>
-            <Button variant="contained" color="primary">
+            <Button variant="contained" color="primary" onClick={handleApply}>
               Apply for a loan
             </Button>
           </div>
           <div className="home-page-right-column">
             <div className="home-page-image">
-              <img
-                className="home-page-card-image"
-                src={Card}
-                alt=""
-              />
+              <img className="home-page-card-image" src={Card} alt="" />
               <div className="home-page-vectors-wrapper">
                 {vectors.map((vector, index) => (
                   <img key={index} src={vector} alt="" />
