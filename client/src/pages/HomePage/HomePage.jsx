@@ -11,6 +11,8 @@ import './HomePage.css';
 import { useNavigate } from 'react-router-dom';
 import { linkService } from '../../link-service';
 import { routes } from '../../routes';
+import { useContext } from 'react';
+import { LinkContext } from '../../App';
 
 //Assets
 import ListIcon from '../../assets/images/icons/bullet-point.svg';
@@ -20,9 +22,12 @@ import vectors from './vectors';
 const HomePage = () => {
   const navigate = useNavigate();
 
+  const linkContext = useContext(LinkContext)
+  
   const handleApply = () => {
     linkService.apply().then((data) => {
       const { userId } = data;
+      linkContext.setApplied(true)
       navigate(routes.loanForm(userId));
     });
   };
@@ -37,7 +42,7 @@ const HomePage = () => {
   return (
     <>
       <div className="home-page-element">
-        <Header className="home-page-header" />
+        <Header className="home-page-header"/>
         <div className="home-page-wrapper">
           <div className="home-page-left-column">
             <Typography variant="h4" component="h2">
