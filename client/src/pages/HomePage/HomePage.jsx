@@ -16,10 +16,10 @@ import vectors from './vectors'
 
 const HomePage = () => {
   const sellingPoints = [
-    'Match with 12+ lenders (swipe right!)',
-    'Its free to apply and it doesn’t affect your credit score',
+    'Revenue-based loan',
+    'Free to apply and it doesn’t affect your credit score',
     'Expert help throught the process',
-    'Loans from £1000 to £15M',
+    'No paperwork',
   ];
 
   return (
@@ -32,7 +32,7 @@ const HomePage = () => {
               Apply for a loan within minutes
             </Typography>
             <Typography className="home-page-description">
-              You need money. We have money. It's that simple.
+              Find the loan for you from £10,000 to £100,000. Connect your accounting software to check your eligibility fast.
             </Typography>
 
             <List>
