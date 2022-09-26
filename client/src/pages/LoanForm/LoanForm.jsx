@@ -56,8 +56,6 @@ const LoanForm = (props) => {
     }))
   }
 
-  console.log(userDetails)
-
   const handleSliderValueChange = (event, newValue) => {
     setLoanSum(newValue * 1000);
   };
