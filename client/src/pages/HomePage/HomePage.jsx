@@ -21,17 +21,21 @@ import vectors from './vectors';
 
 const HomePage = (props) => {
   const navigate = useNavigate();
-  const { applied } = useContext(LinkContext);
+  const { applied, userId: appliedUserId } = useContext(LinkContext);
 
   const handleApply = () => {
-    linkService.apply().then((data) => {
-      const { userId } = data;
-
-      props.setUserId(userId);
-      props.setApplied(true);
-
-      navigate(routes.loanForm(userId));
-    });
+    if (!applied) {
+      linkService.apply().then((data) => {
+        const { userId } = data;
+  
+        props.setUserId(userId);
+        props.setApplied(true);
+  
+        navigate(routes.loanForm(userId));
+      });
+    } else {
+      navigate(routes.dashboard(appliedUserId))
+    }
   };
 
   const sellingPoints = [
@@ -74,9 +78,8 @@ const HomePage = (props) => {
               variant="contained"
               color="primary"
               onClick={handleApply}
-              disabled={applied}
             >
-              Apply for a loan
+              {applied ? "Go to your profile" : "Apply for a loan"}
             </Button>
           </div>
           <div className="home-page-right-column">
