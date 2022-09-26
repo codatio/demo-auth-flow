@@ -43,12 +43,12 @@ const Dashboard = () => {
           <FlexColumns backgroundActive listItems={listItems} />
         </SectionWrapper>
         <CompanyConnections />
-        <SectionWrapper title="Your loans">
+        <SectionWrapper title="Your progress">
           <Typography>
-            To apply for a loan, you will be required to fill out a loan form.
+            To apply for a loan, complete the loan form.
           </Typography>
           <Button variant="contained" onClick={handleApplication} size="large">
-            Apply
+            Go to your loan form
           </Button>
         </SectionWrapper>
       </div>
