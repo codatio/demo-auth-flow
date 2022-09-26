@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
+import { routes } from '../../routes';
 import {
   Typography,
   TextField,
@@ -14,6 +15,7 @@ import {
 import './LoanForm.css';
 import { linkService } from '../../link-service';
 import { LinkContext } from '../../App';
+import { useNavigate } from 'react-router-dom';
 
 //Components
 import Header from '../../components/Header/Header';
@@ -32,6 +34,12 @@ const LoanForm = (props) => {
   const [loanSum, setLoanSum] = useState(10000);
   const sliderValue = loanSum / 1000;
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleApplication = () => {
+    navigate(routes.dashboard(userId));
+  };
 
   const handleModalToggle = () => {
     setIsModalOpen(!isModalOpen);
@@ -235,7 +243,7 @@ const LoanForm = (props) => {
           </div>
         )}
 
-        <Button variant="contained" size="large" color="primary" sx={{ mb: 3 }}>
+        <Button variant="contained" size="large" color="primary" sx={{ mb: 3 }} onClick={handleApplication}>
           Submit application
         </Button>
       </div>
