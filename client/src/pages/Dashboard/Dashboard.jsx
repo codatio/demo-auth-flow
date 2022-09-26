@@ -12,20 +12,20 @@ import SectionWrapper from '../../components/SectionWrapper/SectionWrapper';
 import CompanyConnections from '../../components/CompanyConnections/CompanyConnections';
 
 const Dashboard = () => {
-  const { userId } = useContext(LinkContext);
+  const { userId, userDetails:{name, email} } = useContext(LinkContext);
 
   const listItems = [
     {
       key: 'Name:',
-      value: <Typography variant="body1">User name</Typography>,
+      value: <Typography variant="body1">{name || "No name submitted."}</Typography>,
     },
     {
       key: 'User e-mail:',
-      value: <Typography variant="body1">email@company.com</Typography>,
+      value: <Typography variant="body1">{email || "No email submitted."}</Typography>,
     },
     {
       key: 'User ID:',
-      value: <Typography variant="body1">{userId}</Typography>,
+      value: <Typography variant="body1">{userId || "No user ID assigned."}</Typography>,
     },
   ];
 
