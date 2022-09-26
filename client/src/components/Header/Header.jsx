@@ -1,6 +1,6 @@
 import './Header.css';
 import { Button } from '@mui/material';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { routes } from '../../routes';
 import CompanyLogo from '../CompanyLogo/CompanyLogo';
 import { useContext } from 'react';
@@ -8,19 +8,18 @@ import { LinkContext } from '../../App';
 
 const Header = () => {
   const navigate = useNavigate();
-  const { userId } = useParams();
+  const { userId, applied } = useContext(LinkContext);
+
   const goToProfile = () => {
     navigate(routes.dashboard(userId));
   };
-
-  const linkContext = useContext(LinkContext);
 
   return (
     <header className="main-header">
       <CompanyLogo />
       <Button
         onClick={goToProfile}
-        disabled={linkContext.applied ? false : true}
+        disabled={!applied}
       >
         My profile
       </Button>

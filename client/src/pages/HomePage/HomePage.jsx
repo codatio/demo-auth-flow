@@ -19,15 +19,17 @@ import ListIcon from '../../assets/images/icons/bullet-point.svg';
 import Card from '../../assets/images/card.svg';
 import vectors from './vectors';
 
-const HomePage = () => {
+const HomePage = (props) => {
   const navigate = useNavigate();
+  const { applied } = useContext(LinkContext);
 
-  const linkContext = useContext(LinkContext)
-  
   const handleApply = () => {
     linkService.apply().then((data) => {
       const { userId } = data;
-      linkContext.setApplied(true)
+
+      props.setUserId(userId);
+      props.setApplied(true);
+
       navigate(routes.loanForm(userId));
     });
   };
@@ -42,7 +44,7 @@ const HomePage = () => {
   return (
     <>
       <div className="home-page-element">
-        <Header className="home-page-header"/>
+        <Header className="home-page-header" />
         <div className="home-page-wrapper">
           <div className="home-page-left-column">
             <Typography variant="h4" component="h2">
@@ -68,7 +70,12 @@ const HomePage = () => {
                 );
               })}
             </List>
-            <Button variant="contained" color="primary" onClick={handleApply}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleApply}
+              disabled={applied}
+            >
               Apply for a loan
             </Button>
           </div>

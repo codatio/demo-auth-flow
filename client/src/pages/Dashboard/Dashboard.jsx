@@ -1,8 +1,10 @@
 import { Typography, Button } from '@mui/material';
 import './Dashboard.css';
-import { useParams } from 'react-router-dom';
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { routes } from '../../routes';
+import { LinkContext } from '../../App';
+
 // Components
 import Header from '../../components/Header/Header';
 import FlexColumns from '../../components/FlexColumns/FlexColumns';
@@ -10,7 +12,7 @@ import SectionWrapper from '../../components/SectionWrapper/SectionWrapper';
 import CompanyConnections from '../../components/CompanyConnections/CompanyConnections';
 
 const Dashboard = () => {
-  const { userId } = useParams();
+  const { userId } = useContext(LinkContext);
 
   const listItems = [
     {

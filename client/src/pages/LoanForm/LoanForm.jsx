@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useState, useEffect, useContext } from 'react';
 import {
   Typography,
   TextField,
@@ -14,6 +13,8 @@ import {
 } from '@mui/material';
 import './LoanForm.css';
 import { linkService } from '../../link-service';
+import { LinkContext } from '../../App';
+
 //Components
 import Header from '../../components/Header/Header';
 import FormColumns from '../../components/FormColumns/FormColumns';
@@ -22,7 +23,7 @@ import SectionWrapper from '../../components/SectionWrapper/SectionWrapper';
 import CompanyConnections from '../../components/CompanyConnections/CompanyConnections';
 
 const LoanForm = () => {
-  const { userId } = useParams();
+  const { userId } = useContext(LinkContext);
   const [activeConnectionsAvailable, setActiveConnectionsAvailable] =
     useState(false);
   const [empStatus, setEmpStatus] = useState('');
