@@ -11,9 +11,13 @@ export const LinkContext = React.createContext({});
 const App = () => {
   const [applied, setApplied] = useState(false);
   const [userId, setUserId] = useState(null);
+  const [userDetails, setUserDetails] = useState({
+    name: "",
+    email: ""
+  });
 
   return (
-    <LinkContext.Provider value={{ applied, userId }}>
+    <LinkContext.Provider value={{ applied, userId, userDetails }}>
       <BrowserRouter>
         <Routes>
           <Route
@@ -21,7 +25,7 @@ const App = () => {
             element={<HomePage setApplied={setApplied} setUserId={setUserId} />}
           />
           <Route path={routes.dashboard(':userId')} element={<Dashboard />} />
-          <Route path={routes.loanForm(':userId')} element={<LoanForm />} />
+          <Route path={routes.loanForm(':userId')} element={<LoanForm setUserDetails={setUserDetails}/>} />
           <Route path={routes.redirect} element={<RedirectHandler />} />
           <Route path="*" element={<Navigate replace to={routes.home} />} />
         </Routes>

@@ -22,8 +22,10 @@ import IntegrationsModal from '../../components/IntegrationsModal/IntegrationsMo
 import SectionWrapper from '../../components/SectionWrapper/SectionWrapper';
 import CompanyConnections from '../../components/CompanyConnections/CompanyConnections';
 
-const LoanForm = () => {
-  const { userId } = useContext(LinkContext);
+const LoanForm = (props) => {
+  const { userId, userDetails } = useContext(LinkContext);
+  
+  //States
   const [activeConnectionsAvailable, setActiveConnectionsAvailable] =
     useState(false);
   const [empStatus, setEmpStatus] = useState('');
@@ -38,6 +40,15 @@ const LoanForm = () => {
   const handleEmpSelection = (event) => {
     setEmpStatus(event.target.value);
   };
+
+  const handleUserDetailsChange = (event) => {
+    props.setUserDetails((prev) => ({
+      ...prev,
+      [event.target.name]: event.target.value
+    }))
+  }
+
+  console.log(userDetails)
 
   const handleSliderValueChange = (event, newValue) => {
     setLoanSum(newValue * 1000);
@@ -83,7 +94,13 @@ const LoanForm = () => {
     {
       key: 'Name:',
       value: (
-        <TextField className="name-field" label="Name" variant="outlined" />
+        <TextField className="name-field" name="name" label="Name" required variant="outlined" onChange={handleUserDetailsChange} value={userDetails.name} />
+      ),
+    },
+    {
+      key: 'Email:',
+      value: (
+        <TextField className="email-field" name="email" label="Email" required type="email" variant="outlined" onChange={handleUserDetailsChange} value={userDetails.email}/>
       ),
     },
     {
