@@ -1,10 +1,11 @@
 import { Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { linkService } from "../../link-service";
 
 //Components
 import ConnectionDisplay from "../ConnectionDisplay/ConnectionDisplay";
 import SectionWrapper from "../SectionWrapper/SectionWrapper";
+import PropTypes from "prop-types";
 
 const CompanyConnections = (props) => {
   const { userId } = props;
@@ -41,6 +42,10 @@ const CompanyConnections = (props) => {
       )}
     </SectionWrapper>
   );
+};
+
+CompanyConnections.propTypes = {
+  userId: PropTypes.string.isRequired,
 };
 
 export default CompanyConnections;

@@ -1,5 +1,6 @@
 import { Typography } from "@mui/material";
 import { Fragment } from "react";
+import PropTypes from "prop-types";
 
 import FlexColumns from "../FlexColumns/FlexColumns";
 
@@ -31,6 +32,11 @@ const ConnectionDisplay = (props) => {
       />
     </Fragment>
   );
+};
+
+ConnectionDisplay.propTypes = {
+  connectionObject: PropTypes.object.isRequired,
+  backgroundActive: PropTypes.bool,
 };
 
 export default ConnectionDisplay;
