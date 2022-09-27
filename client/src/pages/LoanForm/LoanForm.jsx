@@ -15,7 +15,7 @@ import {
 import './LoanForm.css';
 import { linkService } from '../../link-service';
 import { LinkContext } from '../../App';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 //Components
 import Header from '../../components/Header/Header';
@@ -25,8 +25,10 @@ import SectionWrapper from '../../components/SectionWrapper/SectionWrapper';
 import CompanyConnections from '../../components/CompanyConnections/CompanyConnections';
 
 const LoanForm = (props) => {
-  const { userId, userDetails } = useContext(LinkContext);
-  
+  const { userDetails } = useContext(LinkContext);
+  const params = useParams();
+  const userId = params['userId'];
+
   //States
   const [activeConnectionsAvailable, setActiveConnectionsAvailable] =
     useState(false);
@@ -52,9 +54,9 @@ const LoanForm = (props) => {
   const handleUserDetailsChange = (event) => {
     props.setUserDetails((prev) => ({
       ...prev,
-      [event.target.name]: event.target.value
-    }))
-  }
+      [event.target.name]: event.target.value,
+    }));
+  };
 
   const handleSliderValueChange = (event, newValue) => {
     setLoanSum(newValue * 1000);
@@ -100,13 +102,30 @@ const LoanForm = (props) => {
     {
       key: 'Name:',
       value: (
-        <TextField className="name-field" name="name" label="Name" required variant="outlined" onChange={handleUserDetailsChange} value={userDetails.name} />
+        <TextField
+          className="name-field"
+          name="name"
+          label="Name"
+          required
+          variant="outlined"
+          onChange={handleUserDetailsChange}
+          value={userDetails.name}
+        />
       ),
     },
     {
       key: 'Email:',
       value: (
-        <TextField className="email-field" name="email" label="Email" required type="email" variant="outlined" onChange={handleUserDetailsChange} value={userDetails.email}/>
+        <TextField
+          className="email-field"
+          name="email"
+          label="Email"
+          required
+          type="email"
+          variant="outlined"
+          onChange={handleUserDetailsChange}
+          value={userDetails.email}
+        />
       ),
     },
     {
@@ -171,12 +190,11 @@ const LoanForm = (props) => {
 
   return (
     <>
-      <Header />
+      <Header userId={userId} />
       <div className="loan-form-content-wrapper">
         <SectionWrapper title="Your loan application">
           <Typography variant="body1">
-            Get customized loan options based on what you tell us.
-            Once your
+            Get customized loan options based on what you tell us. Once your
             loan is funded, we’ll send the money straight to your bank account
             or pay your creditors directly.
           </Typography>
@@ -224,7 +242,7 @@ const LoanForm = (props) => {
         </SectionWrapper>
 
         {activeConnectionsAvailable ? (
-          <CompanyConnections />
+          <CompanyConnections userId={userId} />
         ) : (
           <div className="connection-prompt-wrapper">
             <Typography variant="body1">
@@ -241,7 +259,13 @@ const LoanForm = (props) => {
           </div>
         )}
 
-        <Button variant="contained" size="large" color="primary" sx={{ mb: 3 }} onClick={handleApplication}>
+        <Button
+          variant="contained"
+          size="large"
+          color="primary"
+          sx={{ mb: 3 }}
+          onClick={handleApplication}
+        >
           Submit application
         </Button>
       </div>

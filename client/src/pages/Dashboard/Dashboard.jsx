@@ -1,7 +1,7 @@
 import { Typography, Button } from '@mui/material';
 import './Dashboard.css';
 import { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { routes } from '../../routes';
 import { LinkContext } from '../../App';
 
@@ -12,20 +12,35 @@ import SectionWrapper from '../../components/SectionWrapper/SectionWrapper';
 import CompanyConnections from '../../components/CompanyConnections/CompanyConnections';
 
 const Dashboard = () => {
-  const { userId, userDetails:{name, email} } = useContext(LinkContext);
+  const {
+    userDetails: { name, email },
+  } = useContext(LinkContext);
+
+  const params = useParams();
+  const userId = params['userId'];
 
   const listItems = [
     {
       key: 'Name:',
-      value: <Typography variant="body1">{name || "No name submitted."}</Typography>,
+      value: (
+        <Typography variant="body1">{name || 'No name submitted.'}</Typography>
+      ),
     },
     {
       key: 'User e-mail:',
-      value: <Typography variant="body1">{email || "No email submitted."}</Typography>,
+      value: (
+        <Typography variant="body1">
+          {email || 'No email submitted.'}
+        </Typography>
+      ),
     },
     {
       key: 'User ID:',
-      value: <Typography variant="body1">{userId || "No user ID assigned."}</Typography>,
+      value: (
+        <Typography variant="body1">
+          {userId || 'No user ID assigned.'}
+        </Typography>
+      ),
     },
   ];
 
@@ -37,16 +52,14 @@ const Dashboard = () => {
 
   return (
     <>
-      <Header />
+      <Header userId={userId} />
       <div className="dashboard-content-wrapper">
         <SectionWrapper title="Account information">
           <FlexColumns backgroundActive listItems={listItems} />
         </SectionWrapper>
-        <CompanyConnections />
+        <CompanyConnections userId={userId} />
         <SectionWrapper title="Your progress">
-          <Typography>
-            To apply for a loan, complete the loan form.
-          </Typography>
+          <Typography>To apply for a loan, complete the loan form.</Typography>
           <Button variant="contained" onClick={handleApplication} size="large">
             Go to your loan form
           </Button>

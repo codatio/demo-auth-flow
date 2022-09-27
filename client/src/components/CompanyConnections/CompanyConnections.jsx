@@ -1,14 +1,13 @@
-import { useEffect, useState, useContext } from 'react';
 import { Typography } from '@mui/material';
+import { useEffect, useState } from 'react';
 import { linkService } from '../../link-service';
-import { LinkContext } from '../../App';
 
 //Components
-import SectionWrapper from '../SectionWrapper/SectionWrapper';
 import ConnectionDisplay from '../ConnectionDisplay/ConnectionDisplay';
+import SectionWrapper from '../SectionWrapper/SectionWrapper';
 
-const CompanyConnections = () => {
-  const { userId } = useContext(LinkContext);
+const CompanyConnections = (props) => {
+  const { userId } = props;
   const [companyConnections, setCompanyConnections] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
 
