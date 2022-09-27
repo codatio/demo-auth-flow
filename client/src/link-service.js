@@ -3,11 +3,9 @@ const headers = {
   "Content-Type": "application/json",
 };
 
-const baseUrl = "http://localhost:3001";
-
 const linkService = {
   apply: () =>
-    fetch(`${baseUrl}/apply`, {
+    fetch(`/apply`, {
       method: "POST",
       headers,
     }).then((res) => res.json()),
@@ -15,19 +13,19 @@ const linkService = {
    * Get all company connections
    */
   connections: (userId) =>
-    fetch(`${baseUrl}/user/${userId}/connections`, {
+    fetch(`/user/${userId}/connections`, {
       method: "GET",
       headers,
     }).then((res) => res.json()),
   //Get all available integrations
   integrations: () =>
-    fetch(`${baseUrl}/integrations`, {
+    fetch(`/integrations`, {
       method: "GET",
       headers,
     }).then((res) => res.json()),
   //Create a connection to an integration
   postConnection: (userId, integrationKey) =>
-    fetch(`${baseUrl}/user/${userId}/connections/${integrationKey}`, {
+    fetch(`/user/${userId}/connections/${integrationKey}`, {
       method: "POST",
       headers,
     }).then((res) => res.json()),
