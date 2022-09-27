@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useState, useEffect, useContext } from 'react';
+import { routes } from '../../routes';
 import {
   Typography,
   TextField,
@@ -14,6 +14,9 @@ import {
 } from '@mui/material';
 import './LoanForm.css';
 import { linkService } from '../../link-service';
+import { LinkContext } from '../../App';
+import { useNavigate, useParams } from 'react-router-dom';
+
 //Components
 import Header from '../../components/Header/Header';
 import FormColumns from '../../components/FormColumns/FormColumns';
@@ -21,8 +24,12 @@ import IntegrationsModal from '../../components/IntegrationsModal/IntegrationsMo
 import SectionWrapper from '../../components/SectionWrapper/SectionWrapper';
 import CompanyConnections from '../../components/CompanyConnections/CompanyConnections';
 
-const LoanForm = () => {
-  const { userId } = useParams();
+const LoanForm = (props) => {
+  const { userDetails } = useContext(LinkContext);
+  const params = useParams();
+  const userId = params['userId'];
+
+  //States
   const [activeConnectionsAvailable, setActiveConnectionsAvailable] =
     useState(false);
   const [empStatus, setEmpStatus] = useState('');
@@ -30,12 +37,25 @@ const LoanForm = () => {
   const sliderValue = loanSum / 1000;
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const navigate = useNavigate();
+
+  const handleApplication = () => {
+    navigate(routes.dashboard(userId));
+  };
+
   const handleModalToggle = () => {
     setIsModalOpen(!isModalOpen);
   };
 
   const handleEmpSelection = (event) => {
     setEmpStatus(event.target.value);
+  };
+
+  const handleUserDetailsChange = (event) => {
+    props.setUserDetails((prev) => ({
+      ...prev,
+      [event.target.name]: event.target.value,
+    }));
   };
 
   const handleSliderValueChange = (event, newValue) => {
@@ -82,7 +102,30 @@ const LoanForm = () => {
     {
       key: 'Name:',
       value: (
-        <TextField className="name-field" label="Name" variant="outlined" />
+        <TextField
+          className="name-field"
+          name="name"
+          label="Name"
+          required
+          variant="outlined"
+          onChange={handleUserDetailsChange}
+          value={userDetails.name}
+        />
+      ),
+    },
+    {
+      key: 'Email:',
+      value: (
+        <TextField
+          className="email-field"
+          name="email"
+          label="Email"
+          required
+          type="email"
+          variant="outlined"
+          onChange={handleUserDetailsChange}
+          value={userDetails.email}
+        />
       ),
     },
     {
@@ -108,7 +151,7 @@ const LoanForm = () => {
       key: 'Which sector(s) do you operate in?',
       value: (
         <Autocomplete
-          className='form-value-dropdown'
+          className="form-value-dropdown"
           multiple
           options={sectorOptions}
           renderInput={(params) => (
@@ -147,17 +190,13 @@ const LoanForm = () => {
 
   return (
     <>
-      <Header />
+      <Header userId={userId} />
       <div className="loan-form-content-wrapper">
         <SectionWrapper title="Your loan application">
           <Typography variant="body1">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+            Get customized loan options based on what you tell us. Once your
+            loan is funded, we’ll send the money straight to your bank account
+            or pay your creditors directly.
           </Typography>
         </SectionWrapper>
         <SectionWrapper title="Funding requirements">
@@ -203,7 +242,7 @@ const LoanForm = () => {
         </SectionWrapper>
 
         {activeConnectionsAvailable ? (
-          <CompanyConnections />
+          <CompanyConnections userId={userId} />
         ) : (
           <div className="connection-prompt-wrapper">
             <Typography variant="body1">
@@ -220,7 +259,13 @@ const LoanForm = () => {
           </div>
         )}
 
-        <Button variant="contained" size="large" color="primary" sx={{ mb: 3 }}>
+        <Button
+          variant="contained"
+          size="large"
+          color="primary"
+          sx={{ mb: 3 }}
+          onClick={handleApplication}
+        >
           Submit application
         </Button>
       </div>

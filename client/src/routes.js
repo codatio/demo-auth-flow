@@ -1,7 +1,6 @@
 const routes = {
   home: '/home',
   dashboard: (userId) => `/${userId}/dashboard`,
-  login: '/login',
   loanForm: (userId) => `/${userId}/loan-form`,
   redirect: '/redirect',
 };

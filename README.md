@@ -8,7 +8,7 @@ Signing up in the app will create a new user account with data stored locally in
 
 **What has been implemented:**
 * Basic UI pages:
-  * Login page
+  * Home page
   * User dashboard that shows user's data connections to Codat
   * Loan application page
   * Platform selection modal window
@@ -34,7 +34,7 @@ Server:
 * [Node.js](https://nodejs.org/en/), long-term support (LTS) version
 * [nodemon](https://www.npmjs.com/package/nodemon)
 * [node-localstorage](https://www.npmjs.com/package/node-localstorage)
-  >`node-localstorage` is used to mock out a proper data store system. Login merchant data is stored locally. If deployed to a cloud environment, this will be wiped with each new release.
+  >`node-localstorage` is used to mock out a proper data store system. Merchant data is stored locally. If deployed to a cloud environment, this will be wiped with each new release.
 
 
 

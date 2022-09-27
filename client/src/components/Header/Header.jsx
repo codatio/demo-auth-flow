@@ -1,21 +1,28 @@
 import './Header.css';
 import { Button } from '@mui/material';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { routes } from '../../routes';
-import CompanyLogo from '../CompanyLogo/CompanyLogo'
+import CompanyLogo from '../CompanyLogo/CompanyLogo';
+import { useContext } from 'react';
+import { LinkContext } from '../../App';
 
-const Header = () => {
+const Header = (props) => {
   const navigate = useNavigate();
-  const { userId } = useParams();
+  const { userId } = props;
 
   const goToProfile = () => {
     navigate(routes.dashboard(userId));
   };
 
+  const goToHome = () => {
+    const search = userId ? `?userId=${userId}` : '';
+    navigate({ pathname: routes.home, search });
+  };
+
   return (
     <header className="main-header">
-      <CompanyLogo/>
-      <Button onClick={goToProfile}>My profile</Button>
+      <CompanyLogo onClick={goToHome} />
+      {userId && <Button onClick={goToProfile}>My profile</Button>}
     </header>
   );
 };
