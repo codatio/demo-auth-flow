@@ -7,7 +7,11 @@
     "start": "concurrently \"npm run start:server:watch\" \"npm run start:client\"",
     "start:server": "npm run start --prefix server",
     "start:server:watch": "npm run start:watch --prefix server",
-    "start:client": "npm run start --prefix client"
+    "start:client": "npm run start --prefix client",
+    "install:server": "cd server && npm install",
+    "install:client": "cd client && npm install",
+    "postinstall": "npm run install:server && npm run install:client",
+    "build": "npm run build --prefix client"
   },
   "keywords": [],
   "author": "",
