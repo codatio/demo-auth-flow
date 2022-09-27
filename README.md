@@ -1,6 +1,6 @@
 # Link Demo Application
 
-This is an app that demonstrates the potential implementation of the Codat Link product.
+This is an app that demonstrates the potential implementation of the Codat Link product. A deployed version of this app can be seen [here](https://codat-dev-link-demo.azurewebsites.net/home);
 
 This app is an example of how to integrate to the Codat APIs. It should not be run in a production environment.
 
