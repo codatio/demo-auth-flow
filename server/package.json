@@ -12,8 +12,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cors": "^2.8.5",
     "express": "^4.17.3",
+    "node-fetch": "^3.2.10",
     "node-localstorage": "^2.2.1",
     "uuid": "^8.3.2"
   },

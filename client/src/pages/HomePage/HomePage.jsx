@@ -36,7 +36,7 @@ const HomePage = () => {
   const sellingPoints = [
     "Revenue-based loan",
     "Free to apply and it doesn’t affect your credit score",
-    "Expert help throught the process",
+    "Expert help throughout the process",
     "No paperwork",
   ];
 
