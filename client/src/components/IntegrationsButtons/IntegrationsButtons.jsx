@@ -22,7 +22,7 @@ const IntegrationsButtons = (props) => {
                 ? 'integration-button--active'
                 : 'integration-button--inactive'
             }`}
-            value={{key: integration.key, sourceId: integration.sourceId}}
+            value={{ key: integration.key, sourceId: integration.sourceId }}
             key={integration.key}
           >
             <img alt={integration.name} src={integration.logoUrl} />

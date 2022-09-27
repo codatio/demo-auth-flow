@@ -1,4 +1,3 @@
-
 import Vector from '../../assets/images/vectors/Vector.svg';
 import Vector1 from '../../assets/images/vectors/Vector-1.svg';
 import Vector2 from '../../assets/images/vectors/Vector-2.svg';

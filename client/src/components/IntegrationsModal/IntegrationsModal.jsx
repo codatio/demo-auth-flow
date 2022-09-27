@@ -56,7 +56,7 @@ const IntegrationsModal = (props) => {
           //   If so, set the connection state to connectionError
           //   Get the error message from the data connection error
           //   And display to user, change button text to 'Error'
-          const firstError = matchingConnection?.dataConnectionErrors?.[0]
+          const firstError = matchingConnection?.dataConnectionErrors?.[0];
           if (firstError) {
             const errorTimestamp = new Date(firstError.erroredOnUtc);
 
@@ -85,7 +85,7 @@ const IntegrationsModal = (props) => {
     setSelectedIntegration(null);
     setIgnoreErrorBefore(new Date());
     setConnectionState('');
-  }
+  };
 
   return (
     <Modal open={props.isModalOpen} onClose={props.handleModalToggle}>
@@ -104,8 +104,10 @@ const IntegrationsModal = (props) => {
         </Typography>
         {errorMessage ? (
           <>
-          <Typography>🙁{errorMessage}</Typography>
-          <Button variant="contained" size="large" onClick={onTryAgainClick}>Try again</Button>
+            <Typography>🙁{errorMessage}</Typography>
+            <Button variant="contained" size="large" onClick={onTryAgainClick}>
+              Try again
+            </Button>
           </>
         ) : (
           <>
