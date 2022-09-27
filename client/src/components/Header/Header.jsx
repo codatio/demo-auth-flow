@@ -3,8 +3,6 @@ import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../../routes";
 import CompanyLogo from "../CompanyLogo/CompanyLogo";
-import { useContext } from "react";
-import { LinkContext } from "../../App";
 
 const Header = (props) => {
   const navigate = useNavigate();
