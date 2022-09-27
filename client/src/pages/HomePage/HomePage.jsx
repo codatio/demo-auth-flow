@@ -21,7 +21,6 @@ const HomePage = () => {
   const navigate = useNavigate();
   const [params] = useSearchParams();
   const appliedUserId = params.get('userId');
-  const applied = !!appliedUserId;
 
   const handleApply = () => {
     if (!appliedUserId) {
@@ -71,7 +70,7 @@ const HomePage = () => {
               })}
             </List>
             <Button variant="contained" color="primary" onClick={handleApply}>
-              {applied ? 'Go to your profile' : 'Apply for a loan'}
+              {appliedUserId ? 'Go to your profile' : 'Apply for a loan'}
             </Button>
           </div>
           <div className="home-page-right-column">
