@@ -4,6 +4,7 @@ import { linkService } from "../../link-service";
 import { useState, useEffect } from "react";
 import "./IntegrationsModal.css";
 import CloseIcon from "@mui/icons-material/Close";
+import PropTypes from "prop-types";
 
 const waitingForComplete = "waitingForComplete";
 const connectionSuccess = "connectionSuccess";
@@ -139,6 +140,13 @@ const IntegrationsModal = (props) => {
       </Box>
     </Modal>
   );
+};
+
+IntegrationsModal.propTypes = {
+  userId: PropTypes.string.isRequired,
+  onConnectionLinked: PropTypes.func.isRequired,
+  isModalOpen: PropTypes.bool.isRequired,
+  handleModalToggle: PropTypes.func.isRequired,
 };
 
 export default IntegrationsModal;

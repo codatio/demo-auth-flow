@@ -1,4 +1,5 @@
 import { Typography } from "@mui/material";
+import PropTypes from "prop-types";
 
 import "./FormColumns.css";
 
@@ -16,5 +17,9 @@ const FormColumns = (props) => (
     </div>
   </div>
 );
+
+FormColumns.propTypes = {
+  listItems: PropTypes.array.isRequired,
+};
 
 export default FormColumns;

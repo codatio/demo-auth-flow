@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Typography } from "@mui/material";
 
 import "./FlexColumns.css";
@@ -22,5 +23,10 @@ const FlexColumns = (props) => (
     </ul>
   </div>
 );
+
+FlexColumns.propTypes = {
+  backgroundActive: PropTypes.bool,
+  listItems: PropTypes.array.isRequired,
+};
 
 export default FlexColumns;

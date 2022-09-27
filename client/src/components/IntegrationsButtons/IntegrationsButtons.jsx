@@ -1,6 +1,7 @@
 import { ToggleButtonGroup, ToggleButton } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import "./IntegrationsButtons.css";
+import PropTypes from "prop-types";
 
 const IntegrationsButtons = (props) => {
   const handleIntegrationSelection = (event, newSelectedIntegration) => {
@@ -31,6 +32,12 @@ const IntegrationsButtons = (props) => {
       })}
     </ToggleButtonGroup>
   );
+};
+
+IntegrationsButtons.propTypes = {
+  setSelectedIntegration: PropTypes.func.isRequired,
+  enabledIntegrations: PropTypes.array.isRequired,
+  selectedIntegration: PropTypes.object,
 };
 
 export default IntegrationsButtons;
