@@ -6,23 +6,23 @@ import CompanyLogo from '../CompanyLogo/CompanyLogo';
 import { useContext } from 'react';
 import { LinkContext } from '../../App';
 
-const Header = () => {
+const Header = (props) => {
   const navigate = useNavigate();
-  const { userId, applied } = useContext(LinkContext);
+  const { userId } = props;
 
   const goToProfile = () => {
     navigate(routes.dashboard(userId));
   };
 
+  const goToHome = () => {
+    const search = userId ? `?userId=${userId}` : '';
+    navigate({ pathname: routes.home, search });
+  };
+
   return (
     <header className="main-header">
-      <CompanyLogo />
-      <Button
-        onClick={goToProfile}
-        disabled={!applied}
-      >
-        My profile
-      </Button>
+      <CompanyLogo onClick={goToHome} />
+      {userId && <Button onClick={goToProfile}>My profile</Button>}
     </header>
   );
 };

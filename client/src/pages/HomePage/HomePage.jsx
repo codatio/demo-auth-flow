@@ -1,40 +1,36 @@
-import Header from '../../components/Header/Header';
 import {
-  Typography,
+  Button,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
-  Button,
+  Typography,
 } from '@mui/material';
-import './HomePage.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import Header from '../../components/Header/Header';
 import { linkService } from '../../link-service';
 import { routes } from '../../routes';
-import { useContext } from 'react';
-import { LinkContext } from '../../App';
+import './HomePage.css';
 
 //Assets
-import ListIcon from '../../assets/images/icons/bullet-point.svg';
 import Card from '../../assets/images/card.svg';
+import ListIcon from '../../assets/images/icons/bullet-point.svg';
 import vectors from './vectors';
 
-const HomePage = (props) => {
+const HomePage = () => {
   const navigate = useNavigate();
-  const { applied, userId: appliedUserId } = useContext(LinkContext);
+  const [params] = useSearchParams();
+  const appliedUserId = params.get('userId');
+  const applied = !!appliedUserId;
 
   const handleApply = () => {
-    if (!applied) {
+    if (!appliedUserId) {
       linkService.apply().then((data) => {
         const { userId } = data;
-  
-        props.setUserId(userId);
-        props.setApplied(true);
-  
         navigate(routes.loanForm(userId));
       });
     } else {
-      navigate(routes.dashboard(appliedUserId))
+      navigate(routes.dashboard(appliedUserId));
     }
   };
 
@@ -48,7 +44,7 @@ const HomePage = (props) => {
   return (
     <>
       <div className="home-page-element">
-        <Header className="home-page-header" />
+        <Header className="home-page-header" userId={appliedUserId} />
         <div className="home-page-wrapper">
           <div className="home-page-left-column">
             <Typography variant="h4" component="h2">
@@ -74,12 +70,8 @@ const HomePage = (props) => {
                 );
               })}
             </List>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleApply}
-            >
-              {applied ? "Go to your profile" : "Apply for a loan"}
+            <Button variant="contained" color="primary" onClick={handleApply}>
+              {applied ? 'Go to your profile' : 'Apply for a loan'}
             </Button>
           </div>
           <div className="home-page-right-column">

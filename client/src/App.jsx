@@ -9,23 +9,22 @@ import { routes } from './routes';
 export const LinkContext = React.createContext({});
 
 const App = () => {
-  const [applied, setApplied] = useState(false);
-  const [userId, setUserId] = useState(null);
+  // Should be stored on the API
   const [userDetails, setUserDetails] = useState({
-    name: "",
-    email: ""
+    name: '',
+    email: '',
   });
 
   return (
-    <LinkContext.Provider value={{ applied, userId, userDetails }}>
+    <LinkContext.Provider value={{ userDetails }}>
       <BrowserRouter>
         <Routes>
-          <Route
-            path={routes.home}
-            element={<HomePage setApplied={setApplied} setUserId={setUserId} />}
-          />
+          <Route path={routes.home} element={<HomePage />} />
           <Route path={routes.dashboard(':userId')} element={<Dashboard />} />
-          <Route path={routes.loanForm(':userId')} element={<LoanForm setUserDetails={setUserDetails}/>} />
+          <Route
+            path={routes.loanForm(':userId')}
+            element={<LoanForm setUserDetails={setUserDetails} />}
+          />
           <Route path={routes.redirect} element={<RedirectHandler />} />
           <Route path="*" element={<Navigate replace to={routes.home} />} />
         </Routes>

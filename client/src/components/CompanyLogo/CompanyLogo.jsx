@@ -1,17 +1,14 @@
 import CompanyLogoImage from '../../assets/images/copay-logo.png';
 import './CompanyLogo.css';
-import { Link } from 'react-router-dom';
-import { routes } from '../../routes';
 
-const CompanyLogo = () => {
+const CompanyLogo = (props) => {
   return (
-    <Link to={routes.home}>
-      <img
-        className="company-logo"
-        alt="copay-company-logo"
-        src={CompanyLogoImage}
-      />
-    </Link>
+    <img
+      className="company-logo"
+      alt="copay-company-logo"
+      src={CompanyLogoImage}
+      onClick={props.onClick}
+    />
   );
 };
 
