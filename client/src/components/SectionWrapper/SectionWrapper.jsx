@@ -1,5 +1,5 @@
-import './SectionWrapper.css';
-import { Typography } from '@mui/material';
+import "./SectionWrapper.css";
+import { Typography } from "@mui/material";
 
 const SectionWrapper = (props) => (
   <div className="section-wrapper">

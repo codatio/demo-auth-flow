@@ -1,15 +1,15 @@
-import { Typography, Button } from '@mui/material';
-import './Dashboard.css';
-import { useContext } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { routes } from '../../routes';
-import { LinkContext } from '../../App';
+import { Typography, Button } from "@mui/material";
+import "./Dashboard.css";
+import { useContext } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { routes } from "../../routes";
+import { LinkContext } from "../../App";
 
 // Components
-import Header from '../../components/Header/Header';
-import FlexColumns from '../../components/FlexColumns/FlexColumns';
-import SectionWrapper from '../../components/SectionWrapper/SectionWrapper';
-import CompanyConnections from '../../components/CompanyConnections/CompanyConnections';
+import Header from "../../components/Header/Header";
+import FlexColumns from "../../components/FlexColumns/FlexColumns";
+import SectionWrapper from "../../components/SectionWrapper/SectionWrapper";
+import CompanyConnections from "../../components/CompanyConnections/CompanyConnections";
 
 const Dashboard = () => {
   const {
@@ -17,28 +17,28 @@ const Dashboard = () => {
   } = useContext(LinkContext);
 
   const params = useParams();
-  const userId = params['userId'];
+  const userId = params["userId"];
 
   const listItems = [
     {
-      key: 'Name:',
+      key: "Name:",
       value: (
-        <Typography variant="body1">{name || 'No name submitted.'}</Typography>
+        <Typography variant="body1">{name || "No name submitted."}</Typography>
       ),
     },
     {
-      key: 'User e-mail:',
+      key: "User e-mail:",
       value: (
         <Typography variant="body1">
-          {email || 'No email submitted.'}
+          {email || "No email submitted."}
         </Typography>
       ),
     },
     {
-      key: 'User ID:',
+      key: "User ID:",
       value: (
         <Typography variant="body1">
-          {userId || 'No user ID assigned.'}
+          {userId || "No user ID assigned."}
         </Typography>
       ),
     },

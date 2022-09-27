@@ -1,6 +1,6 @@
-import { Typography } from '@mui/material';
+import { Typography } from "@mui/material";
 
-import './FormColumns.css';
+import "./FormColumns.css";
 
 const FormColumns = (props) => (
   <div className="form-list-container">

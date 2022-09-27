@@ -1,11 +1,11 @@
-import { Typography } from '@mui/material';
+import { Typography } from "@mui/material";
 
-import './FlexColumns.css';
+import "./FlexColumns.css";
 
 const FlexColumns = (props) => (
   <div
     className={`list-container ${
-      props.backgroundActive ? 'list-container--background' : ''
+      props.backgroundActive ? "list-container--background" : ""
     }`}
   >
     <ul className="key-column">

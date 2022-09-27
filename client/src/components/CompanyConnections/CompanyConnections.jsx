@@ -1,15 +1,15 @@
-import { Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
-import { linkService } from '../../link-service';
+import { Typography } from "@mui/material";
+import { useEffect, useState } from "react";
+import { linkService } from "../../link-service";
 
 //Components
-import ConnectionDisplay from '../ConnectionDisplay/ConnectionDisplay';
-import SectionWrapper from '../SectionWrapper/SectionWrapper';
+import ConnectionDisplay from "../ConnectionDisplay/ConnectionDisplay";
+import SectionWrapper from "../SectionWrapper/SectionWrapper";
 
 const CompanyConnections = (props) => {
   const { userId } = props;
   const [companyConnections, setCompanyConnections] = useState([]);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     linkService
@@ -18,7 +18,7 @@ const CompanyConnections = (props) => {
         setCompanyConnections(data);
       })
       .catch(() => {
-        setErrorMessage('Something went wrong.');
+        setErrorMessage("Something went wrong.");
       });
   }, []);
 

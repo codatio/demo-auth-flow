@@ -1,5 +1,5 @@
-import CompanyLogoImage from '../../assets/images/copay-logo.png';
-import './CompanyLogo.css';
+import CompanyLogoImage from "../../assets/images/copay-logo.png";
+import "./CompanyLogo.css";
 
 const CompanyLogo = (props) => {
   return (

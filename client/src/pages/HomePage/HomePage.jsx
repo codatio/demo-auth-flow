@@ -5,22 +5,22 @@ import {
   ListItemIcon,
   ListItemText,
   Typography,
-} from '@mui/material';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import Header from '../../components/Header/Header';
-import { linkService } from '../../link-service';
-import { routes } from '../../routes';
-import './HomePage.css';
+} from "@mui/material";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import Header from "../../components/Header/Header";
+import { linkService } from "../../link-service";
+import { routes } from "../../routes";
+import "./HomePage.css";
 
 //Assets
-import Card from '../../assets/images/card.svg';
-import ListIcon from '../../assets/images/icons/bullet-point.svg';
-import vectors from './vectors';
+import Card from "../../assets/images/card.svg";
+import ListIcon from "../../assets/images/icons/bullet-point.svg";
+import vectors from "./vectors";
 
 const HomePage = () => {
   const navigate = useNavigate();
   const [params] = useSearchParams();
-  const appliedUserId = params.get('userId');
+  const appliedUserId = params.get("userId");
 
   const handleApply = () => {
     if (!appliedUserId) {
@@ -34,10 +34,10 @@ const HomePage = () => {
   };
 
   const sellingPoints = [
-    'Revenue-based loan',
-    'Free to apply and it doesn’t affect your credit score',
-    'Expert help throught the process',
-    'No paperwork',
+    "Revenue-based loan",
+    "Free to apply and it doesn’t affect your credit score",
+    "Expert help throught the process",
+    "No paperwork",
   ];
 
   return (
@@ -70,7 +70,7 @@ const HomePage = () => {
               })}
             </List>
             <Button variant="contained" color="primary" onClick={handleApply}>
-              {appliedUserId ? 'Go to your profile' : 'Apply for a loan'}
+              {appliedUserId ? "Go to your profile" : "Apply for a loan"}
             </Button>
           </div>
           <div className="home-page-right-column">
