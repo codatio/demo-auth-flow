@@ -1,6 +1,7 @@
-import { ToggleButtonGroup, ToggleButton } from '@mui/material';
-import React, { useState } from 'react';
-import './IntegrationsButtons.css';
+import { ToggleButtonGroup, ToggleButton } from "@mui/material";
+import React from "react";
+import "./IntegrationsButtons.css";
+import PropTypes from "prop-types";
 
 const IntegrationsButtons = (props) => {
   const handleIntegrationSelection = (event, newSelectedIntegration) => {
@@ -19,10 +20,10 @@ const IntegrationsButtons = (props) => {
           <ToggleButton
             className={`integration-button ${
               integration.key === props.selectedIntegration?.key
-                ? 'integration-button--active'
-                : 'integration-button--inactive'
+                ? "integration-button--active"
+                : "integration-button--inactive"
             }`}
-            value={{key: integration.key, sourceId: integration.sourceId}}
+            value={{ key: integration.key, sourceId: integration.sourceId }}
             key={integration.key}
           >
             <img alt={integration.name} src={integration.logoUrl} />
@@ -31,6 +32,12 @@ const IntegrationsButtons = (props) => {
       })}
     </ToggleButtonGroup>
   );
+};
+
+IntegrationsButtons.propTypes = {
+  setSelectedIntegration: PropTypes.func.isRequired,
+  enabledIntegrations: PropTypes.array.isRequired,
+  selectedIntegration: PropTypes.object,
 };
 
 export default IntegrationsButtons;

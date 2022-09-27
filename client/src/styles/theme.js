@@ -1,18 +1,18 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme } from "@mui/material/styles";
 
 export const linkTheme = createTheme({
   palette: {
     primary: {
-      main: '#5A42ED',
+      main: "#5A42ED",
     },
     secondary: {
-      main: '#edf2ff',
+      main: "#edf2ff",
     },
     accent: {
-      main: '#C8553D',
+      main: "#C8553D",
     },
   },
   typography: {
     fontSize: 17,
-  }
+  },
 });

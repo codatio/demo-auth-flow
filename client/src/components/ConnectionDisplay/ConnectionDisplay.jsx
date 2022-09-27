@@ -1,19 +1,20 @@
-import { Typography } from '@mui/material';
-import { Fragment } from 'react';
+import { Typography } from "@mui/material";
+import { Fragment } from "react";
+import PropTypes from "prop-types";
 
-import FlexColumns from '../FlexColumns/FlexColumns';
+import FlexColumns from "../FlexColumns/FlexColumns";
 
 const ConnectionDisplay = (props) => {
   const title = props.connectionObject.platformName;
   const listItems = [
     {
-      key: 'Status',
+      key: "Status",
       value: (
         <Typography variant="body1">{props.connectionObject.status}</Typography>
       ),
     },
     {
-      key: 'Source type',
+      key: "Source type",
       value: (
         <Typography variant="body1">
           {props.connectionObject.sourceType}
@@ -31,6 +32,11 @@ const ConnectionDisplay = (props) => {
       />
     </Fragment>
   );
+};
+
+ConnectionDisplay.propTypes = {
+  connectionObject: PropTypes.object.isRequired,
+  backgroundActive: PropTypes.bool,
 };
 
 export default ConnectionDisplay;

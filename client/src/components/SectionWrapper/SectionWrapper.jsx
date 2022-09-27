@@ -1,5 +1,6 @@
-import './SectionWrapper.css';
-import { Typography } from '@mui/material';
+import "./SectionWrapper.css";
+import { Typography } from "@mui/material";
+import PropTypes from "prop-types";
 
 const SectionWrapper = (props) => (
   <div className="section-wrapper">
@@ -7,5 +8,10 @@ const SectionWrapper = (props) => (
     {props.children}
   </div>
 );
+
+SectionWrapper.propTypes = {
+  title: PropTypes.string.isRequired,
+  children: PropTypes.element.isRequired,
+};
 
 export default SectionWrapper;

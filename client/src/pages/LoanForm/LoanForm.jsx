@@ -1,5 +1,5 @@
-import { useState, useEffect, useContext } from 'react';
-import { routes } from '../../routes';
+import { useState, useEffect, useContext } from "react";
+import { routes } from "../../routes";
 import {
   Typography,
   TextField,
@@ -11,28 +11,29 @@ import {
   Input,
   Button,
   Autocomplete,
-} from '@mui/material';
-import './LoanForm.css';
-import { linkService } from '../../link-service';
-import { LinkContext } from '../../App';
-import { useNavigate, useParams } from 'react-router-dom';
+} from "@mui/material";
+import "./LoanForm.css";
+import { linkService } from "../../link-service";
+import { LinkContext } from "../../App";
+import { useNavigate, useParams } from "react-router-dom";
+import PropTypes from "prop-types";
 
 //Components
-import Header from '../../components/Header/Header';
-import FormColumns from '../../components/FormColumns/FormColumns';
-import IntegrationsModal from '../../components/IntegrationsModal/IntegrationsModal';
-import SectionWrapper from '../../components/SectionWrapper/SectionWrapper';
-import CompanyConnections from '../../components/CompanyConnections/CompanyConnections';
+import Header from "../../components/Header/Header";
+import FormColumns from "../../components/FormColumns/FormColumns";
+import IntegrationsModal from "../../components/IntegrationsModal/IntegrationsModal";
+import SectionWrapper from "../../components/SectionWrapper/SectionWrapper";
+import CompanyConnections from "../../components/CompanyConnections/CompanyConnections";
 
 const LoanForm = (props) => {
   const { userDetails } = useContext(LinkContext);
   const params = useParams();
-  const userId = params['userId'];
+  const userId = params["userId"];
 
   //States
   const [activeConnectionsAvailable, setActiveConnectionsAvailable] =
     useState(false);
-  const [empStatus, setEmpStatus] = useState('');
+  const [empStatus, setEmpStatus] = useState("");
   const [loanSum, setLoanSum] = useState(10000);
   const sliderValue = loanSum / 1000;
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -68,7 +69,7 @@ const LoanForm = (props) => {
 
   const refreshActiveConnections = () => {
     linkService.connections(userId).then((data) => {
-      const activeConnectionsValue = data.some((c) => c.status === 'Linked');
+      const activeConnectionsValue = data.some((c) => c.status === "Linked");
       setActiveConnectionsAvailable(activeConnectionsValue);
     });
   };
@@ -84,23 +85,23 @@ const LoanForm = (props) => {
   const marks = [
     {
       value: 10,
-      label: '£10000',
+      label: "£10000",
     },
     {
       value: 50,
-      label: '£50000',
+      label: "£50000",
     },
     {
       value: 100,
-      label: '£100000',
+      label: "£100000",
     },
   ];
 
-  const sectorOptions = ['Finance', 'Health'];
+  const sectorOptions = ["Finance", "Health"];
 
   const listItems = [
     {
-      key: 'Name:',
+      key: "Name:",
       value: (
         <TextField
           className="name-field"
@@ -114,7 +115,7 @@ const LoanForm = (props) => {
       ),
     },
     {
-      key: 'Email:',
+      key: "Email:",
       value: (
         <TextField
           className="email-field"
@@ -129,7 +130,7 @@ const LoanForm = (props) => {
       ),
     },
     {
-      key: 'Employment status:',
+      key: "Employment status:",
       value: (
         <FormControl className="employment-status-field" variant="outlined">
           <InputLabel id="employment-status-label">
@@ -141,14 +142,14 @@ const LoanForm = (props) => {
             onChange={handleEmpSelection}
             label="Employment status"
           >
-            <MenuItem value={'employed'}>Employed</MenuItem>
-            <MenuItem value={'unemployed'}>Unemployed</MenuItem>
+            <MenuItem value={"employed"}>Employed</MenuItem>
+            <MenuItem value={"unemployed"}>Unemployed</MenuItem>
           </Select>
         </FormControl>
       ),
     },
     {
-      key: 'Which sector(s) do you operate in?',
+      key: "Which sector(s) do you operate in?",
       value: (
         <Autocomplete
           className="form-value-dropdown"
@@ -167,23 +168,23 @@ const LoanForm = (props) => {
       ),
     },
     {
-      key: 'What was your turnover in the last financial year?',
+      key: "What was your turnover in the last financial year?",
       value: <TextField label="" variant="outlined" />,
     },
     {
-      key: 'What was your monthly recurring revenue?',
+      key: "What was your monthly recurring revenue?",
       value: <TextField label="" variant="outlined" />,
     },
     {
-      key: 'Did your business make a profit in the last financial year?',
+      key: "Did your business make a profit in the last financial year?",
       value: <TextField label="" variant="outlined" />,
     },
     {
-      key: 'Are you a homeowner?',
+      key: "Are you a homeowner?",
       value: <TextField label="" variant="outlined" />,
     },
     {
-      key: 'Which is your main bank?',
+      key: "Which is your main bank?",
       value: <TextField label="" variant="outlined" />,
     },
   ];
@@ -222,7 +223,7 @@ const LoanForm = (props) => {
                 step: 1000,
                 min: 10000,
                 max: 100000,
-                type: 'number',
+                type: "number",
               }}
             />
           </div>
@@ -277,6 +278,10 @@ const LoanForm = (props) => {
       />
     </>
   );
+};
+
+LoanForm.propTypes = {
+  setUserDetails: PropTypes.func.isRequired,
 };
 
 export default LoanForm;

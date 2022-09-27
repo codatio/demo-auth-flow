@@ -1,8 +1,8 @@
 const routes = {
-  home: '/home',
+  home: "/home",
   dashboard: (userId) => `/${userId}/dashboard`,
   loanForm: (userId) => `/${userId}/loan-form`,
-  redirect: '/redirect',
+  redirect: "/redirect",
 };
 
 export { routes };

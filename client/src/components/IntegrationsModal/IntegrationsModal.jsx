@@ -1,19 +1,20 @@
-import { Modal, Box, Typography, Button, IconButton } from '@mui/material';
-import IntegrationsButtons from '../IntegrationsButtons/IntegrationsButtons';
-import { linkService } from '../../link-service';
-import { useState, useEffect } from 'react';
-import './IntegrationsModal.css';
-import CloseIcon from '@mui/icons-material/Close';
+import { Modal, Box, Typography, Button, IconButton } from "@mui/material";
+import IntegrationsButtons from "../IntegrationsButtons/IntegrationsButtons";
+import { linkService } from "../../link-service";
+import { useState, useEffect } from "react";
+import "./IntegrationsModal.css";
+import CloseIcon from "@mui/icons-material/Close";
+import PropTypes from "prop-types";
 
-const waitingForComplete = 'waitingForComplete';
-const connectionSuccess = 'connectionSuccess';
-const connectionFailure = 'connectionFailure';
+const waitingForComplete = "waitingForComplete";
+const connectionSuccess = "connectionSuccess";
+const connectionFailure = "connectionFailure";
 
 const IntegrationsModal = (props) => {
   const [enabledIntegrations, setEnabledIntegrations] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
   const [selectedIntegration, setSelectedIntegration] = useState(null);
-  const [connectionState, setConnectionState] = useState('');
+  const [connectionState, setConnectionState] = useState("");
   const [ignoreErrorBefore, setIgnoreErrorBefore] = useState(new Date());
 
   useEffect(() => {
@@ -22,7 +23,7 @@ const IntegrationsModal = (props) => {
       .then((data) => {
         setEnabledIntegrations(data);
       })
-      .catch(() => setErrorMessage('Integrations are not available.'));
+      .catch(() => setErrorMessage("Integrations are not available."));
   }, []);
 
   const onPlatformSubmit = () => {
@@ -31,9 +32,9 @@ const IntegrationsModal = (props) => {
       linkService
         .postConnection(props.userId, selectedIntegration.key)
         .then((data) => {
-          window.open(data.linkUrl, '_blank');
+          window.open(data.linkUrl, "_blank");
         })
-        .catch(() => setErrorMessage('Could not add a connection.'));
+        .catch(() => setErrorMessage("Could not add a connection."));
     }
   };
 
@@ -47,7 +48,7 @@ const IntegrationsModal = (props) => {
           );
 
           // Check if the selectedIntegration has changed to Linked
-          if (matchingConnection?.status === 'Linked') {
+          if (matchingConnection?.status === "Linked") {
             // If it has, set connectionState to connectionSuccess
             setConnectionState(connectionSuccess);
             clearInterval(interval);
@@ -56,7 +57,7 @@ const IntegrationsModal = (props) => {
           //   If so, set the connection state to connectionError
           //   Get the error message from the data connection error
           //   And display to user, change button text to 'Error'
-          const firstError = matchingConnection?.dataConnectionErrors?.[0]
+          const firstError = matchingConnection?.dataConnectionErrors?.[0];
           if (firstError) {
             const errorTimestamp = new Date(firstError.erroredOnUtc);
 
@@ -84,8 +85,8 @@ const IntegrationsModal = (props) => {
     setErrorMessage(null);
     setSelectedIntegration(null);
     setIgnoreErrorBefore(new Date());
-    setConnectionState('');
-  }
+    setConnectionState("");
+  };
 
   return (
     <Modal open={props.isModalOpen} onClose={props.handleModalToggle}>
@@ -104,8 +105,10 @@ const IntegrationsModal = (props) => {
         </Typography>
         {errorMessage ? (
           <>
-          <Typography>🙁{errorMessage}</Typography>
-          <Button variant="contained" size="large" onClick={onTryAgainClick}>Try again</Button>
+            <Typography>🙁{errorMessage}</Typography>
+            <Button variant="contained" size="large" onClick={onTryAgainClick}>
+              Try again
+            </Button>
           </>
         ) : (
           <>
@@ -116,27 +119,34 @@ const IntegrationsModal = (props) => {
             />
             <Button variant="contained" size="large" onClick={onPlatformSubmit}>
               {connectionState === waitingForComplete
-                ? 'Waiting...'
+                ? "Waiting..."
                 : connectionState === connectionSuccess
-                ? 'Success!'
+                ? "Success!"
                 : connectionState === connectionFailure
-                ? 'Error'
-                : 'Confirm'}
+                ? "Error"
+                : "Confirm"}
             </Button>
             <Typography variant="body2">
               {connectionState === waitingForComplete
-                ? 'A new window will open. Please follow the instructions to link your accounting package.'
+                ? "A new window will open. Please follow the instructions to link your accounting package."
                 : connectionState === connectionSuccess
-                ? 'Great job! Thanks for your accounting data 😎'
+                ? "Great job! Thanks for your accounting data 😎"
                 : connectionState === connectionFailure
-                ? ''
-                : 'By clicking this button, you will be redirected to your accounting platform to authorize the connection.'}
+                ? ""
+                : "By clicking this button, you will be redirected to your accounting platform to authorize the connection."}
             </Typography>
           </>
         )}
       </Box>
     </Modal>
   );
+};
+
+IntegrationsModal.propTypes = {
+  userId: PropTypes.string.isRequired,
+  onConnectionLinked: PropTypes.func.isRequired,
+  isModalOpen: PropTypes.bool.isRequired,
+  handleModalToggle: PropTypes.func.isRequired,
 };
 
 export default IntegrationsModal;

@@ -1,10 +1,9 @@
-import './Header.css';
-import { Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import { routes } from '../../routes';
-import CompanyLogo from '../CompanyLogo/CompanyLogo';
-import { useContext } from 'react';
-import { LinkContext } from '../../App';
+import "./Header.css";
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { routes } from "../../routes";
+import CompanyLogo from "../CompanyLogo/CompanyLogo";
+import PropTypes from "prop-types";
 
 const Header = (props) => {
   const navigate = useNavigate();
@@ -15,7 +14,7 @@ const Header = (props) => {
   };
 
   const goToHome = () => {
-    const search = userId ? `?userId=${userId}` : '';
+    const search = userId ? `?userId=${userId}` : "";
     navigate({ pathname: routes.home, search });
   };
 
@@ -25,6 +24,10 @@ const Header = (props) => {
       {userId && <Button onClick={goToProfile}>My profile</Button>}
     </header>
   );
+};
+
+Header.propTypes = {
+  userId: PropTypes.string,
 };
 
 export default Header;
