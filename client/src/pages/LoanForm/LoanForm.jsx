@@ -16,6 +16,7 @@ import "./LoanForm.css";
 import { linkService } from "../../link-service";
 import { LinkContext } from "../../App";
 import { useNavigate, useParams } from "react-router-dom";
+import PropTypes from "prop-types";
 
 //Components
 import Header from "../../components/Header/Header";
@@ -277,6 +278,10 @@ const LoanForm = (props) => {
       />
     </>
   );
+};
+
+LoanForm.propTypes = {
+  setUserDetails: PropTypes.func.isRequired,
 };
 
 export default LoanForm;
