@@ -1,6 +1,6 @@
-# Link Demo Application
+# Codat Auth Flow Demo
 
-This is an app that demonstrates the potential implementation of the Codat Link product. A deployed version of this app can be seen [here](https://codat-dev-link-demo.azurewebsites.net/home).
+This app demonstrates a simple implementation of a Codat [auth flow](https://docs.codat.io/docs/auth-flow), enabling your customers to connect their financial accounts. You can experience the demo [here](https://codat-dev-link-demo.azurewebsites.net/home).
 
 This app is an example of how to integrate to the Codat APIs. It should not be run in a production environment.
 
