@@ -1,23 +1,34 @@
 # Codat Auth Flow Demo
 
-This app demonstrates a simple implementation of a Codat [auth flow](https://docs.codat.io/docs/auth-flow), enabling your customers to connect their financial accounts. You can experience the demo [here](https://codat-dev-link-demo.azurewebsites.net/home).
+This project is a simple implementation of a Codat [auth flow](https://docs.codat.io/docs/auth-flow), enabling your customers to connect their financial accounts. You can experience the demo [here](https://codat-dev-link-demo.azurewebsites.net/home).
 
-This app is an example of how to integrate to the Codat APIs. It should not be run in a production environment.
+Note: _This app is for demonstrative purposes only, and should not be used in a production environment._
 
-Signing up in the app will create a new user account with data stored locally in the bin folder of the server app. When logging into the UI, the `userId` for the account will be stored in local storage indefinitely, but won't keep the user logged in.
+## The demo
 
-**What has been implemented:**
-* Basic UI pages:
-  * Home page
-  * User dashboard that shows user's data connections to Codat
-  * Loan application page
-  * Platform selection modal window
-* Authentication based on a user ID (no password)
-* Mock backend storage system
-* Basic error handling
+Indicative of a digital lending onboarding experience. Blah Blah.
 
-**What hasn't been implemented:**
-* Protection of data
+## Running the project
+
+### Prerequisites
+* Set up a Codat account if you don't have one already. See [Codat's documentation](https://docs.codat.io/docs/your-first-call-to-the-api-using-api-explorer#find-your-api-key) for how to sign up for a free trial.
+* Make sure you have a recent LTS version of `Node.js` installed.
+* After the linking process is complete, the user should be redirected back to the Link demo app. Set up the redirect URL to `https://localhost:3000/redirect` To set up the redirect URL, follow the instructions in [Codat's documentation on Redirect URLs](https://docs.codat.io/docs/redirect-urls).
+
+### Installation
+1. Get your Codat client API key. See [here](https://docs.codat.io/docs/your-first-call-to-the-api-using-api-explorer#find-your-api-key) for how to get your API key.
+2. Install NPM packages:
+   ```sh
+   npm install
+   ```
+4. Rename the `.env.template` file in the `server` directory to `.env`
+3. Replace the following in the newly created `.env` file in the `server` directory
+   - `{{CODAT_API_KEY}}` with your Codat client API key
+4. Start the app. This will run the app in a watch build mode.
+   ```sh
+   npm start
+   ```
+5. Navigate to http://localhost:3000
 
 ## Built with:
 
@@ -35,25 +46,3 @@ Server:
 * [nodemon](https://www.npmjs.com/package/nodemon)
 * [node-localstorage](https://www.npmjs.com/package/node-localstorage)
   >`node-localstorage` is used to mock out a proper data store system. Merchant data is stored locally. If deployed to a cloud environment, this will be wiped with each new release.
-
-
-
-## Prerequisites
-* Set up a Codat account if you don't have one already. See [Codat's documentation](https://docs.codat.io/docs/your-first-call-to-the-api-using-api-explorer#find-your-api-key) for how to sign up for a free trial.
-* Make sure you have a recent LTS version of `Node.js` installed.
-* After the linking process is complete, the user should be redirected back to the Link demo app. Set up the redirect URL to `https://localhost:3000/redirect` To set up the redirect URL, follow the instructions in [Codat's documentation on Redirect URLs](https://docs.codat.io/docs/redirect-urls).
-
-## Installation
-1. Get your Codat client API key. See [here](https://docs.codat.io/docs/your-first-call-to-the-api-using-api-explorer#find-your-api-key) for how to get your API key.
-2. Install NPM packages:
-   ```sh
-   npm install
-   ```
-4. Rename the `.env.template` file in the `server` directory to `.env`
-3. Replace the following in the newly created `.env` file in the `server` directory
-   - `{{CODAT_API_KEY}}` with your Codat client API key
-4. Start the app. This will run the app in a watch build mode.
-   ```sh
-   npm start
-   ```
-5. Navigate to http://localhost:3000
