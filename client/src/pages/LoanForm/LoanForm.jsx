@@ -34,6 +34,9 @@ const LoanForm = (props) => {
   const [activeConnectionsAvailable, setActiveConnectionsAvailable] =
     useState(false);
   const [empStatus, setEmpStatus] = useState("");
+  const [profitStatus, setProfitStatus] = useState("");
+  const [homeownerStatus, setHomeownerStatus] = useState("");
+  const [mainBank, setMainBank] = useState("");
   const [loanSum, setLoanSum] = useState(10000);
   const sliderValue = loanSum / 1000;
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -50,6 +53,18 @@ const LoanForm = (props) => {
 
   const handleEmpSelection = (event) => {
     setEmpStatus(event.target.value);
+  };
+
+  const handleProfitStatusChange = (event) => {
+    setProfitStatus(event.target.value);
+  };
+
+  const handleHomeownerStatusChange = (event) => {
+    setHomeownerStatus(event.target.value);
+  };
+
+  const handleMainBankChange = (event) => {
+    setMainBank(event.target.value);
   };
 
   const handleUserDetailsChange = (event) => {
@@ -98,6 +113,12 @@ const LoanForm = (props) => {
   ];
 
   const sectorOptions = ["Finance", "Health"];
+  const bankOptions = [
+    "HSBC",
+    "Barclays",
+    "Lloyds Banking Group",
+    "NatWest Group",
+  ];
 
   const listItems = [
     {
@@ -177,15 +198,57 @@ const LoanForm = (props) => {
     },
     {
       key: "Did your business make a profit in the last financial year?",
-      value: <TextField label="" variant="outlined" />,
+      value: (
+        <FormControl variant="outlined">
+          <InputLabel id="profit-label">Select option</InputLabel>
+          <Select
+            labelId="profit-label"
+            value={profitStatus}
+            onChange={handleProfitStatusChange}
+            label="Select option"
+          >
+            <MenuItem value={"had-profit"}>Yes</MenuItem>
+            <MenuItem value={"no-profit"}>No</MenuItem>
+          </Select>
+        </FormControl>
+      ),
     },
     {
       key: "Are you a homeowner?",
-      value: <TextField label="" variant="outlined" />,
+      value: (
+        <FormControl variant="outlined">
+          <InputLabel id="homeowner-label">Select option</InputLabel>
+          <Select
+            labelId="homeowner-label"
+            value={homeownerStatus}
+            onChange={handleHomeownerStatusChange}
+            label="Select option"
+          >
+            <MenuItem value={"is-homeowner"}>Yes</MenuItem>
+            <MenuItem value={"isnt-homeowner"}>No</MenuItem>
+          </Select>
+        </FormControl>
+      ),
     },
     {
       key: "Which is your main bank?",
-      value: <TextField label="" variant="outlined" />,
+      value: (
+        <FormControl variant="outlined">
+          <InputLabel id="bank-label">Select bank</InputLabel>
+          <Select
+            labelId="bank-label"
+            value={mainBank}
+            onChange={handleMainBankChange}
+            label="Select bank"
+          >
+            {bankOptions.map((bankOption) => (
+              <MenuItem key={bankOption} value={bankOption}>
+                {bankOption}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      ),
     },
   ];
 
