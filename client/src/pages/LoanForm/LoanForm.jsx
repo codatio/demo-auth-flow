@@ -20,9 +20,55 @@ import PropTypes from "prop-types";
 
 import Header from "../../components/Header/Header";
 import FormColumns from "../../components/FormColumns/FormColumns";
-import IntegrationsModal from "../../components/IntegrationsModal/IntegrationsModal";
+//import IntegrationsModal from "../../components/IntegrationsModal/IntegrationsModal";
 import SectionWrapper from "../../components/SectionWrapper/SectionWrapper";
 import CompanyConnections from "../../components/CompanyConnections/CompanyConnections";
+
+import { CodatLink } from '@codat/link-sdk';
+import '../../../node_modules/@codat/link-sdk/index.css';
+
+const marks = [
+  {
+    value: 10,
+    label: "£10000",
+  },
+  {
+    value: 50,
+    label: "£50000",
+  },
+  {
+    value: 100,
+    label: "£100000",
+  },
+];
+
+const sectorOptions = [
+    "Advertising",
+    "Agriculture",
+    "Automotive",
+    "eCommerce",
+    "Education",
+    "Engineering",
+    "Finance",
+    "Food and Beverages",
+    "Healthcare",
+    "Recruitment",
+    "Retail",
+    "Sport",
+    "Technology",
+  ];
+
+  const bankOptions = [
+    "Atom",
+    "Barclays",
+    "HSBC",
+    "Lloyds",
+    "Monzo",
+    "Metro Bank",
+    "NatWest Group",
+    "Santander",
+    "Starling",
+  ];
 
 const LoanForm = (props) => {
   const { userDetails } = useContext(LinkContext);
@@ -39,7 +85,24 @@ const LoanForm = (props) => {
   const [mainBank, setMainBank] = useState("");
   const [loanSum, setLoanSum] = useState(10000);
   const sliderValue = loanSum / 1000;
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const [connections, setConnections] = useState([])
+  //const [companyId, setCompanyId] = useState('')
+  // 72f36c8e-997e-48a9-9515-de668a9330d1
+
+  // const startConnecting = () => {
+  //   if(companyId === '') {
+  //     alert('Add a valid company ID')
+  //   } else {
+  //     setModalOpen(true)
+  //   }
+  // }
+
+  const reset = () => {
+    setModalOpen(false);
+    setConnections([]);
+  }
 
   const navigate = useNavigate();
 
@@ -48,7 +111,7 @@ const LoanForm = (props) => {
   };
 
   const handleModalToggle = () => {
-    setIsModalOpen(!isModalOpen);
+    setModalOpen(!modalOpen);
   };
 
   const handleUserDetailsChange = (event) => {
@@ -80,49 +143,6 @@ const LoanForm = (props) => {
   const onConnectionLinked = () => {
     refreshActiveConnections();
   };
-
-  const marks = [
-    {
-      value: 10,
-      label: "£10000",
-    },
-    {
-      value: 50,
-      label: "£50000",
-    },
-    {
-      value: 100,
-      label: "£100000",
-    },
-  ];
-
-  const sectorOptions = [
-    "Advertising",
-    "Agriculture",
-    "Automotive",
-    "eCommerce",
-    "Education",
-    "Engineering",
-    "Finance",
-    "Food and Beverages",
-    "Healthcare",
-    "Recruitment",
-    "Retail",
-    "Sport",
-    "Technology",
-  ];
-
-  const bankOptions = [
-    "Atom",
-    "Barclays",
-    "HSBC",
-    "Lloyds",
-    "Monzo",
-    "Metro Bank",
-    "NatWest Group",
-    "Santander",
-    "Starling",
-  ];
 
   const companyQuestions = [
     {
@@ -372,12 +392,38 @@ const LoanForm = (props) => {
           Submit application
         </Button>
       </div>
-      <IntegrationsModal
-        isModalOpen={isModalOpen}
-        handleModalToggle={handleModalToggle}
-        userId={userId}
-        onConnectionLinked={onConnectionLinked}
-      />
+
+      {
+        open && <div className="Modal">
+            <CodatLink
+              companyId={userId}
+              onSuccess={(newConnectionId) => {
+                setConnections([...connections, newConnectionId.connectionId]);
+                onConnectionLinked()
+              }}
+              onClose={() => reset()}
+              onError={(error) => {
+                handleModalToggle();
+                alert(error);
+              }}
+            />
+          </div>
+      }
+
+       <h3>Connection IDs</h3>
+
+      {
+        connections.length >= 1
+        ? connections.map((id, i)=><div key={i}>{id}</div>)
+        : <div>No connections</div>
+      }
+
+      {/* <IntegrationsModal */}
+      {/*   isModalOpen={modalOpen} */}
+      {/*   handleModalToggle={handleModalToggle} */}
+      {/*   userId={userId} */}
+      {/*   onConnectionLinked={onConnectionLinked} */}
+      {/* /> */}
     </>
   );
 };
