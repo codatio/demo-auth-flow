@@ -21,7 +21,7 @@ Indicative of a digital lending onboarding experience. Blah Blah.
    ```sh
    npm install
    ```
-4. Rename the `.env.template` file in the `server` directory to `.env`
+4. Copy the `.env.template` file in the `server` directory and rename it `.env`
 3. Replace the following in the newly created `.env` file in the `server` directory
    - `{{CODAT_API_KEY}}` with your Codat client API key
 4. Start the app. This will run the app in a watch build mode.
@@ -32,12 +32,12 @@ Indicative of a digital lending onboarding experience. Blah Blah.
 
 ## Built with:
 
-UI:
+### UI
 * [React.js](https://reactjs.org/)
 * [Create React App](https://create-react-app.dev/) to bootstrap the UI
 * [Material UI](https://mui.com/)
 
-Server:
+### Server
 * [Express.js](https://expressjs.com/)
 * [Concurrently](https://www.npmjs.com/package/concurrently)
 

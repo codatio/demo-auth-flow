@@ -5,7 +5,7 @@ const apiKey = config.apiKey;
 const codatBaseUrl = config.codatBaseUrl;
 
 if (!apiKey) {
-  throw new Error("You must have your Codat api key set as the environment variable CODAT_API_KEY");
+  throw new Error("You must have your Codat API key set as the environment variable CODAT_API_KEY");
 }
 
 if (!codatBaseUrl) {
