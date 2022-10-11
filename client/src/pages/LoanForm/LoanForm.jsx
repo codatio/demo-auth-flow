@@ -18,7 +18,6 @@ import { LinkContext } from "../../App";
 import { useNavigate, useParams } from "react-router-dom";
 import PropTypes from "prop-types";
 
-//Components
 import Header from "../../components/Header/Header";
 import FormColumns from "../../components/FormColumns/FormColumns";
 import IntegrationsModal from "../../components/IntegrationsModal/IntegrationsModal";
@@ -32,6 +31,8 @@ const LoanForm = (props) => {
 
   const [activeConnectionsAvailable, setActiveConnectionsAvailable] =
   useState(false);
+
+  const [companyName, setCompanyName] = useState("");
   const [commercialSale, setCommercialSale] = useState("");
   const [profitStatus, setProfitStatus] = useState("");
   const [homeownerStatus, setHomeownerStatus] = useState("");
@@ -133,8 +134,8 @@ const LoanForm = (props) => {
           label="Company name"
           required
           variant="outlined"
-          onChange={handleUserDetailsChange}
-          value={userDetails.name}
+          onChange={(event) => {setCompanyName(event.target.value)}}
+          value={companyName}
         />
       ),
     },
@@ -338,6 +339,10 @@ const LoanForm = (props) => {
         </SectionWrapper>
 
         <SectionWrapper title="Share your financial data">
+          <Typography variant="body1">
+            Share your accounting data so we can verify the information above.
+          </Typography>
+
           {activeConnectionsAvailable ? (
             <CompanyConnections userId={userId} />
           ) : (

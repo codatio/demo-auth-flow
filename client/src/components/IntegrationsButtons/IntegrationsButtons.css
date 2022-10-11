@@ -3,6 +3,8 @@
   gap: 1rem;
   flex-wrap: wrap;
   justify-content: left;
+  max-height: 50vh;
+  overflow-y: scroll;
 }
 
 .integration-button {
@@ -10,10 +12,13 @@
   border: 1px solid !important;
   max-height: 5rem;
   max-width: 9rem;
+  margin: 0 !important;
 }
 
 .integration-button img {
   height: 100%;
+  width: 100%;
+  object-fit: contain;
 }
 
 .integration-button--active {

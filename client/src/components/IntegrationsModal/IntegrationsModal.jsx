@@ -10,7 +10,12 @@ const waitingForComplete = "waitingForComplete";
 const connectionSuccess = "connectionSuccess";
 const connectionFailure = "connectionFailure";
 
-const IntegrationsModal = (props) => {
+const IntegrationsModal = ({
+  isModalOpen,
+  handleModalToggle,
+  userId,
+  onConnectionLinked,
+}) => {
   const [enabledIntegrations, setEnabledIntegrations] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
   const [selectedIntegration, setSelectedIntegration] = useState(null);
@@ -27,10 +32,14 @@ const IntegrationsModal = (props) => {
   }, []);
 
   const onPlatformSubmit = () => {
+    if (connectionState === connectionSuccess) {
+      handleModalToggle()
+    }
+
     if (selectedIntegration && !connectionState) {
       setConnectionState(waitingForComplete);
       linkService
-        .postConnection(props.userId, selectedIntegration.key)
+        .postConnection(userId, selectedIntegration.key)
         .then((data) => {
           window.open(data.linkUrl, "_blank");
         })
@@ -42,7 +51,7 @@ const IntegrationsModal = (props) => {
     if (connectionState === waitingForComplete) {
       const interval = setInterval(() => {
         // Call the getDataConnections endpoint
-        linkService.connections(props.userId).then((connections) => {
+        linkService.connections(userId).then((connections) => {
           const matchingConnection = connections.find(
             (c) => c.sourceId === selectedIntegration.sourceId
           );
@@ -71,7 +80,7 @@ const IntegrationsModal = (props) => {
         // If it has not completed, try again in 5 seconds
       }, 5000);
     } else if (connectionState === connectionSuccess) {
-      props.onConnectionLinked();
+      onConnectionLinked();
     }
   }, [connectionState]);
 
@@ -89,10 +98,10 @@ const IntegrationsModal = (props) => {
   };
 
   return (
-    <Modal open={props.isModalOpen} onClose={props.handleModalToggle}>
+    <Modal open={isModalOpen} onClose={handleModalToggle}>
       <Box className="integrations-modal-wrapper">
         <div className="close-icon">
-          <IconButton onClick={props.handleModalToggle}>
+          <IconButton onClick={handleModalToggle}>
             <CloseIcon />
           </IconButton>
         </div>
@@ -103,6 +112,7 @@ const IntegrationsModal = (props) => {
         >
           Select your integration
         </Typography>
+
         {errorMessage ? (
           <>
             <Typography>{errorMessage}</Typography>
@@ -121,7 +131,7 @@ const IntegrationsModal = (props) => {
               {connectionState === waitingForComplete
                 ? "Waiting..."
                 : connectionState === connectionSuccess
-                ? "Success!"
+                ? "Done"
                 : connectionState === connectionFailure
                 ? "Error"
                 : "Confirm"}
@@ -130,7 +140,7 @@ const IntegrationsModal = (props) => {
               {connectionState === waitingForComplete
                 ? "A new window will open. Please follow the instructions to link your accounting package."
                 : connectionState === connectionSuccess
-                ? "Great job! Thanks for your accounting data 😎"
+                ? "Thank you for sharing your accounting data."
                 : connectionState === connectionFailure
                 ? ""
                 : "By clicking this button, you will be redirected to your accounting platform to authorize the connection."}

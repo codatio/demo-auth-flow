@@ -4,31 +4,35 @@ import PropTypes from "prop-types";
 
 import FlexColumns from "../FlexColumns/FlexColumns";
 
-const ConnectionDisplay = (props) => {
-  const title = props.connectionObject.platformName;
+const ConnectionDisplay = ({connectionObject, backgroundActive}) => {
   const listItems = [
     {
-      key: "Status",
+      key: "Data source",
       value: (
-        <Typography variant="body1">{props.connectionObject.status}</Typography>
+        <Typography variant="body1">{connectionObject.platformName}</Typography>
       ),
     },
     {
-      key: "Source type",
+      key: "Data category",
       value: (
         <Typography variant="body1">
-          {props.connectionObject.sourceType}
+          {connectionObject.sourceType}
         </Typography>
+      ),
+    },
+    {
+      key: "Connection status",
+      value: (
+        <Typography variant="body1">{connectionObject.status}</Typography>
       ),
     },
   ];
 
   return (
     <Fragment>
-      <Typography variant="h5">{title}</Typography>
       <FlexColumns
         listItems={listItems}
-        backgroundActive={props.backgroundActive}
+        backgroundActive={backgroundActive}
       />
     </Fragment>
   );

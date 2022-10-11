@@ -2,9 +2,7 @@ import { Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { linkService } from "../../link-service";
 
-//Components
 import ConnectionDisplay from "../ConnectionDisplay/ConnectionDisplay";
-import SectionWrapper from "../SectionWrapper/SectionWrapper";
 import PropTypes from "prop-types";
 
 const CompanyConnections = (props) => {
@@ -24,9 +22,9 @@ const CompanyConnections = (props) => {
   }, []);
 
   return (
-    <SectionWrapper title="Company connections">
+    <>
       {errorMessage ? (
-        <Typography>🙁{errorMessage}</Typography>
+        <Typography>Error: {errorMessage}</Typography>
       ) : companyConnections.length > 0 ? (
         companyConnections.map((companyConnection) => (
           <ConnectionDisplay
@@ -37,10 +35,10 @@ const CompanyConnections = (props) => {
         ))
       ) : (
         <div>
-          <Typography>❌Connections not found!</Typography>
+          <Typography>No connections found</Typography>
         </div>
       )}
-    </SectionWrapper>
+    </>
   );
 };
 
