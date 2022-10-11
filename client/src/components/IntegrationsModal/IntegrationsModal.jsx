@@ -105,7 +105,7 @@ const IntegrationsModal = (props) => {
         </Typography>
         {errorMessage ? (
           <>
-            <Typography>🙁{errorMessage}</Typography>
+            <Typography>{errorMessage}</Typography>
             <Button variant="contained" size="large" onClick={onTryAgainClick}>
               Try again
             </Button>

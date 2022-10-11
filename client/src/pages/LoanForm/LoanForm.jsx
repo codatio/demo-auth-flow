@@ -30,10 +30,9 @@ const LoanForm = (props) => {
   const params = useParams();
   const userId = params["userId"];
 
-  //States
   const [activeConnectionsAvailable, setActiveConnectionsAvailable] =
-    useState(false);
-  const [empStatus, setEmpStatus] = useState("");
+  useState(false);
+  const [commercialSale, setCommercialSale] = useState("");
   const [profitStatus, setProfitStatus] = useState("");
   const [homeownerStatus, setHomeownerStatus] = useState("");
   const [mainBank, setMainBank] = useState("");
@@ -49,22 +48,6 @@ const LoanForm = (props) => {
 
   const handleModalToggle = () => {
     setIsModalOpen(!isModalOpen);
-  };
-
-  const handleEmpSelection = (event) => {
-    setEmpStatus(event.target.value);
-  };
-
-  const handleProfitStatusChange = (event) => {
-    setProfitStatus(event.target.value);
-  };
-
-  const handleHomeownerStatusChange = (event) => {
-    setHomeownerStatus(event.target.value);
-  };
-
-  const handleMainBankChange = (event) => {
-    setMainBank(event.target.value);
   };
 
   const handleUserDetailsChange = (event) => {
@@ -112,22 +95,148 @@ const LoanForm = (props) => {
     },
   ];
 
-  const sectorOptions = ["Finance", "Health"];
-  const bankOptions = [
-    "HSBC",
-    "Barclays",
-    "Lloyds Banking Group",
-    "NatWest Group",
+  const sectorOptions = [
+    "Advertising",
+    "Agriculture",
+    "Automotive",
+    "eCommerce",
+    "Education",
+    "Engineering",
+    "Finance",
+    "Food and Beverages",
+    "Healthcare",
+    "Recruitment",
+    "Retail",
+    "Sport",
+    "Technology",
   ];
 
-  const listItems = [
+  const bankOptions = [
+    "Atom",
+    "Barclays",
+    "HSBC",
+    "Lloyds",
+    "Monzo",
+    "Metro Bank",
+    "NatWest Group",
+    "Santander",
+    "Starling",
+  ];
+
+  const companyQuestions = [
     {
-      key: "Name:",
+      key: "Company name:",
+      value: (
+        <TextField
+          className="company-name-field"
+          name="company-name"
+          label="Company name"
+          required
+          variant="outlined"
+          onChange={handleUserDetailsChange}
+          value={userDetails.name}
+        />
+      ),
+    },
+    {
+      key: "Which sector(s) do you operate in?",
+      value: (
+        <Autocomplete
+          className="form-value-dropdown"
+          multiple
+          options={sectorOptions}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              variant="outlined"
+              label="Select sector"
+              placeholder="Sector(s)"
+            />
+          )}
+          label="Select sector(s)"
+        />
+      ),
+    },
+    {
+      key: "Which is your main bank?",
+      value: (
+        <FormControl variant="outlined">
+          <InputLabel id="bank-label">Select bank</InputLabel>
+          <Select
+            labelId="bank-label"
+            value={mainBank}
+            onChange={(event) => {setMainBank(event.target.value)}}
+            label="Select bank"
+          >
+            {bankOptions.map((bankOption) => (
+              <MenuItem key={bankOption} value={bankOption}>
+                {bankOption}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      ),
+    },
+    {
+      key: "How long ago did you make your first commercial sale?:",
+      value: (
+        <FormControl className="employment-status-field" variant="outlined">
+          <InputLabel id="employment-status-label">
+            How long ago did you make your first commercial sale?
+          </InputLabel>
+          <Select
+            labelId="employment-status-label"
+            value={commercialSale}
+            onChange={(event) => {
+              setCommercialSale(event.target.value);
+            }}
+            label="How long ago did you make your first commercial sale?"
+          >
+            <MenuItem value={"6months"}>0 - 6 months</MenuItem>
+            <MenuItem value={"12months"}>6 months - 1 year</MenuItem>
+            <MenuItem value={"24months"}>1 - 2 years</MenuItem>
+            <MenuItem value={"60months"}>2 - 5 years</MenuItem>
+            <MenuItem value={"120months"}>5 - 10 years</MenuItem>
+            <MenuItem value={"121months"}>10+ years</MenuItem>
+          </Select>
+        </FormControl>
+      ),
+    },
+    {
+      key: "What was your turnover in the last financial year?",
+      value: <TextField label="" variant="outlined" />,
+    },
+    {
+      key: "What was your ARR (annual recurring revenue)?",
+      value: <TextField label="" variant="outlined" />,
+    },
+    {
+      key: "Did your business make a profit in the last financial year?",
+      value: (
+        <FormControl variant="outlined">
+          <InputLabel id="profit-label">Select option</InputLabel>
+          <Select
+            labelId="profit-label"
+            value={profitStatus}
+            onChange={(event) => {setProfitStatus(event.target.value)}}
+            label="Select option"
+          >
+            <MenuItem value={"had-profit"}>Yes</MenuItem>
+            <MenuItem value={"no-profit"}>No</MenuItem>
+          </Select>
+        </FormControl>
+      ),
+    },
+  ];
+
+  const applicantQuestions = [
+    {
+      key: "Your name:",
       value: (
         <TextField
           className="name-field"
           name="name"
-          label="Name"
+          label="Your name"
           required
           variant="outlined"
           onChange={handleUserDetailsChange}
@@ -151,69 +260,6 @@ const LoanForm = (props) => {
       ),
     },
     {
-      key: "Employment status:",
-      value: (
-        <FormControl className="employment-status-field" variant="outlined">
-          <InputLabel id="employment-status-label">
-            Employment status
-          </InputLabel>
-          <Select
-            labelId="employment-status-label"
-            value={empStatus}
-            onChange={handleEmpSelection}
-            label="Employment status"
-          >
-            <MenuItem value={"employed"}>Employed</MenuItem>
-            <MenuItem value={"unemployed"}>Unemployed</MenuItem>
-          </Select>
-        </FormControl>
-      ),
-    },
-    {
-      key: "Which sector(s) do you operate in?",
-      value: (
-        <Autocomplete
-          className="form-value-dropdown"
-          multiple
-          options={sectorOptions}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              variant="outlined"
-              label="Select sector"
-              placeholder="Sector(s)"
-            />
-          )}
-          label="Select sector(s)"
-        />
-      ),
-    },
-    {
-      key: "What was your turnover in the last financial year?",
-      value: <TextField label="" variant="outlined" />,
-    },
-    {
-      key: "What was your monthly recurring revenue?",
-      value: <TextField label="" variant="outlined" />,
-    },
-    {
-      key: "Did your business make a profit in the last financial year?",
-      value: (
-        <FormControl variant="outlined">
-          <InputLabel id="profit-label">Select option</InputLabel>
-          <Select
-            labelId="profit-label"
-            value={profitStatus}
-            onChange={handleProfitStatusChange}
-            label="Select option"
-          >
-            <MenuItem value={"had-profit"}>Yes</MenuItem>
-            <MenuItem value={"no-profit"}>No</MenuItem>
-          </Select>
-        </FormControl>
-      ),
-    },
-    {
       key: "Are you a homeowner?",
       value: (
         <FormControl variant="outlined">
@@ -221,31 +267,11 @@ const LoanForm = (props) => {
           <Select
             labelId="homeowner-label"
             value={homeownerStatus}
-            onChange={handleHomeownerStatusChange}
+            onChange={(event) => {setHomeownerStatus(event.target.value)}}
             label="Select option"
           >
             <MenuItem value={"is-homeowner"}>Yes</MenuItem>
             <MenuItem value={"isnt-homeowner"}>No</MenuItem>
-          </Select>
-        </FormControl>
-      ),
-    },
-    {
-      key: "Which is your main bank?",
-      value: (
-        <FormControl variant="outlined">
-          <InputLabel id="bank-label">Select bank</InputLabel>
-          <Select
-            labelId="bank-label"
-            value={mainBank}
-            onChange={handleMainBankChange}
-            label="Select bank"
-          >
-            {bankOptions.map((bankOption) => (
-              <MenuItem key={bankOption} value={bankOption}>
-                {bankOption}
-              </MenuItem>
-            ))}
           </Select>
         </FormControl>
       ),
@@ -263,17 +289,15 @@ const LoanForm = (props) => {
             or pay your creditors directly.
           </Typography>
         </SectionWrapper>
-        <SectionWrapper title="Funding requirements">
-          <FormColumns listItems={listItems} />
-        </SectionWrapper>
-        <SectionWrapper title="Loan details">
+
+        <SectionWrapper title="How much credit do you need?">
           <div className="loan-amount-input">
             <Typography
               variant="body1"
               gutterBottom
               className="loan-amount-label"
             >
-              <span className="bold-text">Loan amount:</span>
+              <span className="bold-text">Requested amount:</span>
             </Typography>
             <Typography variant="body1">£</Typography>
             <Input
@@ -305,23 +329,33 @@ const LoanForm = (props) => {
           </div>
         </SectionWrapper>
 
-        {activeConnectionsAvailable ? (
-          <CompanyConnections userId={userId} />
-        ) : (
-          <div className="connection-prompt-wrapper">
-            <Typography variant="body1">
-              If you connect your accounting platform, we will be able to
-              approve your loan faster.
-            </Typography>
-            <Button
-              variant="outlined"
-              color="primary"
-              onClick={handleModalToggle}
-            >
-              Connect
-            </Button>
-          </div>
-        )}
+        <SectionWrapper title="About your company">
+          <FormColumns listItems={companyQuestions} />
+        </SectionWrapper>
+
+        <SectionWrapper title="About you">
+          <FormColumns listItems={applicantQuestions} />
+        </SectionWrapper>
+
+        <SectionWrapper title="Share your financial data">
+          {activeConnectionsAvailable ? (
+            <CompanyConnections userId={userId} />
+          ) : (
+            <div className="connection-prompt-wrapper">
+              <Typography variant="body1">
+                If you connect your accounting platform, we will be able to
+                approve your loan faster.
+              </Typography>
+              <Button
+                variant="outlined"
+                color="primary"
+                onClick={handleModalToggle}
+              >
+                Connect
+              </Button>
+            </div>
+          )}
+        </SectionWrapper>
 
         <Button
           variant="contained"
