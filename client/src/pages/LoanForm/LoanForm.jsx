@@ -43,32 +43,32 @@ const marks = [
 ];
 
 const sectorOptions = [
-    "Advertising",
-    "Agriculture",
-    "Automotive",
-    "eCommerce",
-    "Education",
-    "Engineering",
-    "Finance",
-    "Food and Beverages",
-    "Healthcare",
-    "Recruitment",
-    "Retail",
-    "Sport",
-    "Technology",
-  ];
+  "Advertising",
+  "Agriculture",
+  "Automotive",
+  "eCommerce",
+  "Education",
+  "Engineering",
+  "Finance",
+  "Food and Beverages",
+  "Healthcare",
+  "Recruitment",
+  "Retail",
+  "Sport",
+  "Technology",
+];
 
-  const bankOptions = [
-    "Atom",
-    "Barclays",
-    "HSBC",
-    "Lloyds",
-    "Monzo",
-    "Metro Bank",
-    "NatWest Group",
-    "Santander",
-    "Starling",
-  ];
+const bankOptions = [
+  "Atom",
+  "Barclays",
+  "HSBC",
+  "Lloyds",
+  "Monzo",
+  "Metro Bank",
+  "NatWest Group",
+  "Santander",
+  "Starling",
+];
 
 const LoanForm = (props) => {
   const { userDetails } = useContext(LinkContext);
