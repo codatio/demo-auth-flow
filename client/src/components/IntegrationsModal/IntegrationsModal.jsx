@@ -33,7 +33,7 @@ const IntegrationsModal = ({
 
   const onPlatformSubmit = () => {
     if (connectionState === connectionSuccess) {
-      handleModalToggle()
+      handleModalToggle();
     }
 
     if (selectedIntegration && !connectionState) {

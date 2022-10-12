@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import FlexColumns from "../FlexColumns/FlexColumns";
 
-const ConnectionDisplay = ({connectionObject, backgroundActive}) => {
+const ConnectionDisplay = ({ connectionObject, backgroundActive }) => {
   const listItems = [
     {
       key: "Data source",
@@ -15,25 +15,18 @@ const ConnectionDisplay = ({connectionObject, backgroundActive}) => {
     {
       key: "Data category",
       value: (
-        <Typography variant="body1">
-          {connectionObject.sourceType}
-        </Typography>
+        <Typography variant="body1">{connectionObject.sourceType}</Typography>
       ),
     },
     {
       key: "Connection status",
-      value: (
-        <Typography variant="body1">{connectionObject.status}</Typography>
-      ),
+      value: <Typography variant="body1">{connectionObject.status}</Typography>,
     },
   ];
 
   return (
     <Fragment>
-      <FlexColumns
-        listItems={listItems}
-        backgroundActive={backgroundActive}
-      />
+      <FlexColumns listItems={listItems} backgroundActive={backgroundActive} />
     </Fragment>
   );
 };

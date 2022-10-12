@@ -1,7 +1,7 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -10,12 +10,12 @@ body {
 
 :root {
   /*Colors*/
-  --primary: #5D9E8F;
+  --primary: #5d9e8f;
   --secondary: #edf2ff;
   --inactive: #c2c3c5;
   --light-text: #556680;
-  --backdrop: #F4F3F6;
-  
+  --backdrop: #f4f3f6;
+
   /*Layout*/
   --landing-page-wrapper: 1500px;
   --main-wrapper: 1200px;
@@ -24,5 +24,5 @@ body {
 .accent-text {
   color: var(--accent);
   font-weight: bold;
-  font-family: 'Philosopher', sans-serif;
+  font-family: "Philosopher", sans-serif;
 }

@@ -24,8 +24,8 @@ import FormColumns from "../../components/FormColumns/FormColumns";
 import SectionWrapper from "../../components/SectionWrapper/SectionWrapper";
 import CompanyConnections from "../../components/CompanyConnections/CompanyConnections";
 
-import { CodatLink } from '@codat/link-sdk';
-import '../../../node_modules/@codat/link-sdk/index.css';
+import { CodatLink } from "@codat/link-sdk";
+import "../../../node_modules/@codat/link-sdk/index.css";
 
 const marks = [
   {
@@ -76,7 +76,7 @@ const LoanForm = (props) => {
   const userId = params["userId"];
 
   const [activeConnectionsAvailable, setActiveConnectionsAvailable] =
-  useState(false);
+    useState(false);
 
   const [companyName, setCompanyName] = useState("");
   const [commercialSale, setCommercialSale] = useState("");
@@ -87,7 +87,7 @@ const LoanForm = (props) => {
   const sliderValue = loanSum / 1000;
   const [modalOpen, setModalOpen] = useState(false);
 
-  const [connections, setConnections] = useState([])
+  const [connections, setConnections] = useState([]);
   //const [companyId, setCompanyId] = useState('')
   // 72f36c8e-997e-48a9-9515-de668a9330d1
 
@@ -102,7 +102,7 @@ const LoanForm = (props) => {
   const reset = () => {
     setModalOpen(false);
     setConnections([]);
-  }
+  };
 
   const navigate = useNavigate();
 
@@ -154,7 +154,9 @@ const LoanForm = (props) => {
           label="Company name"
           required
           variant="outlined"
-          onChange={(event) => {setCompanyName(event.target.value)}}
+          onChange={(event) => {
+            setCompanyName(event.target.value);
+          }}
           value={companyName}
         />
       ),
@@ -186,7 +188,9 @@ const LoanForm = (props) => {
           <Select
             labelId="bank-label"
             value={mainBank}
-            onChange={(event) => {setMainBank(event.target.value)}}
+            onChange={(event) => {
+              setMainBank(event.target.value);
+            }}
             label="Select bank"
           >
             {bankOptions.map((bankOption) => (
@@ -239,7 +243,9 @@ const LoanForm = (props) => {
           <Select
             labelId="profit-label"
             value={profitStatus}
-            onChange={(event) => {setProfitStatus(event.target.value)}}
+            onChange={(event) => {
+              setProfitStatus(event.target.value);
+            }}
             label="Select option"
           >
             <MenuItem value={"had-profit"}>Yes</MenuItem>
@@ -288,7 +294,9 @@ const LoanForm = (props) => {
           <Select
             labelId="homeowner-label"
             value={homeownerStatus}
-            onChange={(event) => {setHomeownerStatus(event.target.value)}}
+            onChange={(event) => {
+              setHomeownerStatus(event.target.value);
+            }}
             label="Select option"
           >
             <MenuItem value={"is-homeowner"}>Yes</MenuItem>
@@ -393,30 +401,30 @@ const LoanForm = (props) => {
         </Button>
       </div>
 
-      {
-        open && <div className="Modal">
-            <CodatLink
-              companyId={userId}
-              onSuccess={(newConnectionId) => {
-                setConnections([...connections, newConnectionId.connectionId]);
-                onConnectionLinked()
-              }}
-              onClose={() => reset()}
-              onError={(error) => {
-                handleModalToggle();
-                alert(error);
-              }}
-            />
-          </div>
-      }
+      {open && (
+        <div className="Modal">
+          <CodatLink
+            companyId={userId}
+            onSuccess={(newConnectionId) => {
+              setConnections([...connections, newConnectionId.connectionId]);
+              onConnectionLinked();
+            }}
+            onClose={() => reset()}
+            onError={(error) => {
+              handleModalToggle();
+              alert(error);
+            }}
+          />
+        </div>
+      )}
 
-       <h3>Connection IDs</h3>
+      <h3>Connection IDs</h3>
 
-      {
-        connections.length >= 1
-        ? connections.map((id, i)=><div key={i}>{id}</div>)
-        : <div>No connections</div>
-      }
+      {connections.length >= 1 ? (
+        connections.map((id, i) => <div key={i}>{id}</div>)
+      ) : (
+        <div>No connections</div>
+      )}
 
       {/* <IntegrationsModal */}
       {/*   isModalOpen={modalOpen} */}
