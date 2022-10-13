@@ -1,4 +1,4 @@
-# Logs
+su# Logs
 logs
 *.log
 npm-debug.log*
@@ -19,3 +19,5 @@ node_modules/
 bin/
 
 public/
+
+.DS_Store

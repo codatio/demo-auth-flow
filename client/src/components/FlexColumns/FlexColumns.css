@@ -8,6 +8,7 @@
   min-width: 30rem;
   padding: 1rem;
   border-radius: 1rem;
+  border-radius: 4px;
 }
 
 .key-column, .value-column {

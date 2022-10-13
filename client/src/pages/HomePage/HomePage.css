@@ -5,7 +5,7 @@
 
 .home-page-wrapper {
   max-width: var(--landing-page-wrapper);
-  margin: 8rem auto 0;
+  margin: 6rem auto 0;
   padding: 2rem 2rem;
   display: grid;
   grid-template-columns: 2fr 1.5fr;
@@ -58,6 +58,7 @@
   animation: spin-counterclockwise 200s linear infinite;
   opacity: .6;
   transition-duration: .1s;
+  user-select: none;
 }
 
 .home-page-vectors-wrapper img:nth-child(2n) {

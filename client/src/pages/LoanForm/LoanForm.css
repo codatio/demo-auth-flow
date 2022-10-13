@@ -1,7 +1,7 @@
 .loan-form-content-wrapper {
   max-width: var(--main-wrapper);
   margin: 0 auto;
-  padding-top: 1.5rem;
+  padding: 3rem 1.5rem;
 }
 
 .contact-information-form {

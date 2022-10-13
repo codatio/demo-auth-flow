@@ -12,7 +12,6 @@ import { linkService } from "../../link-service";
 import { routes } from "../../routes";
 import "./HomePage.css";
 
-//Assets
 import Card from "../../assets/images/card.svg";
 import ListIcon from "../../assets/images/icons/bullet-point.svg";
 import vectors from "./vectors";
