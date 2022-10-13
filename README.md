@@ -6,7 +6,7 @@ Note: _This app is for demonstrative purposes only, and should not be used in a 
 
 ## The demo
 
-Indicative of a digital lending onboarding experience. Blah Blah.
+This demo is indicative of a where Codat might fit in to a digital lending onboarding experience. Copay is a fictional digital lender looking to gather financial data from prospective customers in order to make a credit decision.
 
 ## Running the project
 
