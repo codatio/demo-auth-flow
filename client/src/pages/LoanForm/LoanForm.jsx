@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { routes } from "../../routes";
 import {
   Typography,
@@ -13,16 +13,15 @@ import {
   Autocomplete,
 } from "@mui/material";
 import "./LoanForm.css";
-import { linkService } from "../../link-service";
 import { LinkContext } from "../../App";
+import { linkService } from "../../link-service";
 import { useNavigate, useParams } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import Header from "../../components/Header/Header";
 import FormColumns from "../../components/FormColumns/FormColumns";
-//import IntegrationsModal from "../../components/IntegrationsModal/IntegrationsModal";
 import SectionWrapper from "../../components/SectionWrapper/SectionWrapper";
-import CompanyConnections from "../../components/CompanyConnections/CompanyConnections";
+// import CompanyConnections from "../../components/CompanyConnections/CompanyConnections";
 
 import { CodatLink } from "@codat/link-sdk";
 import "../../../node_modules/@codat/link-sdk/index.css";
@@ -75,9 +74,6 @@ const LoanForm = (props) => {
   const params = useParams();
   const userId = params["userId"];
 
-  const [activeConnectionsAvailable, setActiveConnectionsAvailable] =
-    useState(false);
-
   const [companyName, setCompanyName] = useState("");
   const [commercialSale, setCommercialSale] = useState("");
   const [profitStatus, setProfitStatus] = useState("");
@@ -85,19 +81,12 @@ const LoanForm = (props) => {
   const [mainBank, setMainBank] = useState("");
   const [loanSum, setLoanSum] = useState(10000);
   const sliderValue = loanSum / 1000;
+
+  const [companyId, setCompanyId] = useState();
   const [modalOpen, setModalOpen] = useState(false);
-
   const [connections, setConnections] = useState([]);
-  //const [companyId, setCompanyId] = useState('')
-  // 72f36c8e-997e-48a9-9515-de668a9330d1
 
-  // const startConnecting = () => {
-  //   if(companyId === '') {
-  //     alert('Add a valid company ID')
-  //   } else {
-  //     setModalOpen(true)
-  //   }
-  // }
+  console.log({companyId, userId})
 
   const reset = () => {
     setModalOpen(false);
@@ -129,20 +118,19 @@ const LoanForm = (props) => {
     setLoanSum(event.target.value);
   };
 
-  const refreshActiveConnections = () => {
-    linkService.connections(userId).then((data) => {
-      const activeConnectionsValue = data.some((c) => c.status === "Linked");
-      setActiveConnectionsAvailable(activeConnectionsValue);
-    });
+  const getCompanyId = () => {
+    if(userId) {
+      console.log('fetching companyId for user id', userId)
+      linkService.companyId(userId).then(({codatCompanyId}) => {
+        setCompanyId(codatCompanyId);
+      });
+    }
   };
 
   useEffect(() => {
-    refreshActiveConnections();
-  }, []);
-
-  const onConnectionLinked = () => {
-    refreshActiveConnections();
-  };
+    console.log('foo')
+    getCompanyId();
+  }, [userId]);
 
   const companyQuestions = [
     {
@@ -371,23 +359,37 @@ const LoanForm = (props) => {
             Share your accounting data so we can verify the information above.
           </Typography>
 
-          {activeConnectionsAvailable ? (
-            <CompanyConnections userId={userId} />
-          ) : (
-            <div className="connection-prompt-wrapper">
-              <Typography variant="body1">
-                If you connect your accounting platform, we will be able to
-                approve your loan faster.
-              </Typography>
-              <Button
-                variant="outlined"
-                color="primary"
-                onClick={handleModalToggle}
-              >
-                Connect
-              </Button>
-            </div>
-          )}
+          <div className="connection-prompt-wrapper">
+            <Typography variant="body1">
+              If you connect your accounting platform, we will be able to
+              approve your loan faster.
+            </Typography>
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={() => handleModalToggle()}
+            >
+              Connect
+            </Button>
+          </div>
+
+          {/* {activeConnectionsAvailable ? ( */}
+          {/*   <CompanyConnections userId={userId} /> */}
+          {/* ) : ( */}
+          {/*   <div className="connection-prompt-wrapper"> */}
+          {/*     <Typography variant="body1"> */}
+          {/*       If you connect your accounting platform, we will be able to */}
+          {/*       approve your loan faster. */}
+          {/*     </Typography> */}
+          {/*     <Button */}
+          {/*       variant="outlined" */}
+          {/*       color="primary" */}
+          {/*       onClick={() => handleModalToggle()} */}
+          {/*     > */}
+          {/*       Connect */}
+          {/*     </Button> */}
+          {/*   </div> */}
+          {/* )} */}
         </SectionWrapper>
 
         <Button
@@ -401,20 +403,22 @@ const LoanForm = (props) => {
         </Button>
       </div>
 
-      {open && (
-        <div className="Modal">
-          <CodatLink
-            companyId={userId}
-            onSuccess={(newConnectionId) => {
-              setConnections([...connections, newConnectionId.connectionId]);
-              onConnectionLinked();
-            }}
-            onClose={() => reset()}
-            onError={(error) => {
-              handleModalToggle();
-              alert(error);
-            }}
-          />
+      {modalOpen && (
+        <div className="modal-bg">
+          <div className="modal">
+            <CodatLink
+              companyId={companyId}
+              onConnection={(newConnectionId) => {
+                setConnections([...connections, newConnectionId.connectionId]);
+              }}
+              onFinish={() => setModalOpen(false)}
+              onClose={() => reset()}
+              onError={(error) => {
+                //setModalOpen(false);
+                console.log(error);
+              }}
+            />
+          </div>
         </div>
       )}
 
@@ -425,13 +429,6 @@ const LoanForm = (props) => {
       ) : (
         <div>No connections</div>
       )}
-
-      {/* <IntegrationsModal */}
-      {/*   isModalOpen={modalOpen} */}
-      {/*   handleModalToggle={handleModalToggle} */}
-      {/*   userId={userId} */}
-      {/*   onConnectionLinked={onConnectionLinked} */}
-      {/* /> */}
     </>
   );
 };

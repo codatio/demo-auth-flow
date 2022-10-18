@@ -2,6 +2,16 @@ import { v4 } from "uuid";
 import * as CodatClient from "../clients/codat.js";
 import { userIdMap, getUserStorage } from "../storage/user.js";
 
+const getUserId = (req, res) => {
+  const userId = req.params.userId;
+
+  if (!userId) {
+    res.status(400).send({ error: "userId is a required field" });
+  }
+
+  return userId
+}
+
 //Handle 'Apply for a loan' button
 export const apply = async (_req, res) => {
   const userId = v4();
@@ -27,12 +37,22 @@ export const apply = async (_req, res) => {
   res.json({ userId });
 };
 
-export const getUserConnections = async (req, res) => {
-  const userId = req.params.userId;
+export const getCodatCompanyId = async (req, res) => {
+  const userId = getUserId(req, res)
 
-  if (!userId) {
-    res.status(400).send({ error: "userId is a required field" });
+  const userStorage = getUserStorage(userId);
+
+  if (!userStorage) {
+    res.status(400).send({ error: "Unknown user id" });
   }
+
+  const codatCompanyId = userStorage.getItem("codat-company-id");
+
+  res.json({ codatCompanyId });
+};
+
+export const getUserConnections = async (req, res) => {
+  const userId = getUserId(req, res)
 
   const userStorage = getUserStorage(userId);
 

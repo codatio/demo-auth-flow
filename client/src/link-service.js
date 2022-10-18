@@ -9,19 +9,24 @@ const linkService = {
       method: "POST",
       headers,
     }).then((res) => res.json()),
-  connections: (userId) =>
-    fetch(`/user/${userId}/connections`, {
+  companyId: (userId) =>
+    fetch(`/user/${userId}/companyId`, {
       method: "GET",
       headers,
     }).then((res) => res.json()),
-  integrations: () =>
-    fetch(`/integrations`, {
+  connections: (userId) =>
+    fetch(`/user/${userId}/connections`, {
       method: "GET",
       headers,
     }).then((res) => res.json()),
   postConnection: (userId, integrationKey) =>
     fetch(`/user/${userId}/connections/${integrationKey}`, {
       method: "POST",
+      headers,
+    }).then((res) => res.json()),
+  integrations: () =>
+    fetch(`/integrations`, {
+      method: "GET",
       headers,
     }).then((res) => res.json()),
 };

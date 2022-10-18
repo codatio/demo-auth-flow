@@ -46,3 +46,19 @@
   align-items: center;
   margin-bottom: 2rem;
 }
+
+.modal-bg {
+  position: absolute;
+  background-color: #333333aa;
+  top: 0;
+  left: 0;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.modal {
+
+}
