@@ -18,7 +18,7 @@ This demo is indicative of a where Codat might fit in to a digital lending onboa
 * After the linking process is complete, the user should be redirected back to the Link demo app. Set up the redirect URL to `https://localhost:3000/redirect` To set up the redirect URL, follow the instructions in [Codat's documentation on Redirect URLs](https://docs.codat.io/docs/redirect-urls).
 
 ### Installation
-1. Get your Codat client API key. See [here](https://docs.codat.io/docs/your-first-call-to-the-api-using-api-explorer#find-your-api-key) for how to get your API key.
+1. Get your Codat client API key. See [here](https://docs.codat.io/using-the-api/authentication) for how to get your API key.
 2. Install NPM packages:
    ```sh
    npm install
