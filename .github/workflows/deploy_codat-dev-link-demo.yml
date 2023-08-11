@@ -52,4 +52,4 @@ jobs:
           app-name: 'codat-dev-link-demo'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_33B1BDD03F404C7C81A678D62E73C794 }}
-          package: server
+          package: .
