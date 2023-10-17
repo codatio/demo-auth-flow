@@ -1,7 +1,0 @@
-.dashboard-content-wrapper {
-  max-width: var(--main-wrapper);
-  margin: 0 auto;
-  padding: 3rem 1.5rem;
-  display: flex;
-  flex-direction: column;
-}

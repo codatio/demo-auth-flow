@@ -1,50 +1,36 @@
-# demo-auth-flow
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-This project is a simple implementation of a Codat custom-built [auth flow]([https://docs.codat.io/docs/auth-flow](https://docs.codat.io/auth-flow/build/build-your-own-authorization-journey)), enabling your customers to connect their financial accounts. You can experience the demo [here](https://codat-dev-link-demo.azurewebsites.net/home).
+## Getting Started
 
-We recommend, where possible, using our [Embedded Link SDK](https://docs.codat.io/auth-flow/authorize-embedded-link).
+First, run the development server:
 
-Note: _This app is for demonstrative purposes only, and should not be used in a production environment._
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-## The demo
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-This demo is indicative of a where Codat might fit in to a digital lending onboarding experience. Copay is a fictional digital lender looking to gather financial data from prospective customers in order to make a credit decision.
+You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
-## Running the project
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-### Prerequisites
-* Set up a Codat account if you don't have one already. See [Codat's documentation](https://docs.codat.io/docs/your-first-call-to-the-api-using-api-explorer#find-your-api-key) for how to sign up for a free trial.
-* Make sure you have a recent LTS version of `Node.js` installed.
-* After the linking process is complete, the user should be redirected back to the Link demo app. Set up the redirect URL to `https://localhost:3000/redirect` To set up the redirect URL, follow the instructions in [Codat's documentation on Redirect URLs](https://docs.codat.io/docs/redirect-urls).
+## Learn More
 
-### Installation
-1. Get your Codat client API key. See [here](https://docs.codat.io/using-the-api/authentication) for how to get your API key.
-2. Install NPM packages:
-   ```sh
-   npm install
-   ```
-4. Copy the `.env.template` file in the `server` directory and rename it `.env`
-3. Replace the following in the newly created `.env` file in the `server` directory
-   - `{{CODAT_API_KEY}}` with your Codat client API key
-4. Start the app. This will run the app in a watch build mode.
-   ```sh
-   npm start
-   ```
-5. Navigate to http://localhost:3000
+To learn more about Next.js, take a look at the following resources:
 
-## Built with:
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-### UI
-* [React.js](https://reactjs.org/)
-* [Create React App](https://create-react-app.dev/) to bootstrap the UI
-* [Material UI](https://mui.com/)
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-### Server
-* [Express.js](https://expressjs.com/)
-* [Concurrently](https://www.npmjs.com/package/concurrently)
+## Deploy on Vercel
 
-  >`Concurrently` is to run the client and server code concurrently in a local environment.
-* [Node.js](https://nodejs.org/en/), long-term support (LTS) version
-* [nodemon](https://www.npmjs.com/package/nodemon)
-* [node-localstorage](https://www.npmjs.com/package/node-localstorage)
-  >`node-localstorage` is used to mock out a proper data store system. Merchant data is stored locally. If deployed to a cloud environment, this will be wiped with each new release.
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

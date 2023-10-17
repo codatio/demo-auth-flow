@@ -21,3 +21,5 @@ bin/
 public/
 
 .DS_Store
+
+.next
