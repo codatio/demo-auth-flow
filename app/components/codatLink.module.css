@@ -1,0 +1,11 @@
+.link {
+  max-height: 840px;
+  height: 95%;
+  min-height: 480px;
+
+  max-width: 640px;
+  width: 480px;
+  min-width: 480px;
+
+  padding: 1em;
+}

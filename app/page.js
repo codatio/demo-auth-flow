@@ -1,15 +1,34 @@
+'use client'
+
 import Image from 'next/image'
 import styles from './page.module.css'
 
 import { AuthHeaderManager } from './components/authHeaderModal'
+import { AuthFlow } from './components/authFlow'
+import { useCompany } from './components/hooks/useCompany'
 import { createCompany } from './actions'
 
 const Home = () => {
+  const {   
+    companyId,
+    updateCompanyId,
+    clearCompanyId
+  } = useCompany()
+
+  console.log(companyId)
+
   return (
     <main className={styles.main}>
-      <AuthHeaderManager foo={createCompany}/>
+      <AuthHeaderManager updateCompanyId={updateCompanyId} createCompany={createCompany}/>
 
       <div className={styles.description}>
+        {companyId}
+
+        { 
+          !!companyId
+          && <AuthFlow companyId={companyId}/>
+        }
+
         <p>
           Get started by editing&nbsp;
           <code className={styles.code}>app/page.js</code>

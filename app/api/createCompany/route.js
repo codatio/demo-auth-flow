@@ -7,7 +7,6 @@ export async function POST(
   req,
   res
 ) {
-  console.log('boo')
   const request = await req.json();
 
   const {
@@ -28,7 +27,7 @@ export async function POST(
       name: name || 'New company',
     })
 
-  console.log('foo', result.company, companyId)
+  console.log('foo', result.company)
 
   if (result.statusCode == 402) {
     throw new Error("Free trial limits hit. Please delete a company.");
@@ -39,7 +38,6 @@ export async function POST(
   }
 
   const companyId = result.company.id
-  console.log('foo', result.company, companyId)
 
-  NextResponse.json({ companyId: companyId });
+  return NextResponse.json({ companyId: companyId });
 } 

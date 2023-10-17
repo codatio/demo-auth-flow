@@ -12,11 +12,12 @@ const AuthHeaderReset = ({clearAuthHeader}) => {
 }
 
 const TestCreator = (props) => {
-  const { foo, authHeader } = props
-  
-  const handeClick = () => {
+  const { createCompany, updateCompanyId, authHeader } = props
+
+  const handeClick = async () => {
     console.log('clicked')
-    foo(authHeader)
+    const companyId = await createCompany(authHeader)
+    updateCompanyId(companyId)
   }
 
   return (
@@ -66,7 +67,7 @@ const AuthHeaderModal = (props) => {
 }
 
 export const AuthHeaderManager = (props) => {
-  const { foo } = props
+  const { createCompany, updateCompanyId } = props
   
   const {   
     authHeader,
@@ -82,7 +83,7 @@ export const AuthHeaderManager = (props) => {
       
       <AuthHeaderReset clearAuthHeader={clearAuthHeader}/>
 
-      <TestCreator foo={foo} authHeader={authHeader}/>
+      <TestCreator createCompany={createCompany} updateCompanyId={updateCompanyId} authHeader={authHeader}/>
     </>
   )
 }
