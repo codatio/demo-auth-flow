@@ -1,0 +1,79 @@
+.cardWrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;	
+	padding: 2em;
+	margin: 2em;
+}
+
+.card {
+	position: relative;
+}
+
+.animationWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: -1;
+  position: absolute;
+}
+
+.animationWrapper img {
+  position: absolute;
+  animation: spin-counterclockwise 200s linear infinite;
+  opacity: .6;
+  transition-duration: .1s;
+  user-select: none;
+}
+
+.animationWrapper img:nth-child(2n) {
+  animation: spin-clockwise 220s linear infinite;
+}
+
+.animationWrapper img:nth-child(3n) {
+  animation: spin-counterclockwise 180s linear infinite;
+}
+
+.animationWrapper img:nth-child(4n) {
+  animation: spin-clockwise 240s linear infinite;
+}
+
+.animationWrapper img:nth-child(5n) {
+  animation: spin-counterclockwise 140s linear infinite;
+}
+
+.animationWrapper img:nth-child(6n) {
+  animation: spin-clockwise 260s linear infinite;
+}
+
+.animationWrapper img:nth-child(7n) {
+  animation: spin-counterclockwise 120s linear infinite;
+}
+
+.animationWrapper img:nth-child(8n) {
+  animation: spin-clockwise 280s linear infinite;
+}
+
+@keyframes spin-clockwise {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin-counterclockwise {
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes grow {
+  0% {
+    scale: 1;
+  }
+  50% {
+    scale: 1.02;
+  }
+  100% {
+    scale: 1;
+  }
+}

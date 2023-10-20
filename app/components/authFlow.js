@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-import CodatLink from './CodatLink';
+import { CodatLink } from './codatLink';
 
 import styles from './authFlow.module.css'
 
@@ -30,16 +30,17 @@ export const AuthFlow = ({ companyId }) => {
       }
 
       {
-        open && <div className={styles.modal}>
+        open && 
+          <div className={styles.modal}>
             <CodatLink
               companyId={companyId}
-              onConnection={(newConnection: { connectionId: Connection["id"] }) => setConnectionIds([...connectionIds, newConnection.connectionId])}
+              onConnection={(newConnection) => setConnectionIds([...connectionIds, newConnection.connectionId])}
               onFinish={() => {
                 setComplete(false);
                 setOpen(false);
               }}
               onClose={() => reset()}
-              onError={(error: ErrorCallbackArgs) => {
+              onError={(error) => {
                 setOpen(false);
                 alert(error.message);
               }}

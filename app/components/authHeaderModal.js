@@ -5,23 +5,11 @@ import { useState, useEffect } from "react";
 import { Modal } from './modal'
 import { useAuthHeader } from './hooks/useAuthHeader'
 
+import styles from './authHeaderModal.module.css'
+
 const AuthHeaderReset = ({clearAuthHeader}) => {
   return (
-    <button onClick={clearAuthHeader}>Clear auth header</button>
-  )
-}
-
-const TestCreator = (props) => {
-  const { createCompany, updateCompanyId, authHeader } = props
-
-  const handeClick = async () => {
-    console.log('clicked')
-    const companyId = await createCompany(authHeader)
-    updateCompanyId(companyId)
-  }
-
-  return (
-    <button onClick={handeClick}>Create company</button>
+    <button onClick={clearAuthHeader}>Reset</button>
   )
 }
 
@@ -36,7 +24,7 @@ const AuthHeaderModal = (props) => {
     setTempHeader
   ] = useState(authHeader)
 
-  console.log('rerendered', tempHeader, authHeader)
+  //console.log('rerendered', tempHeader, authHeader)
 
   if(authHeader) {
     return null
@@ -48,7 +36,7 @@ const AuthHeaderModal = (props) => {
 
   return (
     <Modal>
-      <div>Enter your auth header</div>
+      <h2>Enter your auth header</h2>
 
       <form onSubmit={setAuth}>
         <label>
@@ -67,23 +55,13 @@ const AuthHeaderModal = (props) => {
 }
 
 export const AuthHeaderManager = (props) => {
-  const { createCompany, updateCompanyId } = props
-  
-  const {   
-    authHeader,
-    updateAuthHeader,
-    clearAuthHeader
-  } = useAuthHeader()
-
-  console.log('AuthHeaderManager', authHeader)
+  const { createCompany, updateCompanyId, authHeader, updateAuthHeader, clearAuthHeader } = props
 
   return (
-    <>
+    <div className={styles.authHeaderManager}>
       <AuthHeaderModal authHeader={authHeader} updateAuthHeader={updateAuthHeader}/>
       
       <AuthHeaderReset clearAuthHeader={clearAuthHeader}/>
-
-      <TestCreator createCompany={createCompany} updateCompanyId={updateCompanyId} authHeader={authHeader}/>
-    </>
+    </div>
   )
 }

@@ -11,12 +11,13 @@
 }
 
 .modal {
-  border: 2px solid #ededed;
-  background: white;
+  border: 2px solid #444;
+  background: #333;
   border-radius: 4px;
   max-width: 95vw;
   max-height: 95vh;
   overflow: hidden;
+  padding: 2em;
 }
 
 .modalClosed {

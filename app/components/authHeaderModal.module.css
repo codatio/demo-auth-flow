@@ -1,9 +1,7 @@
-.modal {
+.authHeaderManager {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    right: 1em;
+    bottom: 1em;
     margin: auto;
     display: flex;
     align-items: center;

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import styles from './CodatLink.module.css'
 
-export const CodatLinkReact = (props) => {
+export const CodatLink = (props) => {
   const { companyId, onConnection, onError, onClose, onFinish } = props
 
   const [componentMount, setComponentMount] = useState(

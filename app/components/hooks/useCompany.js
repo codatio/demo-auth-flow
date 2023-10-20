@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useCallback } from 'react';
 
+import { createCompany } from '../../actions'
+
 export const useCompany = () => {
   const [companyId, setCompanyId] = useState(undefined);
 
@@ -27,5 +29,6 @@ export const useCompany = () => {
     companyId,
     updateCompanyId,
     clearCompanyId,
+    createCompany,
   };
 }

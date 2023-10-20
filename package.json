@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@codat/lending": "^3.2.0",
+    "@codat/platform": "^1.2.0",
     "@vercel/postgres": "^0.5.0",
     "next": "13.5.5",
     "react": "^18",
