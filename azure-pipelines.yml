@@ -17,3 +17,7 @@ stages:
       ArtifactName: DemoLinkApp
       ArchiveArtifact: true
       SkipUnitTests: true
+      RunCypressComponentTests: false
+      CypressComponentTestsScript: false
+      CypressIntegrationTestsScript: false
+      RunCypressIntegrationTests: false
