@@ -30,7 +30,7 @@ const LoanForm = (props) => {
   const userId = params["userId"];
 
   const [activeConnectionsAvailable, setActiveConnectionsAvailable] =
-  useState(false);
+    useState(false);
 
   const [companyName, setCompanyName] = useState("");
   const [commercialSale, setCommercialSale] = useState("");
@@ -134,7 +134,9 @@ const LoanForm = (props) => {
           label="Company name"
           required
           variant="outlined"
-          onChange={(event) => {setCompanyName(event.target.value)}}
+          onChange={(event) => {
+            setCompanyName(event.target.value);
+          }}
           value={companyName}
         />
       ),
@@ -166,7 +168,9 @@ const LoanForm = (props) => {
           <Select
             labelId="bank-label"
             value={mainBank}
-            onChange={(event) => {setMainBank(event.target.value)}}
+            onChange={(event) => {
+              setMainBank(event.target.value);
+            }}
             label="Select bank"
           >
             {bankOptions.map((bankOption) => (
@@ -219,7 +223,9 @@ const LoanForm = (props) => {
           <Select
             labelId="profit-label"
             value={profitStatus}
-            onChange={(event) => {setProfitStatus(event.target.value)}}
+            onChange={(event) => {
+              setProfitStatus(event.target.value);
+            }}
             label="Select option"
           >
             <MenuItem value={"had-profit"}>Yes</MenuItem>
@@ -268,7 +274,9 @@ const LoanForm = (props) => {
           <Select
             labelId="homeowner-label"
             value={homeownerStatus}
-            onChange={(event) => {setHomeownerStatus(event.target.value)}}
+            onChange={(event) => {
+              setHomeownerStatus(event.target.value);
+            }}
             label="Select option"
           >
             <MenuItem value={"is-homeowner"}>Yes</MenuItem>

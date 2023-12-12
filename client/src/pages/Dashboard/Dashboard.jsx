@@ -29,9 +29,7 @@ const Dashboard = () => {
     {
       key: "Your email:",
       value: (
-        <Typography variant="body1">
-          {email || "No email submitted"}
-        </Typography>
+        <Typography variant="body1">{email || "No email submitted"}</Typography>
       ),
     },
     {
@@ -53,17 +51,16 @@ const Dashboard = () => {
   return (
     <>
       <Header userId={userId} />
-      
+
       <div className="dashboard-content-wrapper">
         <SectionWrapper title="Account information">
           <FlexColumns backgroundActive listItems={listItems} />
         </SectionWrapper>
 
-
         <SectionWrapper title="Shared data">
           <CompanyConnections userId={userId} />
         </SectionWrapper>
-        
+
         <SectionWrapper title="Your progress">
           <Typography>To apply for a loan, complete the loan form.</Typography>
           <Button variant="contained" onClick={handleApplication} size="large">
