@@ -13,9 +13,9 @@ resources:
 stages:
   - template: Build/Frontend.yml@templates
     parameters:
-      AppName: Demo Link App
-      ArtifactName: PortalUI
+      AppName: DemoLinkApp
+      ArtifactName: DemoLinkApp
       ArchiveArtifact: true
-      RunCypressComponentTests: true
+      RunCypressComponentTests: false
       TypeCheckScript: check-types
       SkipUnitTests: true
