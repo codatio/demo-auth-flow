@@ -13,7 +13,7 @@
     "postinstall": "npm run install:server && npm run install:client",
     "build": "npm run build --prefix client",
     "format-check": "cd client && npx prettier --check src",
-    "format-fix": "cd client && npx prettier --write src/**/*.{js,jsx}"
+    "format-fix": "cd client && npx prettier --write src/**/*.{js,jsx,css}"
   },
   "keywords": [],
   "author": "",
