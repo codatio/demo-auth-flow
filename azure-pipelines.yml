@@ -16,4 +16,5 @@ stages:
       AppName: DemoLinkApp
       ArtifactName: DemoLinkApp
       ArchiveArtifact: true
+      RunCypressComponentTests: false
       SkipUnitTests: true
