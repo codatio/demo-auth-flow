@@ -13,7 +13,9 @@
     "postinstall": "npm run install:server && npm run install:client",
     "build": "npm run build --prefix client",
     "format-check": "cd client && npx prettier --check src",
-    "format-fix": "cd client && npx prettier --write src/**/*.{js,jsx,css}"
+    "format-fix": "cd client && npx prettier --write src/**/*.{js,jsx,css}",
+    "lint-check": "cd client && npx eslint --max-warnings=0 --ext js,jsx,ts,tsx src",
+    "lint-fix": "cd client && npx eslint --fix --max-warnings=0 --ext js,ts,tsx src"
   },
   "keywords": [],
   "author": "",
