@@ -21,3 +21,6 @@ stages:
       CypressComponentTestsScript: false
       CypressIntegrationTestsScript: false
       RunCypressIntegrationTests: false
+      CombineTestCoverage: false
+      ConfigExistingLocation: server/.env.template
+      ConfigNewLocation: server/.env
