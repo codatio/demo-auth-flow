@@ -1,7 +1,9 @@
 'use client'
 
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import styles from './page.module.css'
+
 
 import { AuthHeaderManager } from './components/authHeaderModal'
 import { AuthFlow } from './components/authFlow'
@@ -30,7 +32,9 @@ const Home = () => {
   console.log(companyId)
 
   return (
-    <main className={styles.main}>
+    <main className={styles.main} 
+      style={{ '--color-primary': "pink" }}
+    >
       <AuthHeaderManager 
         updateCompanyId={updateCompanyId}
         createCompany={createCompany}
@@ -39,35 +43,40 @@ const Home = () => {
         clearAuthHeader={clearAuthHeader}
       />
 
-      <div>
-       {companyId}
+      <div className={styles.row}>
+        <div className={styles.column}>
+          <CardAnimation/>
+        </div>
 
-        { 
-          !!companyId
-          && <AuthFlow companyId={companyId}/>
-        }
+        <div className={styles.column}>
+          <h2 className={styles.header}>Access credit in minutes</h2>
 
-        <div className={styles.row}>
-          <div className={styles.column}>
-            <CardAnimation/>
+          <div>
+            Find the loan for you from £10,000 to £100,000. Connect your
+            accounting software to check your eligibility fast.
           </div>
 
-          <div className={styles.column}>
-            <h2 className={styles.header}>Access credit in minutes</h2>
-
-            <div>
-              Find the loan for you from £10,000 to £100,000. Connect your
-              accounting software to check your eligibility fast.
+          <div className={styles.advantagesList}>
+            <div className={styles.advantage}>
+              <Image className={styles.tick} src={tick} alt="tick icon"/> Applying doesn't affect your credit score
             </div>
-
-            <div className={styles.advantagesList}>
-              <div className={styles.advantage}>
-                <Image className={styles.tick} src={tick} alt="tick icon"/> Listdsafsad
-              </div>
+            <div className={styles.advantage}>
+              <Image className={styles.tick} src={tick} alt="tick icon"/> Expert help throughout the process
             </div>
-
-            <CreateCompanyButton createCompany={createCompany} updateCompanyId={updateCompanyId} authHeader={authHeader}/>
+            <div className={styles.advantage}>
+              <Image className={styles.tick} src={tick} alt="tick icon"/> Simple application process
+            </div>
           </div>
+
+          <CreateCompanyButton createCompany={createCompany} updateCompanyId={updateCompanyId} authHeader={authHeader}/>
+
+          {companyId}
+
+          { 
+            !!companyId
+            && <AuthFlow companyId={companyId}/>
+          }
+
         </div>
       </div>
     </main>

@@ -21,6 +21,10 @@ export const Nav = () => {
           ? <p>{clientName || 'Demo company'}</p>
           : <img src={logo}/>
       }
+
+      <div className={styles.navItems}>
+        About us
+      </div>
     </div>
   )
 }

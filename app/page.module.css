@@ -1,14 +1,24 @@
+.main {
+	height: 100%;
+}
+
 .row {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	height: 100%;
+	background: black;
+	color: white;
+	background: rgb(2,0,36);
+background: linear-gradient(47deg, rgba(2,0,36,1) 0%, rgba(9,9,9,1) 35%, rgba(142,143,143,1) 100%);
 }
 
 .column {
 	padding: 2em;
 	display: flex;
 	flex-direction: column;
+	max-width: 500px;
+	z-index: 1;
 }
 
 .header {
@@ -22,6 +32,7 @@
 .advantage {
 	display: flex;
 	align-items: center;
+	margin-bottom: 5px;
 }
 
 .tick {

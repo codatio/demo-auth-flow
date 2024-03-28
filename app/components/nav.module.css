@@ -2,5 +2,12 @@
 	width: 100%;
 	padding: 0.5em 1em;
 	background: white;
-	border-bottom: 2px solid #efefef;
+	border-bottom: 2px solid #efefefaa;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.navItems {
+	padding: 0 1em;
 }

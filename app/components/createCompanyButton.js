@@ -12,6 +12,6 @@ export const CreateCompanyButton = (props) => {
   }
 
   return (
-    <button className={styles.button} onClick={handeClick}>Create company</button>
+    <button className={styles.button} onClick={handeClick}>Apply now!</button>
   )
 }

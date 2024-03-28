@@ -1,12 +1,15 @@
 .button {
   padding: 0.5em 1em;
-  border: 2px solid #eee;
-  background: white;
+  background: #333;
+  border: 2px solid #222;
   border-radius: 2px;
   width: fit-content;
   cursor: pointer;
+  font-weight: bold;
+  color: white;
+  background: var(--color-primary);
 }
 
 .button:hover {
-  background: #fafafa;
+  background: #444;
 }
